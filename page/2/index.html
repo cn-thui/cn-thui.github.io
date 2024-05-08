@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,194 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/29/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/13.%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/29/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/13.%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">存在重复元素（217）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-29 17:25:18" itemprop="dateCreated datePublished" datetime="2024-04-29T17:25:18+08:00">2024-04-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-07 16:15:18" itemprop="dateModified" datetime="2024-05-07T16:15:18+08:00">2024-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/contains-duplicate/description/">存在重复元素</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希表"><a href="#1-哈希表" class="headerlink" title="1.哈希表"></a>1.哈希表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">find</span>(i) != hash.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="comment">// 找到了相同值，返回</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 没找到，插入到尾部</span></span><br><span class="line">            hash.<span class="built_in">insert</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 没有相同的值，返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/28/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/12.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/28/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/12.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">多数元素（169）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-28 21:48:28" itemprop="dateCreated datePublished" datetime="2024-04-28T21:48:28+08:00">2024-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-07 16:13:53" itemprop="dateModified" datetime="2024-05-07T16:13:53+08:00">2024-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/majority-element/description/">多数元素</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-摩尔投票"><a href="#1-摩尔投票" class="headerlink" title="1.摩尔投票"></a>1.摩尔投票</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录票数</span></span><br><span class="line">        <span class="type">int</span> votes = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 记录众数值</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (votes == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 票数抵消为0时，将众数更新为当前元素</span></span><br><span class="line">                ans = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == ans) &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素为众数，则票数+1</span></span><br><span class="line">                votes++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素不为众数，则票数-1</span></span><br><span class="line">                votes--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -197,7 +385,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-07 16:13:57" itemprop="dateModified" datetime="2024-05-07T16:13:57+08:00">2024-05-07</time>
+      <time title="修改时间：2024-05-08 13:50:05" itemprop="dateModified" datetime="2024-05-08T13:50:05+08:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,7 +415,7 @@
 <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/description/">只出现一次的数字</a></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-异或运算"><a href="#1-异或运算" class="headerlink" title="1.异或运算"></a>1.异或运算</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">singleNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// 两个相等的值异或等于0</span></span><br><span class="line">            ans ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-异或运算"><a href="#1-异或运算" class="headerlink" title="1.异或运算"></a>1.异或运算</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">singleNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 两个相等的值异或等于0</span></span><br><span class="line">            ans ^= nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -387,7 +575,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-07 16:14:00" itemprop="dateModified" datetime="2024-05-07T16:14:00+08:00">2024-05-07</time>
+      <time title="修改时间：2024-05-08 15:23:08" itemprop="dateModified" datetime="2024-05-08T15:23:08+08:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -417,7 +605,7 @@
 <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">买卖股票的最佳时机</a></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-暴力枚举（超时）"><a href="#1-暴力枚举（超时）" class="headerlink" title="1.暴力枚举（超时）"></a>1.暴力枚举（超时）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录最大利润</span></span><br><span class="line">        <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; numsSize; j++) &#123;</span><br><span class="line">                <span class="comment">// 没有利润直接进入下一次循环</span></span><br><span class="line">                <span class="keyword">if</span> (prices[i] &gt;= prices[j]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 计算第i天买入，第j天卖出的利润</span></span><br><span class="line">                <span class="type">int</span> temp = prices[j] - prices[i];</span><br><span class="line">                <span class="comment">// 找出最大利润</span></span><br><span class="line">                <span class="keyword">if</span> (temp &gt; max) &#123;</span><br><span class="line">                    max = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-暴力枚举"><a href="#1-暴力枚举" class="headerlink" title="1.暴力枚举"></a>1.暴力枚举</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录最大利润</span></span><br><span class="line">        <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; numsSize; j++) &#123;</span><br><span class="line">                <span class="comment">// 没有利润直接进入下一次循环</span></span><br><span class="line">                <span class="keyword">if</span> (prices[i] &gt;= prices[j]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 计算第i天买入，第j天卖出的利润</span></span><br><span class="line">                <span class="type">int</span> temp = prices[j] - prices[i];</span><br><span class="line">                <span class="comment">// 找出最大利润</span></span><br><span class="line">                <span class="keyword">if</span> (temp &gt; max) &#123;</span><br><span class="line">                    max = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-动态规划"><a href="#2-动态规划" class="headerlink" title="2.动态规划"></a>2.动态规划</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> profit_max = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> price_min = prices[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="comment">// 每天都看一下今天是不是历史最低点，若是则更新</span></span><br><span class="line">            price_min = <span class="built_in">min</span>(prices[i], price_min);</span><br><span class="line">            <span class="comment">// 每天都看一下我今天卖出能获取的最大利润是多少，如果比以往利润都大则更新</span></span><br><span class="line">            profit_max = <span class="built_in">max</span>(profit_max, prices[i] - price_min);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit_max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -766,7 +954,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-07 16:15:01" itemprop="dateModified" datetime="2024-05-07T16:15:01+08:00">2024-05-07</time>
+      <time title="修改时间：2024-05-08 15:22:43" itemprop="dateModified" datetime="2024-05-08T15:22:43+08:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -800,7 +988,7 @@
 
 <h2 id="2-双指针（从尾开始填充）"><a href="#2-双指针（从尾开始填充）" class="headerlink" title="2.双指针（从尾开始填充）"></a>2.双指针（从尾开始填充）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt;&amp; nums2, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*******************************处理特殊情况****************************/</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(nums1.<span class="built_in">data</span>(), nums2.<span class="built_in">data</span>(), <span class="built_in">sizeof</span>(<span class="type">int</span>) * n);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[m - <span class="number">1</span>] &lt; nums2[<span class="number">0</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + m);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[<span class="number">0</span>] &gt; nums2[n - <span class="number">1</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums1.<span class="built_in">begin</span>() + <span class="number">0</span>, nums1.<span class="built_in">begin</span>() + m, nums1.<span class="built_in">begin</span>() + n);</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*******************************处理一般情况****************************/</span></span><br><span class="line">        <span class="type">int</span> index = m + n - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> index1 = m - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> index2 = n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 结束条件为某个数组已经填充完毕</span></span><br><span class="line">        <span class="keyword">while</span> (index1 &gt;= <span class="number">0</span> &amp;&amp; index2 &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums1[index1] &gt;= nums2[index2]) &#123;</span><br><span class="line">                nums1[index--] = nums1[index1--];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums1[index--] = nums2[index2--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 数组1填充完毕，将数组2剩余的数据填充</span></span><br><span class="line">        <span class="keyword">if</span> (index1 &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (index2 &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                nums1[index--] = nums2[index2--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 数组2填充完毕，将数组1剩余的数据填充</span></span><br><span class="line">        <span class="keyword">if</span> (index2 &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (index1 &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                nums1[index--] = nums1[index1--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-排序解法"><a href="#3-排序解法" class="headerlink" title="3.排序解法"></a>3.排序解法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt;&amp; nums2, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理特殊情况</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(nums1.<span class="built_in">data</span>(), nums2.<span class="built_in">data</span>(), <span class="built_in">sizeof</span>(<span class="type">int</span>) * n);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[m - <span class="number">1</span>] &lt; nums2[<span class="number">0</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + m);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[<span class="number">0</span>] &gt; nums2[n - <span class="number">1</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums1.<span class="built_in">begin</span>() + <span class="number">0</span>, nums1.<span class="built_in">begin</span>() + m, nums1.<span class="built_in">begin</span>() + n);</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理一般情况</span></span><br><span class="line">        std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + m);</span><br><span class="line">        std::<span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="3-暴力排序"><a href="#3-暴力排序" class="headerlink" title="3.暴力排序"></a>3.暴力排序</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt;&amp; nums2, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理特殊情况</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(nums1.<span class="built_in">data</span>(), nums2.<span class="built_in">data</span>(), <span class="built_in">sizeof</span>(<span class="type">int</span>) * n);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[m - <span class="number">1</span>] &lt; nums2[<span class="number">0</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + m);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (nums1[<span class="number">0</span>] &gt; nums2[n - <span class="number">1</span>]) &#123;</span><br><span class="line">            std::<span class="built_in">copy</span>(nums1.<span class="built_in">begin</span>() + <span class="number">0</span>, nums1.<span class="built_in">begin</span>() + m, nums1.<span class="built_in">begin</span>() + n);</span><br><span class="line">            std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理一般情况</span></span><br><span class="line">        std::<span class="built_in">copy</span>(nums2.<span class="built_in">begin</span>() + <span class="number">0</span>, nums2.<span class="built_in">begin</span>() + n, nums1.<span class="built_in">begin</span>() + m);</span><br><span class="line">        std::<span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/22/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/6.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/#more" rel="contents">
@@ -901,198 +1089,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Hexo环境搭建</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-04-20 22:30:07" itemprop="dateCreated datePublished" datetime="2024-04-20T22:30:07+08:00">2024-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-28 17:38:28" itemprop="dateModified" datetime="2024-04-28T17:38:28+08:00">2024-04-28</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="1-安装-Node-js-和-Git"><a href="#1-安装-Node-js-和-Git" class="headerlink" title="1. 安装 Node.js 和 Git"></a>1. 安装 Node.js 和 Git</h1><p>首先，确保你的计算机上安装了 <code>Node.js</code> 和 <code>Git</code>。你可以在它们的官方网站上找到适合你操作系统的安装程序，并按照说明进行安装。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js 官方网站</a></li>
-<li><a target="_blank" rel="noopener" href="https://git-scm.com/">Git 官方网站</a></li>
-</ul>
-<h1 id="2-创建-GitHub-Page"><a href="#2-创建-GitHub-Page" class="headerlink" title="2.创建 GitHub Page"></a>2.创建 GitHub Page</h1><p>首先，登录你的 GitHub 账号，然后点击页面右上角的 “New” 按钮来创建一个新的仓库。仓库名为 <code>username.github.io</code>，其中 <code>username</code> 是你的 GitHub 用户名。这样的命名方式可以让你的博客成为 GitHub Pages 的一部分。</p>
-<h1 id="3-绑定-Github-SSH-Keys"><a href="#3-绑定-Github-SSH-Keys" class="headerlink" title="3.绑定 Github SSH Keys"></a>3.绑定 Github SSH Keys</h1><p>为了将你的本地 Git 仓库与 GitHub 关联，你需要添加 SSH 密钥到你的 GitHub 帐户中。具体操作请查看：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://cn-thui.github.io/2024/04/20/SSH%20%E8%BF%9E%E6%8E%A5/">SSH 连接</a></li>
-</ul>
-<h1 id="4-安装-Hexo-客户端"><a href="#4-安装-Hexo-客户端" class="headerlink" title="4. 安装 Hexo 客户端"></a>4. 安装 Hexo 客户端</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/20/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/Hexo%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/20/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/20/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="post-title-link" itemprop="url">两数之和（1）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-04-20 22:30:07" itemprop="dateCreated datePublished" datetime="2024-04-20T22:30:07+08:00">2024-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-07 16:14:22" itemprop="dateModified" datetime="2024-05-07T16:14:22+08:00">2024-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/description/">两数之和</a></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-暴力枚举"><a href="#1-暴力枚举" class="headerlink" title="1.暴力枚举"></a>1.暴力枚举</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">twoSum</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; numsSize; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                <span class="type">int</span>* ans = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * <span class="number">2</span>);</span><br><span class="line">                ans[<span class="number">0</span>] = i;</span><br><span class="line">                ans[<span class="number">1</span>] = j;</span><br><span class="line">                *returnSize = <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">return</span> ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-哈希"><a href="#2-哈希" class="headerlink" title="2.哈希"></a>2.哈希</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-
       
     </div>
 
