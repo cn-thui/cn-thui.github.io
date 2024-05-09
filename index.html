@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -131,7 +131,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -152,6 +152,191 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/" class="post-title-link" itemprop="url">下一个更大元素I（496）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-09 14:33:04 / 修改时间：18:39:34" itemprop="dateCreated datePublished" datetime="2024-05-09T14:33:04+08:00">2024-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/description/">下一个更大元素I</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-枚举"><a href="#1-枚举" class="headerlink" title="1.枚举"></a>1.枚举</h2><ul>
+<li><strong>算法思路</strong>：在第二个数组中查询第一个数组的元素，然后找到其后方第一个比该元素大的值，并按照要求插入；依次将第一个数组中的元素查找完毕即可。</li>
+<li><strong>算法分析</strong>：双层循环，时间复杂度：O（n^2）；不考虑返回数组，使用常数空间，空间复杂度：O（1）。</li>
+<li><strong>算法归纳</strong>：通过遍历两个数组，每次遍历元素都判定是否符合要求，属于枚举思想。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">nextGreaterElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = nums1.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nextMax;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">auto</span> it = <span class="built_in">find</span>(nums2.<span class="built_in">begin</span>(), nums2.<span class="built_in">end</span>(), nums1[i]);</span><br><span class="line">            <span class="keyword">while</span> (it != nums2.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="comment">// 找到下一个更大的元素，插入元素</span></span><br><span class="line">                <span class="keyword">if</span> (*it &gt; nums1[i]) &#123;</span><br><span class="line">                    nextMax.<span class="built_in">push_back</span>(*it);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 遍历到容器的末尾还没有找到，插入-1</span></span><br><span class="line">                <span class="keyword">if</span> (it == nums2.<span class="built_in">end</span>() - <span class="number">1</span>) &#123;</span><br><span class="line">                    nextMax.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nextMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">提莫攻击（495）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-09 13:41:17 / 修改时间：18:39:25" itemprop="dateCreated datePublished" datetime="2024-05-09T13:41:17+08:00">2024-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/teemo-attacking/description/">提莫攻击</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-迭代"><a href="#1-迭代" class="headerlink" title="1.迭代"></a>1.迭代</h2><ul>
+<li><strong>算法思路</strong>：如何得到艾希的总中毒时间？当艾希中毒后的中毒时间内没有再次中毒，那么中毒时间就是完整的；当艾希中毒后中毒时间内又再次中毒，那么中毒时间不完整，需要进行计算；最终将每次中毒的时间进行累加就可以得到艾希的总中毒时间。</li>
+<li><strong>算法分析</strong>：只需要一次遍历，时间复杂度：O（n）；使用常数空间，空间复杂度：O（1）。</li>
+<li><strong>算法归纳</strong>：通过遍历数组，对当前元素进行处理计算得到局部解，通过维护一个变量得到最终解，属于迭代思想。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findPoisonedDuration</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; timeSeries, <span class="type">int</span> duration)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = timeSeries.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> sumTime = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 计算第一次中毒的结束时间</span></span><br><span class="line">        <span class="type">int</span> endTime = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 计算中毒的结束时间</span></span><br><span class="line">            endTime = timeSeries[i] + duration - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (endTime &lt; timeSeries[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 中毒时间完整</span></span><br><span class="line">                sumTime += duration;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 中毒时间不完整</span></span><br><span class="line">                sumTime = sumTime + timeSeries[i + <span class="number">1</span>] - timeSeries[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最后一次攻击完后中毒时间总是完整的</span></span><br><span class="line">        sumTime += duration;</span><br><span class="line">        <span class="keyword">return</span> sumTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -189,9 +374,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-08 21:53:48 / 修改时间：22:01:26" itemprop="dateCreated datePublished" datetime="2024-05-08T21:53:48+08:00">2024-05-08</time>
+      <time title="创建时间：2024-05-08 21:53:48" itemprop="dateCreated datePublished" datetime="2024-05-08T21:53:48+08:00">2024-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-09 18:39:45" itemprop="dateModified" datetime="2024-05-09T18:39:45+08:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,11 +412,12 @@
 <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-consecutive-ones/description/">最大连续1的个数</a></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-动态规划"><a href="#1-动态规划" class="headerlink" title="1.动态规划"></a>1.动态规划</h2><ul>
-<li>遍历数组元素，当前元素为 1 时，计数加一并实时更新最大值（防止当最长的在数组末尾时 max 没有更新的情况）；当前元素不为 1 时将计数置为 0；</li>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-迭代"><a href="#1-迭代" class="headerlink" title="1.迭代"></a>1.迭代</h2><ul>
+<li><strong>算法思路</strong>：如何得到最大连续 1 的个数？将连续为 1 的数段累加后与当前出现最大的连续 1 的个数进行比较，如果超过则更新出现最大的连续 1 的个数，如果没超过继续遍历数组，如果为 0 则累加的值作废；</li>
+<li><strong>算法分析</strong>：只需要一次遍历，时间复杂度：O（n），使用常数空间，空间复杂度：O（1）。</li>
+<li><strong>算法归纳</strong>：通过遍历数组，对当前元素进行处理计算得到局部解，并通过维护两个变量得到最终解，属于迭代思想。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                max = cnt &gt; max ? cnt : max;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                cnt = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -280,9 +472,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-08 21:16:46 / 修改时间：21:39:15" itemprop="dateCreated datePublished" datetime="2024-05-08T21:16:46+08:00">2024-05-08</time>
+      <time title="创建时间：2024-05-08 21:16:46" itemprop="dateCreated datePublished" datetime="2024-05-08T21:16:46+08:00">2024-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-09 18:39:45" itemprop="dateModified" datetime="2024-05-09T18:39:45+08:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,9 +511,11 @@
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/island-perimeter/description/">岛屿的周长</a></li>
 </ul>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-迭代"><a href="#1-迭代" class="headerlink" title="1.迭代"></a>1.迭代</h2><ul>
-<li>遍历格子是否为岛屿；不为岛屿则不做任何操作；为岛屿时，计数增加四条边，并判断右方和下方是否有岛屿相连，如果有一座岛屿相连，则扣除两条边（因为连接是相互的，且后续岛屿不再判断上方和左方，所以扣除两条而不是一条边）。</li>
+<li><strong>算法思路</strong>：一个格子有四条边，如果上下左右有一方相邻则减少一条边，那么在遍历数组为陆地时需要处理子问题：当前陆地的上下左右是否为陆地，如果为陆地则减少一条边；陆地与陆地的相邻是相互的，所以判断一个陆地上方有相邻时，上方陆地也会判断出下方陆地相邻，那么上下判断可以只执行其一，减少一条边变为减少两条边（减少的一条边为当前格子的边，另一条边为相邻格子的边），左右同理；所以只需要遍历每个格子并判断右方和下方是否有相邻的陆地，并进行边的计算，最后累加完就是岛屿的周长。</li>
+<li><strong>算法分析</strong>：遍历二维数组，时间复杂度：O（m × n）；使用常数空间，空间复杂度：O（1）。</li>
+<li><strong>算法归纳</strong>：通过遍历数组，对当前元素进行处理计算得到局部解，并通过维护一个变量得到最终解，属于迭代思想。</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">islandPerimeter</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 获取二维向量长宽</span></span><br><span class="line">        <span class="type">int</span> rows = grid.<span class="built_in">size</span>(), cols = grid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="comment">// 当前格子为岛屿</span></span><br><span class="line">                <span class="keyword">if</span> (grid[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    cnt += <span class="number">4</span>;</span><br><span class="line">                    <span class="comment">// 到行末，没有下方进行判断</span></span><br><span class="line">                    <span class="keyword">if</span> (i != rows - <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="comment">// 判断下方是否有岛屿相连</span></span><br><span class="line">                        <span class="keyword">if</span> (grid[i + <span class="number">1</span>][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                            cnt -= <span class="number">2</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">// 到列末，没有右方进行判断</span></span><br><span class="line">                    <span class="keyword">if</span> (j != cols - <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="comment">// 判断右方是否有岛屿相连</span></span><br><span class="line">                        <span class="keyword">if</span> (grid[i][j + <span class="number">1</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">                            cnt -= <span class="number">2</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">islandPerimeter</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> rows = grid.<span class="built_in">size</span>(), cols = grid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 遍历二维数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (grid[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="comment">// 当前元素为陆地，添加四条边并进行右方和下方判断</span></span><br><span class="line">                    cnt += <span class="number">4</span>;</span><br><span class="line">                    <span class="keyword">if</span> (i != rows - <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (grid[i + <span class="number">1</span>][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                            cnt -= <span class="number">2</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (j != cols - <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (grid[i][j + <span class="number">1</span>] == <span class="number">1</span>) &#123;</span><br><span class="line">                            cnt -= <span class="number">2</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -369,9 +569,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-08 19:44:24 / 修改时间：19:50:33" itemprop="dateCreated datePublished" datetime="2024-05-08T19:44:24+08:00">2024-05-08</time>
+      <time title="创建时间：2024-05-08 19:44:24" itemprop="dateCreated datePublished" datetime="2024-05-08T19:44:24+08:00">2024-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-09 18:39:46" itemprop="dateModified" datetime="2024-05-09T18:39:46+08:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -401,7 +607,12 @@
 <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/description/">分发饼干</a></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-双指针"><a href="#1-双指针" class="headerlink" title="1.双指针"></a>1.双指针</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; g, vector&lt;<span class="type">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> indexG = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> indexS = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 排序后双指针开始遍历</span></span><br><span class="line">        <span class="keyword">while</span> (indexS &lt; s.<span class="built_in">size</span>() &amp;&amp; indexG &lt; g.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 贪心思想：给每个小孩尽量合理的饼干大小</span></span><br><span class="line">            <span class="keyword">if</span> (s[indexS] &gt;= g[indexG]) &#123;</span><br><span class="line">                indexG++;</span><br><span class="line">                indexS++;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                indexS++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-贪心"><a href="#1-贪心" class="headerlink" title="1.贪心"></a>1.贪心</h2><ul>
+<li><strong>算法思路</strong>：如何能满足满足最多的小孩？为每个小孩找到一个能满足胃口且最合适的饼干就可以满足尽量多的小孩；如果按照顺序来分，那么没有被分配出去且刚好能满足胃口的饼干就是最合适的饼干；可以从小到大分，也可以从大到小分。</li>
+<li><strong>算法分析</strong>：使用了排序算法，时间复杂度：O（nlogn），其次使用了循环，时间复杂度：O（n），综合来看时间复杂度为：O（nlogn），其中 n 为 g 或 s 数组长度的较大值；使用常数空间，空间复杂度：O（1）。</li>
+<li><strong>算法归纳</strong>：通过从小到大遍历，给每个元素找到一个最优解，而不考虑后方的元素，属于贪心思想。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; g, vector&lt;<span class="type">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 双指针，分别指向小孩和饼干</span></span><br><span class="line">        <span class="type">int</span> indexG = <span class="number">0</span>， indexS = <span class="number">0</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 退出条件为已经没有饼干可以满足后面的小孩了或者是每个小孩都被满足了</span></span><br><span class="line">        <span class="keyword">while</span> (indexS &lt; s.<span class="built_in">size</span>() &amp;&amp; indexG &lt; g.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[indexS] &gt;= g[indexG]) &#123;</span><br><span class="line">                <span class="comment">// 满足了小孩，开始为下一个小孩寻找饼干，满足人数加一</span></span><br><span class="line">                indexG++;</span><br><span class="line">                indexS++;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 没满足小孩，看看下一个饼干是否可以满足</span></span><br><span class="line">                indexS++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -876,199 +1087,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/17.%E7%A7%BB%E5%8A%A80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/17.%E7%A7%BB%E5%8A%A80/" class="post-title-link" itemprop="url">移动0（283）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-07 16:10:39" itemprop="dateCreated datePublished" datetime="2024-05-07T16:10:39+08:00">2024-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-08 15:21:32" itemprop="dateModified" datetime="2024-05-08T15:21:32+08:00">2024-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">移动0</a></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-双指针"><a href="#1-双指针" class="headerlink" title="1.双指针"></a>1.双指针</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 顺序查找为 0 的元素，不为 0 则退出</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 与 i 后第一个不为0的元素进行交换</span></span><br><span class="line">                <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    nums[i] = nums[j];</span><br><span class="line">                    nums[j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-动态规划"><a href="#2-动态规划" class="headerlink" title="2.动态规划"></a>2.动态规划</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录 0 的个数，也就是元素需要移动的距离</span></span><br><span class="line">        <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// 当前元素为 0，不需要移动直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                n++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 当前不需要移动，直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将元素向前移动 n 个单位，并将该位置置为 0</span></span><br><span class="line">            nums[i - n] = nums[i];</span><br><span class="line">            nums[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/07/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%7F%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/07/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%7F%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">系统编程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-05-07 13:45:47 / 修改时间：15:26:45" itemprop="dateCreated datePublished" datetime="2024-05-07T13:45:47+08:00">2024-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">系统编程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​	在学习 Linux 的过程中，在网络上进行搜索，很多的博客或者学习网站都会介绍 Linux 系统编程，其中内容包括文件IO，进程线程，套接字通信等等；有几个点一直很疑惑：到底什么是系统编程？它和 Linux 有什么关系？还有为什么要学习系统编程？在此查阅相关资料学习后进行问题记录。</p>
-<h1 id="1-系统编程是什么？"><a href="#1-系统编程是什么？" class="headerlink" title="1.系统编程是什么？"></a>1.系统编程是什么？</h1><p>系统编程是指利用操作系统提供的功能接口等进行程序开发。</p>
-<h1 id="2-系统编程的好处是什么？"><a href="#2-系统编程的好处是什么？" class="headerlink" title="2.系统编程的好处是什么？"></a>2.系统编程的好处是什么？</h1><p>系统编程的特点就是使用了操作系统的功能接口；当不使用这些功能时，我们所进行的开发基本可以称为裸机开发；裸机开发缺点就是很难开发大型程序，因为大型程序一般涉及到多任务甚至是多主机等；系统编程的好处就体现在提供了一些功能接口，用以帮助开发大型程序，降低开发难度，提高开发效率。</p>
-<h1 id="3-系统编程主要学习什么？"><a href="#3-系统编程主要学习什么？" class="headerlink" title="3.系统编程主要学习什么？"></a>3.系统编程主要学习什么？</h1><p>由上可以看出，系统编程的学习目标是：如何使用操作系统提供的各种功能接口或者工具等进行开发。</p>
-<p>Linux 系统编程主要学习的内容有：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/07/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/%7F%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
