@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,6 +152,90 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">Linux文件IO</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-10 12:00:55 / 修改时间：13:28:45" itemprop="dateCreated datePublished" datetime="2024-05-10T12:00:55+08:00">2024-05-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="1-文件IO是什么？"><a href="#1-文件IO是什么？" class="headerlink" title="1.文件IO是什么？"></a>1.文件IO是什么？</h1><p>Linux 的文件 IO 的 IO 其实就是 input and output，翻译过来就是输入和输出，那么文件 IO 就是对文件进行输入输出，其实就是修改文件。</p>
+<h1 id="2-文件IO有什么作用？"><a href="#2-文件IO有什么作用？" class="headerlink" title="2.文件IO有什么作用？"></a>2.文件IO有什么作用？</h1><p>在程序运行的过程中，我们希望把某些有用的信息保存下来，或者是希望程序去读取某个文件的配置信息，从而达到不同的运行效果，这类操作都需要与文件进行交互，此时就需要使用到文件 IO。</p>
+<h1 id="3-文件IO如何使用？"><a href="#3-文件IO如何使用？" class="headerlink" title="3.文件IO如何使用？"></a>3.文件IO如何使用？</h1><p>在 Linux 操作系统中，提供了一系列文件 IO 的操作接口，其中使用的比较多的有：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按要求打开文件并获取文件描述符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭文件描述符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">close</span><span class="params">(<span class="type">int</span> fd)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从文件中读取数据流</span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 往文件中写入数据流</span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> fd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置文件偏移量</span></span><br><span class="line"><span class="type">off_t</span> <span class="title function_">lseek</span><span class="params">(<span class="type">int</span> fd, <span class="type">off_t</span> offset, <span class="type">int</span> whence)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对文件描述符进行控制操作</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fcntl</span><span class="params">(<span class="type">int</span> fd, <span class="type">int</span> cmd, ... <span class="comment">/* arg */</span> )</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对设备IO进行控制</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ioctl</span><span class="params">(<span class="type">int</span> fd, <span class="type">unsigned</span> <span class="type">long</span> request, ...)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这些函数是操作系统提供的系统调用，实现了对文件IO的底层控制。要使用这些函数，通常需要包含相应的头文件，并在程序中进行错误处理。</p>
+<p>在使用 C 语言和或 C++ 编程时，也可以使用标准库中封装好的 IO 函数：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO%E5%87%BD%E6%95%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -757,7 +841,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-05-08 14:45:38 / 修改时间：15:25:19" itemprop="dateCreated datePublished" datetime="2024-05-08T14:45:38+08:00">2024-05-08</time>
+      <time title="创建时间：2024-05-08 14:45:38 / 修改时间：19:31:40" itemprop="dateCreated datePublished" datetime="2024-05-08T14:45:38+08:00">2024-05-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -842,9 +926,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-08 13:15:32 / 修改时间：17:05:22" itemprop="dateCreated datePublished" datetime="2024-05-08T13:15:32+08:00">2024-05-08</time>
+      <time title="创建时间：2024-05-08 13:15:32" itemprop="dateCreated datePublished" datetime="2024-05-08T13:15:32+08:00">2024-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-09 18:39:52" itemprop="dateModified" datetime="2024-05-09T18:39:52+08:00">2024-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -974,101 +1064,6 @@
 </ul>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希表"><a href="#1-哈希表" class="headerlink" title="1.哈希表"></a>1.哈希表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersection</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建数组存储交集元素</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="comment">// 创建哈希表进行条件判断</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化哈希表</span></span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 将第一个数组的元素插入哈希表中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums1[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第一个数组中相同的元素</span></span><br><span class="line">                hash[nums1[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 检查第二个数组元素有没有在哈希表中出现，出现则为交集元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第二个数组中相同的元素</span></span><br><span class="line">                hash[nums2[i]]++;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/18.%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/18.%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/" class="post-title-link" itemprop="url">区域和检索-数组不可变（303）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-07 22:47:33" itemprop="dateCreated datePublished" datetime="2024-05-07T22:47:33+08:00">2024-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-08 15:30:09" itemprop="dateModified" datetime="2024-05-08T15:30:09+08:00">2024-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-query-immutable/description/">区域和检索-数组不可变</a></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-前缀和"><a href="#1-前缀和" class="headerlink" title="1.前缀和"></a>1.前缀和</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化前缀和数组，长度比原数组长度多 1</span></span><br><span class="line">        arr.<span class="built_in">resize</span>(length + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化时遍历数组计算前缀和</span></span><br><span class="line">            arr[i + <span class="number">1</span>] = arr[i] + nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (arr[right + <span class="number">1</span>] - arr[left]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-枚举"><a href="#2-枚举" class="headerlink" title="2.枚举"></a>2.枚举</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        arr.<span class="built_in">resize</span>(length, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = left; i &lt;= right; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
