@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -131,7 +131,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -152,6 +152,107 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%AF%BC%E8%87%B4%E7%9A%84%E6%AE%B5%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%AF%BC%E8%87%B4%E7%9A%84%E6%AE%B5%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">文件路径导致的段错误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-10 14:05:45 / 修改时间：14:30:50" itemprop="dateCreated datePublished" datetime="2024-05-10T14:05:45+08:00">2024-05-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">系统编程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在学习如何使用 C 标准库的 IO 函数时，写了一个程序，功能是往日志文件中打印十行时间信息，结果报出了段错误信息，在此记录一下问题的原因及解决办法。</p>
+<h1 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a><strong>代码段</strong></h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fd = fopen(<span class="string">&quot;~/project/log&quot;</span>, <span class="string">&quot;a&quot;</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 往日志中打印十行时间</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前时间</span></span><br><span class="line">        <span class="type">time_t</span> current_time = time(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 转换为当地时间结构</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">tm</span> *<span class="title">localTime</span> =</span> localtime(&amp;current_time);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印时间到日志中</span></span><br><span class="line">        <span class="type">int</span> wriedTime = <span class="built_in">fprintf</span>(fd, <span class="string">&quot;time:%s\n&quot;</span>, asctime(localTime));</span><br><span class="line">        </span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="终端输出"><a href="#终端输出" class="headerlink" title="终端输出"></a>终端输出</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thui@master:~/project$ gcc a.c -o a.exe</span><br><span class="line">thui@master:~/project$ ./a.exe </span><br><span class="line">Segmentation fault</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a><strong>问题原因</strong></h1><p>在UNIX系统中，<code>~</code> 不会被自动扩展为当前用户的家目录，在打开文件时找不到路径从而出现段错误。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%AF%BC%E8%87%B4%E7%9A%84%E6%AE%B5%E9%94%99%E8%AF%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -982,100 +1083,6 @@
 
 
 <h2 id="2-双指针"><a href="#2-双指针" class="headerlink" title="2.双指针"></a>2.双指针</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果给定的数组已经排好序呢？你将如何优化你的算法？</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersect</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 假设已经排好序</span></span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(nums2.<span class="built_in">begin</span>(), nums2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums1.<span class="built_in">size</span>() &amp;&amp; j &lt; nums2.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 相同元素插入，否则元素值小的指针先往前走</span></span><br><span class="line">            <span class="keyword">if</span> (nums1[i] == nums2[j]) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[i] &gt; nums2[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/19.%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/07/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/19.%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/" class="post-title-link" itemprop="url">两个数组的交集（349）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-07 23:41:36" itemprop="dateCreated datePublished" datetime="2024-05-07T23:41:36+08:00">2024-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-08 15:23:54" itemprop="dateModified" datetime="2024-05-08T15:23:54+08:00">2024-05-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/description/">两个数组的交集</a></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希表"><a href="#1-哈希表" class="headerlink" title="1.哈希表"></a>1.哈希表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersection</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建数组存储交集元素</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="comment">// 创建哈希表进行条件判断</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化哈希表</span></span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 将第一个数组的元素插入哈希表中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums1[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第一个数组中相同的元素</span></span><br><span class="line">                hash[nums1[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 检查第二个数组元素有没有在哈希表中出现，出现则为交集元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第二个数组中相同的元素</span></span><br><span class="line">                hash[nums2[i]]++;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
