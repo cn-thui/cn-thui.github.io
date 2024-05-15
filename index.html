@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -161,6 +161,196 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/35.%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/35.%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/" class="post-title-link" itemprop="url">两个列表的最小索引总和</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-15 20:14:58 / 修改时间：21:12:48" itemprop="dateCreated datePublished" datetime="2024-05-15T20:14:58+08:00">2024-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-index-sum-of-two-lists/description/">两个列表的最小索引总和</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希-条件查找"><a href="#1-哈希-条件查找" class="headerlink" title="1.哈希+条件查找"></a>1.哈希+条件查找</h2><p><strong>方法与思路</strong>：构建一个哈希表，将餐厅名作为键，索引作为值，将第一个数组映射为哈希表；对第二个数组进行遍历，在遍历每一个元素时，都对哈希表进行查找，哈希表中是否存在与当前元素相同的键，如果存在则获取两个元素的索引和，并判断该索引和是否为满足条件索引和的最小值，如果是最小值，则更新最小值并重置数组，如果与之前的最小值相同，则直接将该元素插入。</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O（n），n 为两个数组中较长数组的长度</li>
+<li>空间复杂度：O（n），n 为两个数组中较短数组的长度</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findRestaurant</span><span class="params">(vector&lt;string&gt;&amp; list1,</span></span></span><br><span class="line"><span class="params"><span class="function">                                  vector&lt;string&gt;&amp; list2)</span> </span>&#123;</span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        unordered_map&lt;string, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="comment">// 将短的数组映射为哈希表，节省内存</span></span><br><span class="line">        vector&lt;string&gt;&amp; shortList = list1.<span class="built_in">size</span>() &lt; list2.<span class="built_in">size</span>() ? list1 : list2;</span><br><span class="line">        vector&lt;string&gt;&amp; longList = list1.<span class="built_in">size</span>() &gt;= list2.<span class="built_in">size</span>() ? list1 : list2;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; shortList.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            hash[shortList[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最小索引和</span></span><br><span class="line">        <span class="type">int</span> minIndexSum = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; longList.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 查询到相同的餐厅</span></span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">count</span>(longList[i])) &#123;</span><br><span class="line">                <span class="type">int</span> indexSum = i + hash[longList[i]];</span><br><span class="line">                <span class="comment">// 判断索引和与最小索引和的关系</span></span><br><span class="line">                <span class="keyword">if</span> (indexSum &lt; minIndexSum) &#123;</span><br><span class="line">                    <span class="comment">// 更新最小索引和并且重置数组</span></span><br><span class="line">                    minIndexSum = indexSum;</span><br><span class="line">                    ans = &#123;longList[i]&#125;;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (indexSum == minIndexSum) &#123;</span><br><span class="line">                    <span class="comment">// 插入数组</span></span><br><span class="line">                    ans.<span class="built_in">push_back</span>(longList[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/34.%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/34.%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/" class="post-title-link" itemprop="url">区间加法II</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-15 19:31:58 / 修改时间：19:49:45" itemprop="dateCreated datePublished" datetime="2024-05-15T19:31:58+08:00">2024-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-addition-ii/description/">区间加法II</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-原理计算"><a href="#1-原理计算" class="headerlink" title="1.原理计算"></a>1.原理计算</h2><p><strong>方法与思路</strong>：对于每一次操作都需要对指定区间进行加一，每次操作都覆盖到的区域即为矩阵中的最大值，对于操作数来说，每次操作都能覆盖的范围其实就是操作数中的最小值，只需要遍历数组找到行和列对应操作数的最小值即可。</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O（n），n 为 ops 的行数</li>
+<li>空间复杂度：O（1）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxCount</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; ops)</span> </span>&#123;</span><br><span class="line">        <span class="type">size_t</span> rows = ops.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="comment">// 找到行操作数的最小值</span></span><br><span class="line">           	m = <span class="built_in">min</span>(m, ops[i][<span class="number">0</span>]);</span><br><span class="line">            <span class="comment">// 找到列操作数的最小值</span></span><br><span class="line">            n = <span class="built_in">min</span>(n, ops[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> m * n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -191,7 +381,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-05-15 15:06:35 / 修改时间：18:04:47" itemprop="dateCreated datePublished" datetime="2024-05-15T15:06:35+08:00">2024-05-15</time>
+      <time title="创建时间：2024-05-15 15:06:35 / 修改时间：20:18:21" itemprop="dateCreated datePublished" datetime="2024-05-15T15:06:35+08:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,14 +411,14 @@
 <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-harmonious-subsequence/description/">最长和谐子序列</a></li>
 </ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希-条件查询"><a href="#1-哈希-条件查询" class="headerlink" title="1.哈希+条件查询"></a>1.哈希+条件查询</h2><p><strong>思路与方法</strong>：首先构建一个哈希表，键为原数组元素的值，值为该元素出现的次数；将原数组映射为哈希表后，对哈希表进行遍历，在遍历每一个元素时，查询哈希表中是否存在该元素的伙伴，如果存在则获取两个元素出现次数的和，满足条件和中的最大值即为最长子序列的长度。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希-条件查找"><a href="#1-哈希-条件查找" class="headerlink" title="1.哈希+条件查找"></a>1.哈希+条件查找</h2><p><strong>思路与方法</strong>：首先构建一个哈希表，键为原数组元素的值，值为该元素出现的次数；将原数组映射为哈希表后，对哈希表进行遍历，在遍历每一个元素时，查询哈希表中是否存在该元素的伙伴，如果存在则获取两个元素出现次数的和，满足条件和中的最大值即为最长子序列的长度。</p>
 <ul>
 <li>如果 b &#x3D; a + 1，则称 b 为 a 的伙伴</li>
 </ul>
 <p><strong>复杂度分析</strong>：</p>
 <ul>
-<li>时间复杂度：O（n）</li>
-<li>空间复杂度：O（n）</li>
+<li>时间复杂度：O（n），n 为 nums 的长度</li>
+<li>空间复杂度：O（n），n 为 nums 的长度</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findLHS</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            hash[num]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; it : hash) &#123;</span><br><span class="line">            <span class="comment">// 查询当前元素是否有伙伴</span></span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">count</span>(it.first + <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="comment">// 获取这对元素构成的子序列长度</span></span><br><span class="line">                <span class="type">int</span> sum = it.second + hash[it.first + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">// 获取最长子序列的长度</span></span><br><span class="line">                ans = sum &gt; ans ? sum : ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
@@ -926,204 +1116,6 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findWords</span><span class="params">(vector&lt;string&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储符合要求的字符串</span></span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        <span class="comment">// 数组哈希</span></span><br><span class="line">        string rowIndex = <span class="string">&quot;12210111011122000010020202&quot;</span>;</span><br><span class="line">        <span class="comment">// 循环遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 创建标志位判断该字符串是否符合要求</span></span><br><span class="line">            <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">// 获取字符串第一个字符所在的行号</span></span><br><span class="line">            <span class="type">char</span> startLine = rowIndex[<span class="built_in">tolower</span>(words[i][<span class="number">0</span>]) - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="comment">// 循环遍历字符串中的每个字符</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; words[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 判定字符是否与第一个字符属于同一行</span></span><br><span class="line">                <span class="keyword">if</span> (rowIndex[<span class="built_in">tolower</span>(words[i][j]) - <span class="string">&#x27;a&#x27;</span>] != startLine) &#123;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 每个字符串判定结束后，将符合要求的字符串插入返回数组</span></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(words[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">fopen()找不到文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-05-10 14:05:45 / 修改时间：14:43:54" itemprop="dateCreated datePublished" datetime="2024-05-10T14:05:45+08:00">2024-05-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">系统编程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在学习如何使用 C 标准库的 IO 函数时，写了一个程序，功能是往日志文件中打印十行时间信息，报出错误找不到文件，在此记录一下问题原因及解决方案。</p>
-<h1 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a><strong>代码段</strong></h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">    FILE* fd = fopen(<span class="string">&quot;~/project/log.txt&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fd == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前时间</span></span><br><span class="line">        <span class="type">time_t</span> current_time = time(<span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (current_time == (<span class="type">time_t</span>)<span class="number">-1</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;time&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 转换为当地时间结构</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">tm</span>* <span class="title">localTime</span> =</span> localtime(&amp;current_time);</span><br><span class="line">        <span class="keyword">if</span> (localTime == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;localtime&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 打印时间到日志中</span></span><br><span class="line">        <span class="type">int</span> writtenTime = <span class="built_in">fprintf</span>(fd, <span class="string">&quot;time:%s\n&quot;</span>, asctime(localTime));</span><br><span class="line">        <span class="keyword">if</span> (writtenTime &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;fprintf&quot;</span>);</span><br><span class="line">            fclose(fd);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="终端输出"><a href="#终端输出" class="headerlink" title="终端输出"></a>终端输出</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thui@master:~/project$ gcc a.c -o a.exe</span><br><span class="line">thui@master:~/project$ ./a.exe </span><br><span class="line">fopen: No such file or directory</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a><strong>问题原因</strong></h1><p>在UNIX系统中，<code>~</code> 不会被自动扩展为当前用户的家目录，所以无法找到文件。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/" class="post-title-link" itemprop="url">Linux文件IO</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-05-10 12:00:55 / 修改时间：14:18:23" itemprop="dateCreated datePublished" datetime="2024-05-10T12:00:55+08:00">2024-05-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">系统编程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="1-文件IO是什么？"><a href="#1-文件IO是什么？" class="headerlink" title="1.文件IO是什么？"></a>1.文件IO是什么？</h1><p>Linux 的文件 IO 的 IO 其实就是 input and output，翻译过来就是输入和输出，那么文件 IO 就是对文件进行输入输出，其实就是修改文件。</p>
-<h1 id="2-文件IO有什么作用？"><a href="#2-文件IO有什么作用？" class="headerlink" title="2.文件IO有什么作用？"></a>2.文件IO有什么作用？</h1><p>在程序运行的过程中，我们希望把某些有用的信息保存下来，或者是希望程序去读取某个文件的配置信息，从而达到不同的运行效果，这类操作都需要与文件进行交互，此时就需要使用到文件 IO。</p>
-<h1 id="3-文件IO如何使用？"><a href="#3-文件IO如何使用？" class="headerlink" title="3.文件IO如何使用？"></a>3.文件IO如何使用？</h1><p>在 Linux 操作系统中，提供了一系列文件 IO 的操作接口，其中使用的比较多的有：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按要求打开文件并获取文件描述符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭文件描述符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">close</span><span class="params">(<span class="type">int</span> fd)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从文件中读取数据流</span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 往文件中写入数据流</span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> fd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置文件偏移量</span></span><br><span class="line"><span class="type">off_t</span> <span class="title function_">lseek</span><span class="params">(<span class="type">int</span> fd, <span class="type">off_t</span> offset, <span class="type">int</span> whence)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对文件描述符进行控制操作</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fcntl</span><span class="params">(<span class="type">int</span> fd, <span class="type">int</span> cmd, ... <span class="comment">/* arg */</span> )</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对设备IO进行控制</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ioctl</span><span class="params">(<span class="type">int</span> fd, <span class="type">unsigned</span> <span class="type">long</span> request, ...)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>这些函数是操作系统提供的系统调用，实现了对文件IO的底层控制。要使用这些函数，通常需要包含相应的头文件，并在程序中进行错误处理。</p>
-<p>在使用 C 语言和或 C++ 编程时，也可以使用标准库中封装好的 IO 函数：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
