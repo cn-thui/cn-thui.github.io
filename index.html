@@ -161,6 +161,109 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">最长和谐子序列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-15 15:06:35 / 修改时间：18:04:47" itemprop="dateCreated datePublished" datetime="2024-05-15T15:06:35+08:00">2024-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-harmonious-subsequence/description/">最长和谐子序列</a></li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="1-哈希-条件查询"><a href="#1-哈希-条件查询" class="headerlink" title="1.哈希+条件查询"></a>1.哈希+条件查询</h2><p><strong>思路与方法</strong>：首先构建一个哈希表，键为原数组元素的值，值为该元素出现的次数；将原数组映射为哈希表后，对哈希表进行遍历，在遍历每一个元素时，查询哈希表中是否存在该元素的伙伴，如果存在则获取两个元素出现次数的和，满足条件和中的最大值即为最长子序列的长度。</p>
+<ul>
+<li>如果 b &#x3D; a + 1，则称 b 为 a 的伙伴</li>
+</ul>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O（n）</li>
+<li>空间复杂度：O（n）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findLHS</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            hash[num]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; it : hash) &#123;</span><br><span class="line">            <span class="comment">// 查询当前元素是否有伙伴</span></span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">count</span>(it.first + <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="comment">// 获取这对元素构成的子序列长度</span></span><br><span class="line">                <span class="type">int</span> sum = it.second + hash[it.first + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">// 获取最长子序列的长度</span></span><br><span class="line">                ans = sum &gt; ans ? sum : ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/32.%E5%88%86%E7%B3%96%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -191,7 +294,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-05-15 13:25:02 / 修改时间：15:33:28" itemprop="dateCreated datePublished" datetime="2024-05-15T13:25:02+08:00">2024-05-15</time>
+      <time title="创建时间：2024-05-15 13:25:02 / 修改时间：17:53:37" itemprop="dateCreated datePublished" datetime="2024-05-15T13:25:02+08:00">2024-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1021,104 +1124,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/" class="post-title-link" itemprop="url">下一个更大元素I</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-09 14:33:04" itemprop="dateCreated datePublished" datetime="2024-05-09T14:33:04+08:00">2024-05-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-13 18:15:16" itemprop="dateModified" datetime="2024-05-13T18:15:16+08:00">2024-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <hr>
-<h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/description/">下一个更大元素I</a></li>
-</ul>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ul>
-<li><strong>算法思路</strong>：在第二个数组中查询第一个数组的元素，然后找到其后方第一个比该元素大的值，并按照要求插入；依次将第一个数组中的元素查找完毕即可。</li>
-<li><strong>算法分析</strong>：双层循环，时间复杂度：O（n x m）；不考虑返回数组，使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">nextGreaterElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = nums1.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; nextMax;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">auto</span> it = <span class="built_in">find</span>(nums2.<span class="built_in">begin</span>(), nums2.<span class="built_in">end</span>(), nums1[i]);</span><br><span class="line">            <span class="keyword">while</span> (it != nums2.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="comment">// 找到下一个更大的元素，插入元素</span></span><br><span class="line">                <span class="keyword">if</span> (*it &gt; nums1[i]) &#123;</span><br><span class="line">                    nextMax.<span class="built_in">push_back</span>(*it);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 遍历到容器的末尾还没有找到，插入-1</span></span><br><span class="line">                <span class="keyword">if</span> (it == nums2.<span class="built_in">end</span>() - <span class="number">1</span>) &#123;</span><br><span class="line">                    nextMax.<span class="built_in">push_back</span>(<span class="number">-1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nextMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
       
     </div>
 
