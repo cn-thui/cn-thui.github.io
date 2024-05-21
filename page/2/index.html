@@ -183,7 +183,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/28.%E9%94%AE%E7%9B%98%E8%A1%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/28.%E9%94%AE%E7%9B%98%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/11/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/28.%E9%94%AE%E7%9B%98%E8%A1%8C/" class="post-title-link" itemprop="url">键盘行</a>
+          <a href="/2024/05/11/28.%E9%94%AE%E7%9B%98%E8%A1%8C/" class="post-title-link" itemprop="url">键盘行</a>
         </h2>
 
         <div class="post-meta-container">
@@ -281,7 +281,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -299,7 +299,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">fopen()找不到文件</a>
+          <a href="/2024/05/10/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">fopen()找不到文件</a>
         </h2>
 
         <div class="post-meta-container">
@@ -355,7 +355,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 获取用户的家目录然后构建出日志文件路径即可</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *home_dir = getenv(<span class="string">&quot;HOME&quot;</span>);</span><br><span class="line">    <span class="type">char</span> log_path[<span class="number">256</span>];</span><br><span class="line">    <span class="built_in">snprintf</span>(log_path, <span class="keyword">sizeof</span>(log_path), <span class="string">&quot;%s/project/log.txt&quot;</span>, home_dir);</span><br><span class="line"></span><br><span class="line">    FILE *fd = fopen(log_path, <span class="string">&quot;a&quot;</span>); </span><br><span class="line">    <span class="keyword">if</span> (fd == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;fopen&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 获取当前时间</span></span><br><span class="line">        <span class="type">time_t</span> current_time = time(<span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (current_time == (<span class="type">time_t</span>)<span class="number">-1</span>) &#123;</span><br><span class="line">        	perror(<span class="string">&quot;time&quot;</span>);</span><br><span class="line">        	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">        <span class="comment">// 转换为当地时间结构</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">tm</span> *<span class="title">localTime</span> =</span> localtime(&amp;current_time);</span><br><span class="line">        <span class="keyword">if</span> (localTime == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;localtime&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">        <span class="comment">// 打印时间到日志中</span></span><br><span class="line">        <span class="type">int</span> writtenTime = <span class="built_in">fprintf</span>(fd, <span class="string">&quot;time:%s\n&quot;</span>, asctime(localTime));</span><br><span class="line">        <span class="keyword">if</span> (writtenTime &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;fprintf&quot;</span>);</span><br><span class="line">            fclose(fd);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/#more" rel="contents">
+              <a class="btn" href="/2024/05/10/2.fopen()%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -386,7 +386,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/10/1.%E6%96%87%E4%BB%B6IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -404,7 +404,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/" class="post-title-link" itemprop="url">Linux文件IO</a>
+          <a href="/2024/05/10/1.%E6%96%87%E4%BB%B6IO/" class="post-title-link" itemprop="url">Linux文件IO</a>
         </h2>
 
         <div class="post-meta-container">
@@ -460,7 +460,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">FILE *<span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">const</span> <span class="type">char</span> *mode)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fclose</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> size, FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/05/10/2.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/1.%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/1.%E6%96%87%E4%BB%B6IO/1.%E6%96%87%E4%BB%B6IO/#more" rel="contents">
+              <a class="btn" href="/2024/05/10/1.%E6%96%87%E4%BB%B6IO/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -491,7 +491,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -509,7 +509,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/" class="post-title-link" itemprop="url">下一个更大元素I</a>
+          <a href="/2024/05/09/27.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I/" class="post-title-link" itemprop="url">下一个更大元素I</a>
         </h2>
 
         <div class="post-meta-container">
@@ -589,7 +589,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/09/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -607,7 +607,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/09/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">提莫攻击</a>
+          <a href="/2024/05/09/26.%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">提莫攻击</a>
         </h2>
 
         <div class="post-meta-container">
@@ -687,7 +687,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/25.%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/25.%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -705,7 +705,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/25.%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/" class="post-title-link" itemprop="url">最大连续1的个数</a>
+          <a href="/2024/05/08/25.%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/" class="post-title-link" itemprop="url">最大连续1的个数</a>
         </h2>
 
         <div class="post-meta-container">
@@ -785,7 +785,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/24.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/24.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -803,7 +803,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/24.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/" class="post-title-link" itemprop="url">岛屿的周长</a>
+          <a href="/2024/05/08/24.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF/" class="post-title-link" itemprop="url">岛屿的周长</a>
         </h2>
 
         <div class="post-meta-container">
@@ -882,7 +882,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/23.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/23.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -900,7 +900,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/23.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/" class="post-title-link" itemprop="url">分发饼干</a>
+          <a href="/2024/05/08/23.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/" class="post-title-link" itemprop="url">分发饼干</a>
         </h2>
 
         <div class="post-meta-container">
@@ -980,7 +980,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/22.%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/22.%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -998,7 +998,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/22.%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/" class="post-title-link" itemprop="url">找到所有数组中消失的数字</a>
+          <a href="/2024/05/08/22.%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/" class="post-title-link" itemprop="url">找到所有数组中消失的数字</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1075,7 +1075,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/21.%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/08/21.%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1093,7 +1093,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/08/3.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/leetcode/21.%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/" class="post-title-link" itemprop="url">第三大的数</a>
+          <a href="/2024/05/08/21.%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/" class="post-title-link" itemprop="url">第三大的数</a>
         </h2>
 
         <div class="post-meta-container">
