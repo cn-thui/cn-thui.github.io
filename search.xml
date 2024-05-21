@@ -88,7 +88,7 @@
 <h1 id="3绑定-github-ssh-keys"><a class="markdownIt-Anchor" href="#3绑定-github-ssh-keys"></a> 3.绑定 Github SSH Keys</h1>
 <p>为了将你的本地 Git 仓库与 GitHub 关联，你需要添加 SSH 密钥到你的 GitHub 帐户中。具体操作请查看：</p>
 <ul>
-<li><a href="https://cn-thui.github.io/2024/04/20/SSH%20%E8%BF%9E%E6%8E%A5/">SSH 连接</a></li>
+<li><a href="https://cn-thui.github.io/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/">SSH 连接</a></li>
 </ul>
 <h1 id="4-安装-hexo-客户端"><a class="markdownIt-Anchor" href="#4-安装-hexo-客户端"></a> 4. 安装 Hexo 客户端</h1>
 <p>打开命令行（或终端），运行以下命令来安装 Hexo：</p>
@@ -114,28 +114,37 @@
 ]]></content>
   </entry>
   <entry>
-    <title>SSH 连接（以Github为例）</title>
+    <title>SSH安装配置连接（Windows）</title>
     <url>/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/</url>
-    <content><![CDATA[<h1 id="1生成-ssh-密钥"><a class="markdownIt-Anchor" href="#1生成-ssh-密钥"></a> 1.生成 SSH 密钥</h1>
+    <content><![CDATA[<h1 id="1安装-ssh-客户端"><a class="markdownIt-Anchor" href="#1安装-ssh-客户端"></a> 1.安装 SSH 客户端</h1>
+<p>因 Windows 10 及以上版本基本上默认安装了 SSH 客户端，不需要额外安装，可以使用以下命令检查：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ssh -V</span><br></pre></td></tr></table></figure>
+<p>如出现版本信息则表示 SSH 客户端已安装；没有出现版本信息则需要手动安装，可以使用以下命令安装：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">dism /Online /Add-Capability /CapabilityName:OpenSSH.Client~~~~<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h1 id="2生成-ssh-密钥"><a class="markdownIt-Anchor" href="#2生成-ssh-密钥"></a> 2.生成 SSH 密钥</h1>
 <p>首先，你需要检查是否已经有 SSH 密钥。在命令行中运行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> ~/.ssh</span><br></pre></td></tr></table></figure>
 <p>如果存在 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 文件，则表示你已经有了 SSH 密钥。你可以跳过生成 SSH 密钥的步骤。</p>
 <p>如果不存在 SSH 密钥，你需要生成一个。在命令行中运行以下命令，并按照提示操作：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-<p>将 <code>&quot;your_email@example.com&quot;</code> 替换为你的 GitHub 注册邮箱。在提示你输入文件路径时，直接按 Enter 键即可使用默认路径。</p>
-<h1 id="2添加-ssh-密钥到-github-帐户"><a class="markdownIt-Anchor" href="#2添加-ssh-密钥到-github-帐户"></a> 2.添加 SSH 密钥到 GitHub 帐户</h1>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.c</span></span><br></pre></td></tr></table></figure>
+<p>将 <code>&quot;your_email@example.com&quot;</code> 替换为你的 GitHub 注册邮箱。在提示你输入文件路径时，直接连按两个 Enter 键即可使用默认路径。</p>
+<h1 id="3添加-ssh-密钥到-github-帐户"><a class="markdownIt-Anchor" href="#3添加-ssh-密钥到-github-帐户"></a> 3.添加 SSH 密钥到 GitHub 帐户</h1>
 <p>复制你的 SSH 公钥。你可以使用以下命令将公钥打印到终端：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 <p>然后，复制输出的 SSH 公钥。</p>
 <p>登录到 GitHub 帐户，点击右上角的头像，选择 “Settings”，然后选择 “SSH and GPG keys”。</p>
 <p>点击 “New SSH key”，在 “Title” 字段中为该密钥命名（可以任意命名），在 “Key” 字段中粘贴刚刚复制的 SSH 公钥。</p>
 <p>点击 “Add SSH key” 以添加密钥。</p>
-<h1 id="3验证-ssh-连接"><a class="markdownIt-Anchor" href="#3验证-ssh-连接"></a> 3.验证 SSH 连接</h1>
+<h1 id="4验证-ssh-连接"><a class="markdownIt-Anchor" href="#4验证-ssh-连接"></a> 4.验证 SSH 连接</h1>
 <p>最后，为了验证 SSH 连接是否正常，你可以在终端中运行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>如果一切正常，你将看到一条消息，说明连接成功。</p>
-<p>现在，本地 Git 应该能够与 GitHub 仓库正常通信了。</p>
+<p>如果一切正常，你将看到一条消息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Hi [你的GitHub用户名]! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+<p>这条消息表明连接已成功建立，并且你的GitHub用户名被正确识别。</p>
 ]]></content>
+      <tags>
+        <tag>环境配置</tag>
+      </tags>
   </entry>
   <entry>
     <title>gcc编译</title>

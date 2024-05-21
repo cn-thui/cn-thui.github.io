@@ -157,7 +157,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -985,7 +985,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-16 14:59:23" itemprop="dateModified" datetime="2024-05-16T14:59:23+08:00">2024-05-16</time>
+      <time title="修改时间：2024-05-21 23:26:12" itemprop="dateModified" datetime="2024-05-21T23:26:12+08:00">2024-05-21</time>
     </span>
 
   
@@ -1009,7 +1009,7 @@
 <h1 id="3绑定-github-ssh-keys"><a class="markdownIt-Anchor" href="#3绑定-github-ssh-keys"></a> 3.绑定 Github SSH Keys</h1>
 <p>为了将你的本地 Git 仓库与 GitHub 关联，你需要添加 SSH 密钥到你的 GitHub 帐户中。具体操作请查看：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://cn-thui.github.io/2024/04/20/SSH%20%E8%BF%9E%E6%8E%A5/">SSH 连接</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn-thui.github.io/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/">SSH 连接</a></li>
 </ul>
 <h1 id="4-安装-hexo-客户端"><a class="markdownIt-Anchor" href="#4-安装-hexo-客户端"></a> 4. 安装 Hexo 客户端</h1>
 <p>打开命令行（或终端），运行以下命令来安装 Hexo：</p>
@@ -1064,7 +1064,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SSH 连接（以Github为例）</a>
+          <a href="/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SSH安装配置连接（Windows）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1082,7 +1082,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-16 14:59:19" itemprop="dateModified" datetime="2024-05-16T14:59:19+08:00">2024-05-16</time>
+      <time title="修改时间：2024-05-21 23:22:18" itemprop="dateModified" datetime="2024-05-21T23:22:18+08:00">2024-05-21</time>
     </span>
 
   
@@ -1095,16 +1095,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="1生成-ssh-密钥"><a class="markdownIt-Anchor" href="#1生成-ssh-密钥"></a> 1.生成 SSH 密钥</h1>
+          <h1 id="1安装-ssh-客户端"><a class="markdownIt-Anchor" href="#1安装-ssh-客户端"></a> 1.安装 SSH 客户端</h1>
+<p>因 Windows 10 及以上版本基本上默认安装了 SSH 客户端，不需要额外安装，可以使用以下命令检查：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -V</span><br></pre></td></tr></table></figure>
+<p>如出现版本信息则表示 SSH 客户端已安装；没有出现版本信息则需要手动安装，可以使用以下命令安装：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism /Online /Add-Capability /CapabilityName:OpenSSH.Client~~~~<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h1 id="2生成-ssh-密钥"><a class="markdownIt-Anchor" href="#2生成-ssh-密钥"></a> 2.生成 SSH 密钥</h1>
 <p>首先，你需要检查是否已经有 SSH 密钥。在命令行中运行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> ~/.ssh</span><br></pre></td></tr></table></figure>
 <p>如果存在 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 文件，则表示你已经有了 SSH 密钥。你可以跳过生成 SSH 密钥的步骤。</p>
 <p>如果不存在 SSH 密钥，你需要生成一个。在命令行中运行以下命令，并按照提示操作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-<p>将 <code>&quot;your_email@example.com&quot;</code> 替换为你的 GitHub 注册邮箱。在提示你输入文件路径时，直接按 Enter 键即可使用默认路径。</p>
-<h1 id="2添加-ssh-密钥到-github-帐户"><a class="markdownIt-Anchor" href="#2添加-ssh-密钥到-github-帐户"></a> 2.添加 SSH 密钥到 GitHub 帐户</h1>
-<p>复制你的 SSH 公钥。你可以使用以下命令将公钥打印到终端：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/20/%E5%85%B6%E4%BB%96/SSH%20%E8%BF%9E%E6%8E%A5/#more" rel="contents">
