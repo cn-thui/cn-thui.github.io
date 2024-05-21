@@ -146,18 +146,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -183,7 +183,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/16/36.%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/17/%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -201,7 +201,117 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/16/36.%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">种花问题</a>
+          <a href="/2024/05/17/%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/" class="post-title-link" itemprop="url">三个数的最大乘积</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-17 14:21:21 / 修改时间：20:01:31" itemprop="dateCreated datePublished" datetime="2024-05-17T14:21:21+08:00">2024-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-product-of-three-numbers/">三个数的最大乘积</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1排序"><a class="markdownIt-Anchor" href="#1排序"></a> 1.排序</h2>
+<p><strong>方法与思路</strong>：需要得到三个数乘积的最大值，需要考虑到数组元素的正负问题，全部为正数或负数时返回最大三个元素的乘积，有正数有负数时，需要计算两个最小数与一个最大数的乘积和三个最大数的乘积，最后返回较大值即可；</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O(nlogn)，n 为数组的长度</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<pre class="highlight"><code class="cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
+<span class="keyword">public</span>:
+    <span class="function"><span class="type">int</span> <span class="title">maximumProduct</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;
+        <span class="type">size_t</span> length = nums.<span class="built_in">size</span>();
+        <span class="comment">// 排序</span>
+        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());
+        <span class="comment">// 计算两个最小数与一个最大数的乘积</span>
+        <span class="type">int</span> product1 = nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length - <span class="number">1</span>];
+        <span class="comment">// 计算三个最大数的乘积</span>
+        <span class="type">int</span> product2 = nums[length - <span class="number">1</span>] * nums[length - <span class="number">2</span>] * nums[length - <span class="number">3</span>];
+        <span class="comment">// 全部为正或负的情况下，一定返回的是product2，不用单独考虑</span>
+        <span class="comment">// 返回两者中的较大值</span>
+        <span class="keyword">return</span> <span class="built_in">max</span>(product1, product2);
+    &#125;
+&#125;;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/16/%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/16/%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">种花问题</a>
         </h2>
 
         <div class="post-meta-container">
@@ -287,7 +397,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/35.%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -305,7 +415,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/15/35.%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/" class="post-title-link" itemprop="url">两个列表的最小索引总和</a>
+          <a href="/2024/05/15/%E4%B8%A4%E4%B8%AA%E5%88%97%E8%A1%A8%E7%9A%84%E6%9C%80%E5%B0%8F%E7%B4%A2%E5%BC%95%E6%80%BB%E5%92%8C/" class="post-title-link" itemprop="url">两个列表的最小索引总和</a>
         </h2>
 
         <div class="post-meta-container">
@@ -388,7 +498,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/34.%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -406,7 +516,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/15/34.%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/" class="post-title-link" itemprop="url">区间加法II</a>
+          <a href="/2024/05/15/%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/" class="post-title-link" itemprop="url">区间加法II</a>
         </h2>
 
         <div class="post-meta-container">
@@ -489,7 +599,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -507,7 +617,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/15/33.%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">最长和谐子序列</a>
+          <a href="/2024/05/15/%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">最长和谐子序列</a>
         </h2>
 
         <div class="post-meta-container">
@@ -593,7 +703,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/32.%E5%88%86%E7%B3%96%E6%9E%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/15/%E5%88%86%E7%B3%96%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -611,7 +721,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/15/32.%E5%88%86%E7%B3%96%E6%9E%9C/" class="post-title-link" itemprop="url">分糖果</a>
+          <a href="/2024/05/15/%E5%88%86%E7%B3%96%E6%9E%9C/" class="post-title-link" itemprop="url">分糖果</a>
         </h2>
 
         <div class="post-meta-container">
@@ -698,7 +808,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/14/PicGo+Typero+GitHub/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -716,194 +826,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/14/PicGo+Typero+GitHub/" class="post-title-link" itemprop="url">PicGo+Typero+GitHub搭建图床</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-14 20:40:15" itemprop="dateCreated datePublished" datetime="2024-05-14T20:40:15+08:00">2024-05-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-17 14:04:58" itemprop="dateModified" datetime="2024-05-17T14:04:58+08:00">2024-05-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>在写博客时经常需要插入图片，图片插入后一般保存在本地，部署到服务器上之后，访问博客图片是无法显示的；为了解决这个问题，可以把图片上传到图床上，并转义为 URL 路径后插入到博客中；这样部署到服务器上后，访问博客就可以正常显示图片了；在这里记录一下如何使用 PicGo+Typero+GitHub 进行图床的搭建，并记录其中出现的一些问题，避免遗忘。</p>
-<h1 id="搭建步骤"><a class="markdownIt-Anchor" href="#搭建步骤"></a> 搭建步骤</h1>
-<h2 id="1创建仓库"><a class="markdownIt-Anchor" href="#1创建仓库"></a> 1.创建仓库</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405142259930.png" alt="image-20240514213423838"></p>
-<h2 id="2picgo配置"><a class="markdownIt-Anchor" href="#2picgo配置"></a> 2.PicGo配置</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405142259931.png" alt="image-20240514214747276"></p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设定仓库名:&lt;github用户名/仓库名称&gt;</span><br><span class="line">设定分支名:&lt;上传分支&gt;</span><br><span class="line">设定Token:&lt;github令牌&gt;				  </span><br><span class="line">指定存储路径: &lt;存储到仓库的位置&gt;</span><br><span class="line">设定自定义域名: &lt;https://cdn.jsdelivr.net/gh/github用户名/仓库名称@上传分支&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>没有 GitHub 令牌的话可以去 GitHub 官网生成一个，注意令牌需要 repo 的全部权限</li>
-<li>自定义域名是将 GitHub 中的图片映射到 JsDelivr 中获得的 URL 域名前缀，按照格式进行设定即可</li>
-</ul>
-<h2 id="3picgo-安装-compress-插件"><a class="markdownIt-Anchor" href="#3picgo-安装-compress-插件"></a> 3.PicGo 安装 Compress 插件</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/14/PicGo+Typero+GitHub/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/WSL2+Ubuntu+VSCode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/13/WSL2+Ubuntu+VSCode/" class="post-title-link" itemprop="url">WSL2+Ubuntu+VSCode搭建开发环境</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-13 22:33:22" itemprop="dateCreated datePublished" datetime="2024-05-13T22:33:22+08:00">2024-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-17 14:05:03" itemprop="dateModified" datetime="2024-05-17T14:05:03+08:00">2024-05-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
-<p>这里记录一下 WSL2 + Ubuntu22.04 + VSCode 开发环境的搭建过程，以及需要注意的事项。</p>
-<h1 id="1安装wsl服务"><a class="markdownIt-Anchor" href="#1安装wsl服务"></a> 1.安装WSL服务</h1>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 自动启用WSL相关功能，安装必要组件，设置WSL2为默认版本</span><br><span class="line">wsl.exe --install</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 更新WSL，否则后续使用WSL可能会报错</span><br><span class="line">wsl.exe --update</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 重启电脑以启动WSL相关功能服务</span><br><span class="line">shutdown /r /t <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h1 id="2安装分发版子系统"><a class="markdownIt-Anchor" href="#2安装分发版子系统"></a> 2.安装分发版子系统</h1>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看可安装的分发版列表</span><br><span class="line">wsl --list --online</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 安装Ubuntu-<span class="number">22</span>.<span class="number">04</span>，选择&lt;NAME&gt;字段中需要的版本即可</span><br><span class="line"># 默认安装在C盘，后续可以迁移到其他盘符中</span><br><span class="line">wsl --install -d Ubuntu-<span class="number">22</span>.<span class="number">04</span> </span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看ubuntu是否安装成功，出现相关信息即为安装成功</span><br><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/13/WSL2+Ubuntu+VSCode/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/31.%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/13/31.%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">重塑矩阵</a>
+          <a href="/2024/05/13/%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">重塑矩阵</a>
         </h2>
 
         <div class="post-meta-container">
@@ -921,7 +844,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-17 15:42:16" itemprop="dateModified" datetime="2024-05-17T15:42:16+08:00">2024-05-17</time>
+      <time title="修改时间：2024-05-22 00:12:30" itemprop="dateModified" datetime="2024-05-22T00:12:30+08:00">2024-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -955,7 +878,7 @@
 <h2 id="1flatten映射"><a class="markdownIt-Anchor" href="#1flatten映射"></a> 1.flatten映射</h2>
 <ul>
 <li><strong>算法思路</strong>：用两个下标进行标注，遍历原数组的元素插入重塑数组，当重塑数组的第一行插入满了以后切换进入下一行，直到插入完毕为止，先将原数组映射为一维数组，获得其下标，将下标再映射为目标数组，因为映射计算是可逆的，所以可以直接将原数组赋值给目标数组。</li>
-<li><strong>算法分析</strong>：遍历二维矩阵，时间复杂度：O（m x n）；不考虑返回数组，空间复杂度：O（1）。</li>
+<li>xxxxxxxxxx class Solution {public:    int findMaxConsecutiveOnes(vector<int>&amp; nums) {        int length = nums.size();        int max = 0;        int cnt = 0;        for (int i = 0; i &lt; length; i++) {            if (nums[i] == 1) {                cnt++;                max = cnt &gt; max ? cnt : max;            }            if (nums[i] == 0) {                cnt = 0;            }        }        return max;    }};cpp</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">matrixReshape</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; mat, <span class="type">int</span> r, <span class="type">int</span> c) &#123;</span><br><span class="line">        <span class="type">int</span> rows = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> cols = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(rows * cols != r * c)&#123;</span><br><span class="line">            <span class="keyword">return</span> mat;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">againArr</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows * cols; i++) &#123;</span><br><span class="line">            <span class="comment">// 行 = 一维数组下标 / 最大列</span></span><br><span class="line">            <span class="comment">// 列 = 一维数组下标 % 最大列</span></span><br><span class="line">            againArr[i / c][i % c] = mat[i / cols][i % cols];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> againArr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -984,7 +907,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/30.%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1002,7 +925,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/13/30.%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/" class="post-title-link" itemprop="url">数组拆分</a>
+          <a href="/2024/05/13/%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/" class="post-title-link" itemprop="url">数组拆分</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1020,7 +943,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-17 15:42:24" itemprop="dateModified" datetime="2024-05-17T15:42:24+08:00">2024-05-17</time>
+      <time title="修改时间：2024-05-22 00:05:09" itemprop="dateModified" datetime="2024-05-22T00:05:09+08:00">2024-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1083,7 +1006,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/12/29.%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/12/%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1101,7 +1024,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/12/29.%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/" class="post-title-link" itemprop="url">相对名次</a>
+          <a href="/2024/05/12/%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/" class="post-title-link" itemprop="url">相对名次</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1119,7 +1042,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-17 15:42:27" itemprop="dateModified" datetime="2024-05-17T15:42:27+08:00">2024-05-17</time>
+      <time title="修改时间：2024-05-22 00:05:12" itemprop="dateModified" datetime="2024-05-22T00:05:12+08:00">2024-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1180,8 +1103,106 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/%E9%94%AE%E7%9B%98%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/11/%E9%94%AE%E7%9B%98%E8%A1%8C/" class="post-title-link" itemprop="url">键盘行</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-11 16:23:25" itemprop="dateCreated datePublished" datetime="2024-05-11T16:23:25+08:00">2024-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-22 00:05:15" itemprop="dateModified" datetime="2024-05-22T00:05:15+08:00">2024-05-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/keyboard-row/description/">键盘行</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<ul>
+<li><strong>算法思路</strong>：如何只返回可以使用键盘同一行打印的单词？首先需要遍历每个单词，并对每个单词的每个字符判定，是否属于同一行，如果是则存储返回数组，不是则开始遍历下一个单词；此时需要解决两个子问题：（1）怎么获取到单词中字符的行号？（2）怎么判定字符属于同一行？先解决第一个问题：使用一个数组哈希，使用 26 个字母的 ASCII 值减去小写字母 a 的 ASCII 值即为数组的下标，而下标对应的元素的值为该字母所属的行号，那么在获取到字符时先转换为小写，然后获取其 ASCII 值并进行计算就可以获取该字符的行号；第二个问题：如果使用字符两两判定实现起来太过复杂，将问题转为，当字符串中的每个字符都和第一个字符在同一行时，那么这个字符串就是符合要求的，然后循环进行判定即可。</li>
+<li><strong>算法分析</strong>：需要遍历所有的字符，时间复杂度：O（n），n 为字符串数组中所有字符的个数；除开返回数组外，使用常数空间，空间复杂度：O（1）。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findWords</span><span class="params">(vector&lt;string&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储符合要求的字符串</span></span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        <span class="comment">// 数组哈希</span></span><br><span class="line">        string rowIndex = <span class="string">&quot;12210111011122000010020202&quot;</span>;</span><br><span class="line">        <span class="comment">// 循环遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 创建标志位判断该字符串是否符合要求</span></span><br><span class="line">            <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">// 获取字符串第一个字符所在的行号</span></span><br><span class="line">            <span class="type">char</span> startLine = rowIndex[<span class="built_in">tolower</span>(words[i][<span class="number">0</span>]) - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="comment">// 循环遍历字符串中的每个字符</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; words[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 判定字符是否与第一个字符属于同一行</span></span><br><span class="line">                <span class="keyword">if</span> (rowIndex[<span class="built_in">tolower</span>(words[i][j]) - <span class="string">&#x27;a&#x27;</span>] != startLine) &#123;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 每个字符串判定结束后，将符合要求的字符串插入返回数组</span></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(words[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
