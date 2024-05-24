@@ -15,22 +15,43 @@
 <li>时间复杂度：O(nlogn)，n 为数组的长度</li>
 <li>空间复杂度：O(1)</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;
-<span class="keyword">public</span>:
-    <span class="function"><span class="type">int</span> <span class="title">maximumProduct</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;
-        <span class="type">size_t</span> length = nums.<span class="built_in">size</span>();
-        <span class="comment">// 排序</span>
-        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());
-        <span class="comment">// 计算两个最小数与一个最大数的乘积</span>
-        <span class="type">int</span> product1 = nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length - <span class="number">1</span>];
-        <span class="comment">// 计算三个最大数的乘积</span>
-        <span class="type">int</span> product2 = nums[length - <span class="number">1</span>] * nums[length - <span class="number">2</span>] * nums[length - <span class="number">3</span>];
-        <span class="comment">// 全部为正或负的情况下，一定返回的是product2，不用单独考虑</span>
-        <span class="comment">// 返回两者中的较大值</span>
-        <span class="keyword">return</span> <span class="built_in">max</span>(product1, product2);
-    &#125;
+<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maximumProduct</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;
+        <span class="hljs-type">size_t</span> length = nums.<span class="hljs-built_in">size</span>();
+        <span class="hljs-comment">// 排序</span>
+        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());
+        <span class="hljs-comment">// 计算两个最小数与一个最大数的乘积</span>
+        <span class="hljs-type">int</span> product1 = nums[<span class="hljs-number">0</span>] * nums[<span class="hljs-number">1</span>] * nums[length - <span class="hljs-number">1</span>];
+        <span class="hljs-comment">// 计算三个最大数的乘积</span>
+        <span class="hljs-type">int</span> product2 = nums[length - <span class="hljs-number">1</span>] * nums[length - <span class="hljs-number">2</span>] * nums[length - <span class="hljs-number">3</span>];
+        <span class="hljs-comment">// 全部为正或负的情况下，一定返回的是product2，不用单独考虑</span>
+        <span class="hljs-comment">// 返回两者中的较大值</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(product1, product2);
+    &#125;
 &#125;;
 </code></pre>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>丢失的数字</title>
+    <url>/2024/05/06/%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/missing-number/description/">丢失的数字</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1原理计算"><a class="markdownIt-Anchor" href="#1原理计算"></a> 1.原理计算</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// [0, n]中元素的和与从 1 加到 n 的和的差值，就是缺失元素的值</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">missingNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// i 为 数组元素的位置，从 1 开始</span></span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            ans += i;</span><br><span class="line">            ans -= nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2枚举"><a class="markdownIt-Anchor" href="#2枚举"></a> 2.枚举</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">missingNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; table;</span><br><span class="line">        <span class="comment">// 创建一个set容器将nums插入进去</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; i : nums) &#123;</span><br><span class="line">            table.<span class="built_in">insert</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 数组的长度为 n 也就是数组的最大值</span></span><br><span class="line">        <span class="type">int</span> n = table.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 查询 [0, n] 中没有出现的数字</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (table.<span class="built_in">find</span>(i) == table.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -63,17 +84,15 @@
       </tags>
   </entry>
   <entry>
-    <title>丢失的数字</title>
-    <url>/2024/05/06/%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
+    <title>两个数组的交集</title>
+    <url>/2024/05/07/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
 <ul>
-<li><a href="https://leetcode.cn/problems/missing-number/description/">丢失的数字</a></li>
+<li><a href="https://leetcode.cn/problems/intersection-of-two-arrays/description/">两个数组的交集</a></li>
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1原理计算"><a class="markdownIt-Anchor" href="#1原理计算"></a> 1.原理计算</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// [0, n]中元素的和与从 1 加到 n 的和的差值，就是缺失元素的值</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">missingNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// i 为 数组元素的位置，从 1 开始</span></span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            ans += i;</span><br><span class="line">            ans -= nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2枚举"><a class="markdownIt-Anchor" href="#2枚举"></a> 2.枚举</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">missingNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; table;</span><br><span class="line">        <span class="comment">// 创建一个set容器将nums插入进去</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; i : nums) &#123;</span><br><span class="line">            table.<span class="built_in">insert</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 数组的长度为 n 也就是数组的最大值</span></span><br><span class="line">        <span class="type">int</span> n = table.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 查询 [0, n] 中没有出现的数字</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (table.<span class="built_in">find</span>(i) == table.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1哈希表"><a class="markdownIt-Anchor" href="#1哈希表"></a> 1.哈希表</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersection</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建数组存储交集元素</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="comment">// 创建哈希表进行条件判断</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化哈希表</span></span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 将第一个数组的元素插入哈希表中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums1[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第一个数组中相同的元素</span></span><br><span class="line">                hash[nums1[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 检查第二个数组元素有没有在哈希表中出现，出现则为交集元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第二个数组中相同的元素</span></span><br><span class="line">                hash[nums2[i]]++;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -81,6 +100,7 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
+        <tag>哈希表</tag>
       </tags>
   </entry>
   <entry>
@@ -106,6 +126,29 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>两个数组的交集II</title>
+    <url>/2024/05/08/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86II/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/intersection-of-two-arrays-ii/description/">两个数组的交集II</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1哈希表"><a class="markdownIt-Anchor" href="#1哈希表"></a> 1.哈希表</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersect</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="comment">// 记录第一个数组中元素出现的个数</span></span><br><span class="line">            hash[nums1[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="comment">// 检查第二个数组元素是否为交集元素</span></span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">                hash[nums2[i]]--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2双指针"><a class="markdownIt-Anchor" href="#2双指针"></a> 2.双指针</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果给定的数组已经排好序呢？你将如何优化你的算法？</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersect</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 假设已经排好序</span></span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(nums2.<span class="built_in">begin</span>(), nums2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums1.<span class="built_in">size</span>() &amp;&amp; j &lt; nums2.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 相同元素插入，否则元素值小的指针先往前走</span></span><br><span class="line">            <span class="keyword">if</span> (nums1[i] == nums2[j]) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[i] &gt; nums2[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -145,15 +188,17 @@
       </tags>
   </entry>
   <entry>
-    <title>两个数组的交集</title>
-    <url>/2024/05/07/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/</url>
+    <title>买卖股票的最佳时机</title>
+    <url>/2024/04/23/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
 <ul>
-<li><a href="https://leetcode.cn/problems/intersection-of-two-arrays/description/">两个数组的交集</a></li>
+<li><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">买卖股票的最佳时机</a></li>
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1哈希表"><a class="markdownIt-Anchor" href="#1哈希表"></a> 1.哈希表</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersection</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建数组存储交集元素</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="comment">// 创建哈希表进行条件判断</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化哈希表</span></span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 将第一个数组的元素插入哈希表中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums1[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第一个数组中相同的元素</span></span><br><span class="line">                hash[nums1[i]]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 检查第二个数组元素有没有在哈希表中出现，出现则为交集元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 屏蔽第二个数组中相同的元素</span></span><br><span class="line">                hash[nums2[i]]++;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1枚举"><a class="markdownIt-Anchor" href="#1枚举"></a> 1.枚举</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录最大利润</span></span><br><span class="line">        <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; numsSize; j++) &#123;</span><br><span class="line">                <span class="comment">// 没有利润直接进入下一次循环</span></span><br><span class="line">                <span class="keyword">if</span> (prices[i] &gt;= prices[j]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 计算第i天买入，第j天卖出的利润</span></span><br><span class="line">                <span class="type">int</span> temp = prices[j] - prices[i];</span><br><span class="line">                <span class="comment">// 找出最大利润</span></span><br><span class="line">                <span class="keyword">if</span> (temp &gt; max) &#123;</span><br><span class="line">                    max = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2动态规划"><a class="markdownIt-Anchor" href="#2动态规划"></a> 2.动态规划</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> profit_max = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> price_min = prices[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="comment">// 每天都看一下今天是不是历史最低点，若是则更新</span></span><br><span class="line">            price_min = <span class="built_in">min</span>(prices[i], price_min);</span><br><span class="line">            <span class="comment">// 每天都看一下我今天卖出能获取的最大利润是多少，如果比以往利润都大则更新</span></span><br><span class="line">            profit_max = <span class="built_in">max</span>(profit_max, prices[i] - price_min);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit_max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -161,21 +206,33 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>哈希表</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
-    <title>两个数组的交集II</title>
-    <url>/2024/05/08/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86II/</url>
+    <title>分糖果</title>
+    <url>/2024/05/15/%E5%88%86%E7%B3%96%E6%9E%9C/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
 <ul>
-<li><a href="https://leetcode.cn/problems/intersection-of-two-arrays-ii/description/">两个数组的交集II</a></li>
+<li><a href="https://leetcode.cn/problems/distribute-candies/description/">分糖果</a></li>
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1哈希表"><a class="markdownIt-Anchor" href="#1哈希表"></a> 1.哈希表</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersect</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> length1 = nums1.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> length2 = nums2.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        hash.<span class="built_in">resize</span>(<span class="number">1001</span>, <span class="number">0</span>);</span><br><span class="line">		</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length1; i++) &#123;</span><br><span class="line">            <span class="comment">// 记录第一个数组中元素出现的个数</span></span><br><span class="line">            hash[nums1[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length2; i++) &#123;</span><br><span class="line">            <span class="comment">// 检查第二个数组元素是否为交集元素</span></span><br><span class="line">            <span class="keyword">if</span> (hash[nums2[i]] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums2[i]);</span><br><span class="line">                hash[nums2[i]]--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2双指针"><a class="markdownIt-Anchor" href="#2双指针"></a> 2.双指针</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果给定的数组已经排好序呢？你将如何优化你的算法？</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">intersect</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums1, vector&lt;<span class="type">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 假设已经排好序</span></span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(nums2.<span class="built_in">begin</span>(), nums2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums1.<span class="built_in">size</span>() &amp;&amp; j &lt; nums2.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 相同元素插入，否则元素值小的指针先往前走</span></span><br><span class="line">            <span class="keyword">if</span> (nums1[i] == nums2[j]) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[i] &gt; nums2[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1哈希计数"><a class="markdownIt-Anchor" href="#1哈希计数"></a> 1.哈希+计数</h2>
+<p><strong>方法与思路</strong>：需要在尽可能少的糖果中吃到尽可能多的类型，我们可以遍历数组，每遇到一种不同的糖果就吃一颗，并且对吃的颗数进行计数；那么出现了子问题：怎么判断糖果的类型不同？可以使用哈希表进行去重，当哈希表中已经记录了这颗糖果时就代表已经吃过了，没记录就代表没吃过；最后在计数的同时判断有没有超过医生建议的数量即可。</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O(n)，n 为数组长度</li>
+<li>空间复杂度：O(n)，n 为构建的哈希表大小</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">distributeCandies</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candyType)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = candyType.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录吃到不同类型糖果的数量</span></span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 没吃过，可以吃</span></span><br><span class="line">            <span class="keyword">if</span> (hash[candyType[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                hash[candyType[i]]++;</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="comment">// 遵循医生建议，最多只吃一半</span></span><br><span class="line">                <span class="keyword">if</span> (cnt &gt;= length / <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> cnt;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2排序计数"><a class="markdownIt-Anchor" href="#2排序计数"></a> 2.排序+计数</h2>
+<p><strong>方法与思路</strong>：先将数组进行排序，数组中的糖总是大于两颗的，所以第一颗一定是可以吃的，那么从第二颗开始判断，如果与上一颗糖不同则可以吃，当吃过的糖果数等于医生建议时或数组被遍历完后，返回吃过的不同糖果数。</p>
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：O(nlogn)，n 为排序数组的长度</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">distributeCandies</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candyType)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = candyType.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录吃到不同类型糖果的数量，且假定已经吃了一颗</span></span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">sort</span>(candyType.<span class="built_in">begin</span>(), candyType.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 第一颗总是可以吃的，从第二颗开始判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 与上一颗不同，可以吃</span></span><br><span class="line">            <span class="keyword">if</span> (candyType[i] != candyType[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cnt &gt;= length / <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> cnt;</span><br><span class="line">                &#125;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -183,8 +240,6 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>哈希表</tag>
-        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -207,28 +262,6 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>买卖股票的最佳时机</title>
-    <url>/2024/04/23/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">买卖股票的最佳时机</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1枚举"><a class="markdownIt-Anchor" href="#1枚举"></a> 1.枚举</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录最大利润</span></span><br><span class="line">        <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; numsSize; j++) &#123;</span><br><span class="line">                <span class="comment">// 没有利润直接进入下一次循环</span></span><br><span class="line">                <span class="keyword">if</span> (prices[i] &gt;= prices[j]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 计算第i天买入，第j天卖出的利润</span></span><br><span class="line">                <span class="type">int</span> temp = prices[j] - prices[i];</span><br><span class="line">                <span class="comment">// 找出最大利润</span></span><br><span class="line">                <span class="keyword">if</span> (temp &gt; max) &#123;</span><br><span class="line">                    max = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2动态规划"><a class="markdownIt-Anchor" href="#2动态规划"></a> 2.动态规划</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数组大小</span></span><br><span class="line">        <span class="type">int</span> numsSize = prices.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> profit_max = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> price_min = prices[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="comment">// 每天都看一下今天是不是历史最低点，若是则更新</span></span><br><span class="line">            price_min = <span class="built_in">min</span>(prices[i], price_min);</span><br><span class="line">            <span class="comment">// 每天都看一下我今天卖出能获取的最大利润是多少，如果比以往利润都大则更新</span></span><br><span class="line">            profit_max = <span class="built_in">max</span>(profit_max, prices[i] - price_min);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit_max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -271,57 +304,6 @@
       </tags>
   </entry>
   <entry>
-    <title>区域和检索-数组不可变</title>
-    <url>/2024/05/07/%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/range-sum-query-immutable/description/">区域和检索-数组不可变</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1前缀和"><a class="markdownIt-Anchor" href="#1前缀和"></a> 1.前缀和</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化前缀和数组，长度比原数组长度多 1</span></span><br><span class="line">        arr.<span class="built_in">resize</span>(length + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化时遍历数组计算前缀和</span></span><br><span class="line">            arr[i + <span class="number">1</span>] = arr[i] + nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (arr[right + <span class="number">1</span>] - arr[left]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2枚举"><a class="markdownIt-Anchor" href="#2枚举"></a> 2.枚举</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        arr.<span class="built_in">resize</span>(length, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = left; i &lt;= right; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>前缀和</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分糖果</title>
-    <url>/2024/05/15/%E5%88%86%E7%B3%96%E6%9E%9C/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/distribute-candies/description/">分糖果</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1哈希计数"><a class="markdownIt-Anchor" href="#1哈希计数"></a> 1.哈希+计数</h2>
-<ul>
-<li><strong>算法思路</strong>：需要在尽可能少的糖果中吃到尽可能多的类型，我们可以遍历数组，每遇到一种不同的糖果就吃一颗，并且对吃的颗数进行计数；那么出现了子问题：怎么判断糖果的类型不同？可以使用哈希表进行去重，当哈希表中已经记录了这颗糖果时就代表已经吃过了，没记录就代表没吃过；最后在计数的同时判断有没有超过医生建议的数量即可。</li>
-<li><strong>算法分析</strong>：一次循环遍历，时间复杂度：O（n）；创建哈希表进行去重，空间复杂度：O（n）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">distributeCandies</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candyType)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = candyType.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录吃到不同类型糖果的数量</span></span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 没吃过，可以吃</span></span><br><span class="line">            <span class="keyword">if</span> (hash[candyType[i]] == <span class="number">0</span>) &#123;</span><br><span class="line">                hash[candyType[i]]++;</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="comment">// 遵循医生建议，最多只吃一半</span></span><br><span class="line">                <span class="keyword">if</span> (cnt &gt;= length / <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> cnt;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2排序计数"><a class="markdownIt-Anchor" href="#2排序计数"></a> 2.排序+计数</h2>
-<ul>
-<li>xxxxxxxxxx class Solution {public:    int findLHS(vector<int>&amp; nums) {        // 构建哈希表        unordered_map&lt;int, int&gt; hash;        for (int num : nums) {            hash[num]++;        }        int ans = 0;        for (const auto&amp; it : hash) {            // 查询当前元素是否有伙伴            if (hash.count(it.first + 1)) {                // 获取这对元素构成的子序列长度                int sum = it.second + hash[it.first + 1];                // 获取最长子序列的长度                ans = sum &gt; ans ? sum : ans;            }        }        return ans;    }};cpp</li>
-<li><strong>算法分析</strong>：使用 sort() 排序，时间复杂度：O（nlogn），一次循环遍历，时间复杂度：O（n），综合时间复杂度：O（nlogn）；使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">distributeCandies</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; candyType)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = candyType.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 记录吃到不同类型糖果的数量，且假定已经吃了一颗</span></span><br><span class="line">        <span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">sort</span>(candyType.<span class="built_in">begin</span>(), candyType.<span class="built_in">end</span>());</span><br><span class="line">        <span class="comment">// 第一颗总是可以吃的，从第二颗开始判断</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 与上一颗不同，可以吃</span></span><br><span class="line">            <span class="keyword">if</span> (candyType[i] != candyType[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cnt &gt;= length / <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> cnt;</span><br><span class="line">                &#125;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>区间加法II</title>
     <url>/2024/05/15/%E5%8C%BA%E9%97%B4%E5%8A%A0%E6%B3%95II/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
@@ -347,6 +329,28 @@
       </tags>
   </entry>
   <entry>
+    <title>区域和检索-数组不可变</title>
+    <url>/2024/05/07/%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/range-sum-query-immutable/description/">区域和检索-数组不可变</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1前缀和"><a class="markdownIt-Anchor" href="#1前缀和"></a> 1.前缀和</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 初始化前缀和数组，长度比原数组长度多 1</span></span><br><span class="line">        arr.<span class="built_in">resize</span>(length + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化时遍历数组计算前缀和</span></span><br><span class="line">            arr[i + <span class="number">1</span>] = arr[i] + nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (arr[right + <span class="number">1</span>] - arr[left]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2枚举"><a class="markdownIt-Anchor" href="#2枚举"></a> 2.枚举</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">NumArray</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        arr.<span class="built_in">resize</span>(length, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sumRange</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = left; i &lt;= right; i++) &#123;</span><br><span class="line">            sum += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>只出现一次的的数字</title>
     <url>/2024/04/28/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E7%9A%84%E6%95%B0%E5%AD%97/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
@@ -363,6 +367,26 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多数元素</title>
+    <url>/2024/04/28/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/majority-element/description/">多数元素</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1摩尔投票"><a class="markdownIt-Anchor" href="#1摩尔投票"></a> 1.摩尔投票</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录票数</span></span><br><span class="line">        <span class="type">int</span> votes = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 记录众数值</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (votes == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 票数抵消为0时，将众数更新为当前元素</span></span><br><span class="line">                ans = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == ans) &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素为众数，则票数+1</span></span><br><span class="line">                votes++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素不为众数，则票数-1</span></span><br><span class="line">                votes--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -387,26 +411,6 @@
       <tags>
         <tag>leetcode</tag>
         <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多数元素</title>
-    <url>/2024/04/28/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/majority-element/description/">多数元素</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1摩尔投票"><a class="markdownIt-Anchor" href="#1摩尔投票"></a> 1.摩尔投票</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">majorityElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录票数</span></span><br><span class="line">        <span class="type">int</span> votes = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 记录众数值</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (votes == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 票数抵消为0时，将众数更新为当前元素</span></span><br><span class="line">                ans = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == ans) &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素为众数，则票数+1</span></span><br><span class="line">                votes++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果当前元素不为众数，则票数-1</span></span><br><span class="line">                votes--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -439,6 +443,26 @@
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
 <h2 id="1哈希表"><a class="markdownIt-Anchor" href="#1哈希表"></a> 1.哈希表</h2>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">find</span>(i) != hash.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="comment">// 找到了相同值，返回</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 没找到，插入到尾部</span></span><br><span class="line">            hash.<span class="built_in">insert</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 没有相同的值，返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>找到所有数组中消失的数字</title>
+    <url>/2024/05/08/%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/description/">找到所有数组中消失的数字</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1哈希预处理遍历搜索"><a class="markdownIt-Anchor" href="#1哈希预处理遍历搜索"></a> 1.哈希预处理+遍历+搜索</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findDisappearedNumbers</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="comment">// 数组的长度 = 数组的最大值 = 区间的最大值</span></span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            hash[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[i] != <span class="number">1</span>) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -491,15 +515,18 @@
       </tags>
   </entry>
   <entry>
-    <title>找到所有数组中消失的数字</title>
-    <url>/2024/05/08/%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</url>
+    <title>提莫攻击</title>
+    <url>/2024/05/09/%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
 <ul>
-<li><a href="https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/description/">找到所有数组中消失的数字</a></li>
+<li><a href="https://leetcode.cn/problems/teemo-attacking/description/">提莫攻击</a></li>
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1哈希预处理遍历搜索"><a class="markdownIt-Anchor" href="#1哈希预处理遍历搜索"></a> 1.哈希预处理+遍历+搜索</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findDisappearedNumbers</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="comment">// 数组的长度 = 数组的最大值 = 区间的最大值</span></span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            hash[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[i] != <span class="number">1</span>) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>算法思路</strong>：如何得到艾希的总中毒时间？当艾希中毒后的中毒时间内没有再次中毒，那么中毒时间就是完整的；当艾希中毒后中毒时间内又再次中毒，那么中毒时间不完整，需要进行计算；最终将每次中毒的时间进行累加就可以得到艾希的总中毒时间。</li>
+<li><strong>算法分析</strong>：只需要一次遍历，时间复杂度：O（n）；使用常数空间，空间复杂度：O（1）。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findPoisonedDuration</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; timeSeries, <span class="type">int</span> duration)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = timeSeries.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> sumTime = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 计算第一次中毒的结束时间</span></span><br><span class="line">        <span class="type">int</span> endTime = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 计算中毒的结束时间</span></span><br><span class="line">            endTime = timeSeries[i] + duration - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (endTime &lt; timeSeries[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 中毒时间完整</span></span><br><span class="line">                sumTime += duration;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 中毒时间不完整</span></span><br><span class="line">                sumTime = sumTime + timeSeries[i + <span class="number">1</span>] - timeSeries[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最后一次攻击完后中毒时间总是完整的</span></span><br><span class="line">        sumTime += duration;</span><br><span class="line">        <span class="keyword">return</span> sumTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -507,7 +534,26 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-        <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搜索插入位置</title>
+    <url>/2024/04/20/%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/search-insert-position/description/">搜索插入位置</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1二分查找"><a class="markdownIt-Anchor" href="#1二分查找"></a> 1.二分查找</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MIN(x, y) ((x) &lt; (y) ? (x) : (y))</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> left, <span class="type">int</span> right, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="type">int</span> mid;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// 获取中间索引</span></span><br><span class="line">        mid = (left + right) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (target &lt; nums[mid]) &#123;</span><br><span class="line">            <span class="comment">// 更新右边界</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &gt; nums[mid]) &#123;</span><br><span class="line">            <span class="comment">// 更新左边界</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 返回目标值的索引</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回插入位置的索引</span></span><br><span class="line">    <span class="keyword">return</span> MIN(left, right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="comment">// 目标值小于数组最小值</span></span><br><span class="line">    <span class="keyword">if</span> (target &lt; nums[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 目标值大于数组最大值</span></span><br><span class="line">    <span class="keyword">if</span> (target &gt; nums[numsSize - <span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> numsSize;</span><br><span class="line">    <span class="comment">// 二分查找</span></span><br><span class="line">    <span class="keyword">return</span> binarySearch(nums, <span class="number">0</span>, numsSize - <span class="number">1</span>, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>二分查找</tag>
       </tags>
   </entry>
   <entry>
@@ -556,38 +602,15 @@
       </tags>
   </entry>
   <entry>
-    <title>搜索插入位置</title>
-    <url>/2024/04/20/%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/</url>
+    <title>杨辉三角</title>
+    <url>/2024/04/22/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
 <ul>
-<li><a href="https://leetcode.cn/problems/search-insert-position/description/">搜索插入位置</a></li>
+<li><a href="https://leetcode.cn/problems/pascals-triangle/description/">杨辉三角</a></li>
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1二分查找"><a class="markdownIt-Anchor" href="#1二分查找"></a> 1.二分查找</h2>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MIN(x, y) ((x) &lt; (y) ? (x) : (y))</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> left, <span class="type">int</span> right, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="type">int</span> mid;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// 获取中间索引</span></span><br><span class="line">        mid = (left + right) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (target &lt; nums[mid]) &#123;</span><br><span class="line">            <span class="comment">// 更新右边界</span></span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &gt; nums[mid]) &#123;</span><br><span class="line">            <span class="comment">// 更新左边界</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 返回目标值的索引</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回插入位置的索引</span></span><br><span class="line">    <span class="keyword">return</span> MIN(left, right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="comment">// 目标值小于数组最小值</span></span><br><span class="line">    <span class="keyword">if</span> (target &lt; nums[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 目标值大于数组最大值</span></span><br><span class="line">    <span class="keyword">if</span> (target &gt; nums[numsSize - <span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> numsSize;</span><br><span class="line">    <span class="comment">// 二分查找</span></span><br><span class="line">    <span class="keyword">return</span> binarySearch(nums, <span class="number">0</span>, numsSize - <span class="number">1</span>, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>二分查找</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>提莫攻击</title>
-    <url>/2024/05/09/%E6%8F%90%E8%8E%AB%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/teemo-attacking/description/">提莫攻击</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<ul>
-<li><strong>算法思路</strong>：如何得到艾希的总中毒时间？当艾希中毒后的中毒时间内没有再次中毒，那么中毒时间就是完整的；当艾希中毒后中毒时间内又再次中毒，那么中毒时间不完整，需要进行计算；最终将每次中毒的时间进行累加就可以得到艾希的总中毒时间。</li>
-<li><strong>算法分析</strong>：只需要一次遍历，时间复杂度：O（n）；使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findPoisonedDuration</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; timeSeries, <span class="type">int</span> duration)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = timeSeries.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> sumTime = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 计算第一次中毒的结束时间</span></span><br><span class="line">        <span class="type">int</span> endTime = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 计算中毒的结束时间</span></span><br><span class="line">            endTime = timeSeries[i] + duration - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (endTime &lt; timeSeries[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 中毒时间完整</span></span><br><span class="line">                sumTime += duration;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 中毒时间不完整</span></span><br><span class="line">                sumTime = sumTime + timeSeries[i + <span class="number">1</span>] - timeSeries[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最后一次攻击完后中毒时间总是完整的</span></span><br><span class="line">        sumTime += duration;</span><br><span class="line">        <span class="keyword">return</span> sumTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1原理计算"><a class="markdownIt-Anchor" href="#1原理计算"></a> 1.原理计算</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">generate</span>(<span class="type">int</span> numRows) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">nums</span>(numRows);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numRows; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化行容器的大小</span></span><br><span class="line">            nums[i].<span class="built_in">resize</span>(i + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 初始化行第一个元素和最后一个元素为1</span></span><br><span class="line">            nums[i][<span class="number">0</span>] = nums[i][i] = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 找到每一行的中间靠右元素的下标</span></span><br><span class="line">            <span class="type">int</span> mid_right = (i / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 计算需要填充数据位置及其大小</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; mid_right; j++) &#123;</span><br><span class="line">                nums[i][j] = nums[i][i - j] =</span><br><span class="line">                    nums[i - <span class="number">1</span>][j - <span class="number">1</span>] + nums[i - <span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -606,7 +629,7 @@
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
 <h2 id="1哈希条件查找"><a class="markdownIt-Anchor" href="#1哈希条件查找"></a> 1.哈希+条件查找</h2>
-<p><strong>思路与方法</strong>：首先构建一个哈希表，键为原数组元素的值，值为该元素出现的次数；将原数组映射为哈希表后，对哈希表进行遍历，在遍历每一个元素时，查询哈希表中是否存在该元素的伙伴，如果存在则获取两个元素出现次数的和，满足条件和中的最大值即为最长子序列的长度。</p>
+<p><strong>方法与思路</strong>：首先构建一个哈希表，键为原数组元素的值，值为该元素出现的次数；将原数组映射为哈希表后，对哈希表进行遍历，在遍历每一个元素时，查询哈希表中是否存在该元素的伙伴，如果存在则获取两个元素出现次数的和，满足条件和中的最大值即为最长子序列的长度。</p>
 <ul>
 <li>如果 b = a + 1，则称 b 为 a 的伙伴</li>
 </ul>
@@ -616,25 +639,6 @@
 <li>空间复杂度：O(n)，n 为 nums 的长度</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findLHS</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            hash[num]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; it : hash) &#123;</span><br><span class="line">            <span class="comment">// 查询当前元素是否有伙伴</span></span><br><span class="line">            <span class="keyword">if</span> (hash.<span class="built_in">count</span>(it.first + <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="comment">// 获取这对元素构成的子序列长度</span></span><br><span class="line">                <span class="type">int</span> sum = it.second + hash[it.first + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">// 获取最长子序列的长度</span></span><br><span class="line">                ans = sum &gt; ans ? sum : ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>杨辉三角</title>
-    <url>/2024/04/22/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/pascals-triangle/description/">杨辉三角</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1原理计算"><a class="markdownIt-Anchor" href="#1原理计算"></a> 1.原理计算</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">generate</span>(<span class="type">int</span> numRows) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">nums</span>(numRows);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numRows; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化行容器的大小</span></span><br><span class="line">            nums[i].<span class="built_in">resize</span>(i + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 初始化行第一个元素和最后一个元素为1</span></span><br><span class="line">            nums[i][<span class="number">0</span>] = nums[i][i] = <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 找到每一行的中间靠右元素的下标</span></span><br><span class="line">            <span class="type">int</span> mid_right = (i / <span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 计算需要填充数据位置及其大小</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; mid_right; j++) &#123;</span><br><span class="line">                nums[i][j] = nums[i][i - j] =</span><br><span class="line">                    nums[i - <span class="number">1</span>][j - <span class="number">1</span>] + nums[i - <span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -713,6 +717,29 @@
       </tags>
   </entry>
   <entry>
+    <title>移动0</title>
+    <url>/2024/05/07/%E7%A7%BB%E5%8A%A80/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/move-zeroes/description/">移动0</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1双指针"><a class="markdownIt-Anchor" href="#1双指针"></a> 1.双指针</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 顺序查找为 0 的元素，不为 0 则退出</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 与 i 后第一个不为0的元素进行交换</span></span><br><span class="line">                <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    nums[i] = nums[j];</span><br><span class="line">                    nums[j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2动态规划"><a class="markdownIt-Anchor" href="#2动态规划"></a> 2.动态规划</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录 0 的个数，也就是元素需要移动的距离</span></span><br><span class="line">        <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// 当前元素为 0，不需要移动直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                n++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 当前不需要移动，直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将元素向前移动 n 个单位，并将该位置置为 0</span></span><br><span class="line">            nums[i - n] = nums[i];</span><br><span class="line">            nums[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>双指针</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>种花问题</title>
     <url>/2024/05/16/%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
@@ -738,49 +765,6 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>移动0</title>
-    <url>/2024/05/07/%E7%A7%BB%E5%8A%A80/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/move-zeroes/description/">移动0</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1双指针"><a class="markdownIt-Anchor" href="#1双指针"></a> 1.双指针</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 顺序查找为 0 的元素，不为 0 则退出</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; nums.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 与 i 后第一个不为0的元素进行交换</span></span><br><span class="line">                <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    nums[i] = nums[j];</span><br><span class="line">                    nums[j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="2动态规划"><a class="markdownIt-Anchor" href="#2动态规划"></a> 2.动态规划</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 记录 0 的个数，也就是元素需要移动的距离</span></span><br><span class="line">        <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// 当前元素为 0，不需要移动直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                n++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 当前不需要移动，直接退出</span></span><br><span class="line">            <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将元素向前移动 n 个单位，并将该位置置为 0</span></span><br><span class="line">            nums[i - n] = nums[i];</span><br><span class="line">            nums[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>双指针</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第三大的数</title>
-    <url>/2024/05/08/%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a href="https://leetcode.cn/problems/third-maximum-number/description/">第三大的数</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1动态规划"><a class="markdownIt-Anchor" href="#1动态规划"></a> 1.动态规划</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">thirdMax</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 保证三个数比数组中任何元素都小</span></span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> first = LONG_MIN;</span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> secend = LONG_MIN;</span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> third = LONG_MIN;</span><br><span class="line">        <span class="comment">// 记录更新次数</span></span><br><span class="line">        <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 去重，不进行更新</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] == first || nums[i] == secend || nums[i] == third) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 根据遍历元素的大小进行更新</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; first) &#123;</span><br><span class="line">                third = secend;</span><br><span class="line">                secend = first;</span><br><span class="line">                first = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] &gt; secend) &#123;</span><br><span class="line">                third = secend;</span><br><span class="line">                secend = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] &gt; third) &#123;</span><br><span class="line">                third = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 当更新次数小于3时说明没有第三大的数字，按要求返回</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> first;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> third;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -812,9 +796,11 @@
 </ul>
 <h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
 <h2 id="1flatten映射"><a class="markdownIt-Anchor" href="#1flatten映射"></a> 1.flatten映射</h2>
+<p><strong>方法与思路</strong>：用两个下标进行标注，遍历原数组的元素插入重塑数组，当重塑数组的第一行插入满了以后切换进入下一行，直到插入完毕为止，先将原数组映射为一维数组，获得其下标，将下标再映射为目标数组，因为映射计算是可逆的，所以可以直接将原数组赋值给目标数组。</p>
+<p><strong>复杂度分析</strong>：</p>
 <ul>
-<li><strong>算法思路</strong>：用两个下标进行标注，遍历原数组的元素插入重塑数组，当重塑数组的第一行插入满了以后切换进入下一行，直到插入完毕为止，先将原数组映射为一维数组，获得其下标，将下标再映射为目标数组，因为映射计算是可逆的，所以可以直接将原数组赋值给目标数组。</li>
-<li>xxxxxxxxxx class Solution {public:    int findMaxConsecutiveOnes(vector<int>&amp; nums) {        int length = nums.size();        int max = 0;        int cnt = 0;        for (int i = 0; i &lt; length; i++) {            if (nums[i] == 1) {                cnt++;                max = cnt &gt; max ? cnt : max;            }            if (nums[i] == 0) {                cnt = 0;            }        }        return max;    }};cpp</li>
+<li>时间复杂度：O(n)，n 为二维向量中的元素个数</li>
+<li>空间复杂度：O(1)</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">matrixReshape</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; mat, <span class="type">int</span> r, <span class="type">int</span> c) &#123;</span><br><span class="line">        <span class="type">int</span> rows = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> cols = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(rows * cols != r * c)&#123;</span><br><span class="line">            <span class="keyword">return</span> mat;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">againArr</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows * cols; i++) &#123;</span><br><span class="line">            <span class="comment">// 行 = 一维数组下标 / 最大列</span></span><br><span class="line">            <span class="comment">// 列 = 一维数组下标 % 最大列</span></span><br><span class="line">            againArr[i / c][i % c] = mat[i / cols][i % cols];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> againArr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -824,6 +810,26 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三大的数</title>
+    <url>/2024/05/08/%E7%AC%AC%E4%B8%89%E5%A4%A7%E7%9A%84%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
+<ul>
+<li><a href="https://leetcode.cn/problems/third-maximum-number/description/">第三大的数</a></li>
+</ul>
+<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
+<h2 id="1动态规划"><a class="markdownIt-Anchor" href="#1动态规划"></a> 1.动态规划</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">thirdMax</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 保证三个数比数组中任何元素都小</span></span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> first = LONG_MIN;</span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> secend = LONG_MIN;</span><br><span class="line">        <span class="type">long</span> <span class="type">int</span> third = LONG_MIN;</span><br><span class="line">        <span class="comment">// 记录更新次数</span></span><br><span class="line">        <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="comment">// 去重，不进行更新</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] == first || nums[i] == secend || nums[i] == third) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 根据遍历元素的大小进行更新</span></span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; first) &#123;</span><br><span class="line">                third = secend;</span><br><span class="line">                secend = first;</span><br><span class="line">                first = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] &gt; secend) &#123;</span><br><span class="line">                third = secend;</span><br><span class="line">                secend = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] &gt; third) &#123;</span><br><span class="line">                third = nums[i];</span><br><span class="line">                n++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 当更新次数小于3时说明没有第三大的数字，按要求返回</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> first;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> third;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
