@@ -885,7 +885,7 @@
   </entry>
   <entry>
     <title>NAND结构及特点</title>
-    <url>/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <url>/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/</url>
     <content><![CDATA[<h1 id="1-存储结构"><a class="markdownIt-Anchor" href="#1-存储结构"></a> 1、存储结构</h1>
 <p>NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：</p>
 <ul>
