@@ -898,9 +898,8 @@
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png" alt="Untitled Diagram (1)" /></p>
 <h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
-<p><strong>存储列阵</strong>：NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上。</p>
+<p>NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上；这种排列方式被称为 NAND 存储阵列，它是一种二维平面的排列方式（也存在三维结构的排列方式，通过将存储阵列在垂直方向上进行叠加处理来实现）。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258547.png" alt="Untitled Diagram (3)" /></p>
-<p><strong>3D结构</strong>：在二维结构的基础上，将多个存储阵列在垂直方向上进行叠加处理，就形成了 NAND 的 3D 结构。</p>
 <h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
 <p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
 <ul>
