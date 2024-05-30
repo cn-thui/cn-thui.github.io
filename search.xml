@@ -839,4 +839,94 @@
         <tag>leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>eMMC基础知识</title>
+    <url>/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="1-emmc基本组成"><a class="markdownIt-Anchor" href="#1-emmc基本组成"></a> 1、eMMC基本组成</h1>
+<p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1" /></p>
+<h2 id="11-nand-flash"><a class="markdownIt-Anchor" href="#11-nand-flash"></a> 1.1 NAND Flash</h2>
+<p>NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2" /></p>
+<ul>
+<li><strong>BOOT Area Partition 1 &amp; 2</strong>：这两个分区主要是为了支持eMMC 启动系统而设计。</li>
+<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：这个分区通过一些处理保证其内部的数据不被非法篡改，通常用于保存安全相关的数据，如指纹数据，安全支付相关的密钥。</li>
+<li><strong>General Purpose Partition 1 ~ 4 (GPP)</strong>：这个分区主要用于存储系统或者用户数据，一般需要在 eMMC 出厂后由用户主动配置后才会存在。</li>
+<li><strong>User Data Area (UDA)</strong>：这个分区主要用于存放系统和用户数据，通常 UDA 占据了 eMMC 总容量的 93% 左右，是用于读写的主要区域。</li>
+</ul>
+<h2 id="12-device-controller"><a class="markdownIt-Anchor" href="#12-device-controller"></a> 1.2 Device Controller</h2>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NAND Flash Translation Layer，即 NFTL 或 NAND Flash 文件系统来做坏块管理、磨损均衡等功能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3" /></p>
+<p>而 eMMC 在其内部集成了 Device Controller，用于完成 NFTL 的一系列功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash ，减少了主机软件的复杂度，省去了对 NAND Flash 的处理。同时 eMMC 还使用了其他的一些技术对 NAND Flash 进行优化，其读写性能也比直接使用 NAND Flash 好很多。</p>
+<h2 id="13-standard-inetrface"><a class="markdownIt-Anchor" href="#13-standard-inetrface"></a> 1.3 Standard Inetrface</h2>
+<p>eMMC 是基于 MMC 总线的一种存储技术，继承了 MMC 的接口规范，同时在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准有以下信号线：</p>
+<ul>
+<li><strong>CLK</strong>：用于接收主机输出的时钟信号。</li>
+<li><strong>Reset</strong>：用于接收主机输出的复位信号。</li>
+<li><strong>CMD</strong>：用于主机向 eMMC 发送命令信号和 eMMC 向主机发送应答信号。</li>
+<li><strong>Data</strong>：用于主机和 eMMC 间的数据通信，同时用户可以配置使用的 Date 线的数量，可以选择 4 根或者 8 根。</li>
+<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 时被提出。</li>
+</ul>
+<h1 id="2-emmc工作流程"><a class="markdownIt-Anchor" href="#2-emmc工作流程"></a> 2、eMMC工作流程</h1>
+<ul>
+<li><strong>初始化</strong>：包括引脚连接、电源供应、时钟设置、发送命令和应答等步骤。</li>
+<li><strong>读取数据</strong>：包括发送读取命令、应答、数据传输和校验等步骤。</li>
+<li><strong>发送数据</strong>：包括发送写入命令、应答、数据传输和校验等步骤。</li>
+<li><strong>结束</strong>：在完成读取或写入操作后，主机断开对eMMC的电源供应，以保护数据的安全性，并保存结果以满足系统或用户的需求。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储开发</category>
+        <category>eMMC</category>
+      </categories>
+      <tags>
+        <tag>eMMC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NAND结构及特点</title>
+    <url>/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="1-存储结构"><a class="markdownIt-Anchor" href="#1-存储结构"></a> 1、存储结构</h1>
+<p>NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：</p>
+<ul>
+<li><strong>CHIP</strong>：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。</li>
+<li><strong>DIE</strong>：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。</li>
+<li><strong>Plane</strong>：Plane 是一个存储矩阵，包含若干个 Block。</li>
+<li><strong>Block</strong>：Block 是 NAND 中擦除操作的最小单位，包含若干个 Page。</li>
+<li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，每个 Page 中包含了成千上万个 Cell。</li>
+<li><strong>Cell</strong>：Cell 主要是浮栅 MOS 管，用来存储信息。</li>
+</ul>
+<p>![Untitled Diagram (1)](D:\File\下载\Untitled Diagram (1).png)</p>
+<h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
+<p><strong>存储列阵</strong>：NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上。</p>
+<p>![Untitled Diagram (3)](D:\File\下载\Untitled Diagram (3).png)</p>
+<p><strong>3D结构</strong>：在二维结构的基础上，将多个存储阵列在垂直方向上进行叠加处理，就形成了 NAND 的 3D 结构。</p>
+<h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
+<p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
+<ul>
+<li>SLC：一个存储单元存储 1 bit 数据。</li>
+<li>MLC：一个存储单元存储 2 bit 数据。</li>
+<li>TLC：一个存储单元存储 3 bit 数据。</li>
+<li>QLC：一个存储单元存储 4 bit 数据。</li>
+</ul>
+<p>通过更精准的判断晶体管浮栅中存储的电荷数量来存储信息，比如低于 10 个电荷为 00，10-20 个电荷为 01，20-30 个电荷为 10，40个电荷以上则为 11。</p>
+<h1 id="4-特点"><a class="markdownIt-Anchor" href="#4-特点"></a> 4、特点</h1>
+<ul>
+<li>顺序访问：因其串联的排列方式，使得寻址时只可以进行顺序访问。</li>
+<li>高密度存储：NAND 的串联排列相较于 NOR 的并行排列减少了金属导线的占用面积，使得相同面积下可以集成更多的存储单元，提高了存储密度。</li>
+<li>擦除速度快：NAND 采用块擦除的方式，相较于 NOR 的随机擦除方式，擦除速度更快。</li>
+<li>写入速度快：闪存写入前需要擦除，NAND 擦除速度相较于 NOR 更快，所以其写入速度也更快。</li>
+<li>使用寿命长：NAND 是基于块的存储，每个块的擦写寿命是有限的，为了避免在某一个块上反复擦写，引入了磨损均衡技术，延长了 NAND 的使用寿命。</li>
+<li>数据可靠：NAND 中即使某些块损坏了，NAND 也可以对坏块进行管理，使其不影响有效块的性能，确保了数据的完整性和可靠性。</li>
+<li>成本低：NAND 相较于 NOR 简化了结构，降低了制造难度和成本。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储开发</category>
+        <category>Flash</category>
+      </categories>
+      <tags>
+        <tag>NAND</tag>
+      </tags>
+  </entry>
 </search>

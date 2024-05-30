@@ -146,18 +146,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -174,6 +174,216 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">NAND结构及特点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 22:57:48 / 修改时间：22:57:34" itemprop="dateCreated datePublished" datetime="2024-05-30T22:57:48+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/Flash/" itemprop="url" rel="index"><span itemprop="name">Flash</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-存储结构"><a class="markdownIt-Anchor" href="#1-存储结构"></a> 1、存储结构</h1>
+<p>NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：</p>
+<ul>
+<li><strong>CHIP</strong>：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。</li>
+<li><strong>DIE</strong>：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。</li>
+<li><strong>Plane</strong>：Plane 是一个存储矩阵，包含若干个 Block。</li>
+<li><strong>Block</strong>：Block 是 NAND 中擦除操作的最小单位，包含若干个 Page。</li>
+<li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，每个 Page 中包含了成千上万个 Cell。</li>
+<li><strong>Cell</strong>：Cell 主要是浮栅 MOS 管，用来存储信息。</li>
+</ul>
+<p>![Untitled Diagram (1)](D:\File\下载\Untitled Diagram (1).png)</p>
+<h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
+<p><strong>存储列阵</strong>：NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上。</p>
+<p>![Untitled Diagram (3)](D:\File\下载\Untitled Diagram (3).png)</p>
+<p><strong>3D结构</strong>：在二维结构的基础上，将多个存储阵列在垂直方向上进行叠加处理，就形成了 NAND 的 3D 结构。</p>
+<h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
+<p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">eMMC基础知识</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 21:21:10 / 修改时间：21:40:18" itemprop="dateCreated datePublished" datetime="2024-05-30T21:21:10+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/eMMC/" itemprop="url" rel="index"><span itemprop="name">eMMC</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-emmc基本组成"><a class="markdownIt-Anchor" href="#1-emmc基本组成"></a> 1、eMMC基本组成</h1>
+<p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1"></p>
+<h2 id="11-nand-flash"><a class="markdownIt-Anchor" href="#11-nand-flash"></a> 1.1 NAND Flash</h2>
+<p>NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2"></p>
+<ul>
+<li><strong>BOOT Area Partition 1 &amp; 2</strong>：这两个分区主要是为了支持eMMC 启动系统而设计。</li>
+<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：这个分区通过一些处理保证其内部的数据不被非法篡改，通常用于保存安全相关的数据，如指纹数据，安全支付相关的密钥。</li>
+<li><strong>General Purpose Partition 1 ~ 4 (GPP)</strong>：这个分区主要用于存储系统或者用户数据，一般需要在 eMMC 出厂后由用户主动配置后才会存在。</li>
+<li><strong>User Data Area (UDA)</strong>：这个分区主要用于存放系统和用户数据，通常 UDA 占据了 eMMC 总容量的 93% 左右，是用于读写的主要区域。</li>
+</ul>
+<h2 id="12-device-controller"><a class="markdownIt-Anchor" href="#12-device-controller"></a> 1.2 Device Controller</h2>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NAND Flash Translation Layer，即 NFTL 或 NAND Flash 文件系统来做坏块管理、磨损均衡等功能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -978,209 +1188,6 @@
 <li><strong>算法分析</strong>：sort() 函数底层使用快速排序或者堆排序，时间复杂度：O（nlogn），循环遍历时间复杂度：O（n），综合来看时间复杂度：O（nlogn）；使用常数空间，空间复杂度：O（1）。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">arrayPairSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> minSum = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i+=<span class="number">2</span>)&#123;</span><br><span class="line">            minSum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/12/%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/12/%E7%9B%B8%E5%AF%B9%E5%90%8D%E6%AC%A1/" class="post-title-link" itemprop="url">相对名次</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-12 20:24:50" itemprop="dateCreated datePublished" datetime="2024-05-12T20:24:50+08:00">2024-05-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-22 00:05:12" itemprop="dateModified" datetime="2024-05-22T00:05:12+08:00">2024-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/relative-ranks/description/">相对名次</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="遍历"><a class="markdownIt-Anchor" href="#遍历"></a> 遍历</h2>
-<ul>
-<li><strong>算法思路</strong>：如何获取每位运动员的名次？可以按顺序进行查找，先找到分数最高的运动员进行颁奖，然后找到分数第二的进行颁奖，直到每位运动员都拿到对应的名次为止。</li>
-<li><strong>算法分析</strong>：双循环遍历，时间复杂度：O（n^2）；不考虑返回数组，使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findRelativeRanks</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; score)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数组的长度 = 运动员的个数 = 运动员的最低名次</span></span><br><span class="line">        <span class="type">int</span> length = score.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        ans.<span class="built_in">resize</span>(length, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 找出获得第 i 名的运动员</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= length; i++) &#123;</span><br><span class="line">            <span class="comment">// 找出该名运动员对应的下标</span></span><br><span class="line">            <span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (score[j] &gt; score[n]) &#123;</span><br><span class="line">                    n = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 给出这名运动员的名次 i 所对应的奖励</span></span><br><span class="line">            <span class="keyword">switch</span>(i)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>: ans[n] = <span class="string">&quot;Gold Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>: ans[n] = <span class="string">&quot;Silver Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>: ans[n] = <span class="string">&quot;Bronze Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>: ans[n] = <span class="built_in">to_string</span>(i); <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 抹除掉这名运动员成绩</span></span><br><span class="line">            score[n] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="哈希排序"><a class="markdownIt-Anchor" href="#哈希排序"></a> 哈希+排序</h2>
-<ul>
-<li><strong>算法思路</strong>：如何获取每位运动员的名次？可以将分数进行排序，然后依次分配名次，但是分配名次时需要知道成绩对应的运动员信息，可以使用哈希表，将分数作为键，将运动员信息作为值，然后对键进行排序，然后依次分配名次，分配名次时获取运动员信息即可。</li>
-<li><strong>算法分析</strong>：map 插入函数的底层基于红黑树实现，时间复杂度：O（log n），循环遍历时间复杂度：O（n），综合来看时间复杂度：O（n）；不考虑返回数组，构建了一个哈希表，空间复杂度：O（n）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findRelativeRanks</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; score)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 数组的长度 = 运动员的个数 = 运动员的最低名次</span></span><br><span class="line">        <span class="type">int</span> length = score.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        ans.<span class="built_in">resize</span>(length, <span class="string">&quot;&quot;</span>);</span><br><span class="line">		<span class="comment">// 使用map构建哈希表，因为map会自动根据键的大小进行排序</span></span><br><span class="line">        map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            hash.<span class="built_in">insert</span>(<span class="built_in">make_pair</span>(score[i], i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 因为遍历map时从最小值开始，所以从最低名次开始分配</span></span><br><span class="line">        <span class="type">int</span> i = length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; it : hash) &#123;</span><br><span class="line">            <span class="keyword">switch</span> (i) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>: ans[it.second] = <span class="string">&quot;Gold Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>: ans[it.second] = <span class="string">&quot;Silver Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>: ans[it.second] = <span class="string">&quot;Bronze Medal&quot;</span>; <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>: ans[it.second] = <span class="built_in">to_string</span>(i); <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/11/%E9%94%AE%E7%9B%98%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/11/%E9%94%AE%E7%9B%98%E8%A1%8C/" class="post-title-link" itemprop="url">键盘行</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-11 16:23:25" itemprop="dateCreated datePublished" datetime="2024-05-11T16:23:25+08:00">2024-05-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-22 00:05:15" itemprop="dateModified" datetime="2024-05-22T00:05:15+08:00">2024-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/keyboard-row/description/">键盘行</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<ul>
-<li><strong>算法思路</strong>：如何只返回可以使用键盘同一行打印的单词？首先需要遍历每个单词，并对每个单词的每个字符判定，是否属于同一行，如果是则存储返回数组，不是则开始遍历下一个单词；此时需要解决两个子问题：（1）怎么获取到单词中字符的行号？（2）怎么判定字符属于同一行？先解决第一个问题：使用一个数组哈希，使用 26 个字母的 ASCII 值减去小写字母 a 的 ASCII 值即为数组的下标，而下标对应的元素的值为该字母所属的行号，那么在获取到字符时先转换为小写，然后获取其 ASCII 值并进行计算就可以获取该字符的行号；第二个问题：如果使用字符两两判定实现起来太过复杂，将问题转为，当字符串中的每个字符都和第一个字符在同一行时，那么这个字符串就是符合要求的，然后循环进行判定即可。</li>
-<li><strong>算法分析</strong>：需要遍历所有的字符，时间复杂度：O（n），n 为字符串数组中所有字符的个数；除开返回数组外，使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">findWords</span><span class="params">(vector&lt;string&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储符合要求的字符串</span></span><br><span class="line">        vector&lt;string&gt; ans;</span><br><span class="line">        <span class="comment">// 数组哈希</span></span><br><span class="line">        string rowIndex = <span class="string">&quot;12210111011122000010020202&quot;</span>;</span><br><span class="line">        <span class="comment">// 循环遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 创建标志位判断该字符串是否符合要求</span></span><br><span class="line">            <span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">// 获取字符串第一个字符所在的行号</span></span><br><span class="line">            <span class="type">char</span> startLine = rowIndex[<span class="built_in">tolower</span>(words[i][<span class="number">0</span>]) - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="comment">// 循环遍历字符串中的每个字符</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; words[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 判定字符是否与第一个字符属于同一行</span></span><br><span class="line">                <span class="keyword">if</span> (rowIndex[<span class="built_in">tolower</span>(words[i][j]) - <span class="string">&#x27;a&#x27;</span>] != startLine) &#123;</span><br><span class="line">                    flag = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 每个字符串判定结束后，将符合要求的字符串插入返回数组</span></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(words[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>

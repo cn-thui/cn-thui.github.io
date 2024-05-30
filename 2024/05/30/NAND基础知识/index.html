@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1、存储结构 NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。 DIE：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。 Plane：Plane 是一个存储矩阵，包含若干个 Block。 Block：Block 是 NAND 中擦除操作的最小单位，包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAND结构及特点">
+<meta property="og:url" content="http://example.com/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="thui blogs">
+<meta property="og:description" content="1、存储结构 NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。 DIE：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。 Plane：Plane 是一个存储矩阵，包含若干个 Block。 Block：Block 是 NAND 中擦除操作的最小单位，包含">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-30T14:57:48.488Z">
+<meta property="article:modified_time" content="2024-05-30T14:57:34.607Z">
+<meta property="article:author" content="tanghui">
+<meta property="article:tag" content="NAND">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/05/30/NAND基础知识/","title":"NAND结构及特点"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NAND结构及特点 | thui blogs</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">thui blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页-|-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页 | home</a></li><li class="menu-item menu-item-标签-|-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签 | tags</a></li><li class="menu-item menu-item-分类-|-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类 | categories</a></li><li class="menu-item menu-item-归档-|-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档 | archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-text"> 1、存储结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8E%92%E5%88%97%E7%BB%93%E6%9E%84"><span class="nav-text"> 2、排列结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-nand%E7%B1%BB%E5%9E%8B"><span class="nav-text"> 3、NAND类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%89%B9%E7%82%B9"><span class="nav-text"> 4、特点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tanghui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NAND结构及特点 | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NAND结构及特点
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 22:57:48 / 修改时间：22:57:34" itemprop="dateCreated datePublished" datetime="2024-05-30T22:57:48+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/Flash/" itemprop="url" rel="index"><span itemprop="name">Flash</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-存储结构"><a class="markdownIt-Anchor" href="#1-存储结构"></a> 1、存储结构</h1>
+<p>NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：</p>
+<ul>
+<li><strong>CHIP</strong>：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。</li>
+<li><strong>DIE</strong>：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。</li>
+<li><strong>Plane</strong>：Plane 是一个存储矩阵，包含若干个 Block。</li>
+<li><strong>Block</strong>：Block 是 NAND 中擦除操作的最小单位，包含若干个 Page。</li>
+<li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，每个 Page 中包含了成千上万个 Cell。</li>
+<li><strong>Cell</strong>：Cell 主要是浮栅 MOS 管，用来存储信息。</li>
+</ul>
+<p>![Untitled Diagram (1)](D:\File\下载\Untitled Diagram (1).png)</p>
+<h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
+<p><strong>存储列阵</strong>：NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上。</p>
+<p>![Untitled Diagram (3)](D:\File\下载\Untitled Diagram (3).png)</p>
+<p><strong>3D结构</strong>：在二维结构的基础上，将多个存储阵列在垂直方向上进行叠加处理，就形成了 NAND 的 3D 结构。</p>
+<h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
+<p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
+<ul>
+<li>SLC：一个存储单元存储 1 bit 数据。</li>
+<li>MLC：一个存储单元存储 2 bit 数据。</li>
+<li>TLC：一个存储单元存储 3 bit 数据。</li>
+<li>QLC：一个存储单元存储 4 bit 数据。</li>
+</ul>
+<p>通过更精准的判断晶体管浮栅中存储的电荷数量来存储信息，比如低于 10 个电荷为 00，10-20 个电荷为 01，20-30 个电荷为 10，40个电荷以上则为 11。</p>
+<h1 id="4-特点"><a class="markdownIt-Anchor" href="#4-特点"></a> 4、特点</h1>
+<ul>
+<li>顺序访问：因其串联的排列方式，使得寻址时只可以进行顺序访问。</li>
+<li>高密度存储：NAND 的串联排列相较于 NOR 的并行排列减少了金属导线的占用面积，使得相同面积下可以集成更多的存储单元，提高了存储密度。</li>
+<li>擦除速度快：NAND 采用块擦除的方式，相较于 NOR 的随机擦除方式，擦除速度更快。</li>
+<li>写入速度快：闪存写入前需要擦除，NAND 擦除速度相较于 NOR 更快，所以其写入速度也更快。</li>
+<li>使用寿命长：NAND 是基于块的存储，每个块的擦写寿命是有限的，为了避免在某一个块上反复擦写，引入了磨损均衡技术，延长了 NAND 的使用寿命。</li>
+<li>数据可靠：NAND 中即使某些块损坏了，NAND 也可以对坏块进行管理，使其不影响有效块的性能，确保了数据的完整性和可靠性。</li>
+<li>成本低：NAND 相较于 NOR 简化了结构，降低了制造难度和成本。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NAND/" rel="tag"># NAND</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="eMMC基础知识">
+                  <i class="fa fa-angle-left"></i> eMMC基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tanghui</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

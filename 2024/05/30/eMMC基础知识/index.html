@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1、eMMC基本组成 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   1.1 NAND Flash NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：   BOOT Area Parti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eMMC基础知识">
+<meta property="og:url" content="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="thui blogs">
+<meta property="og:description" content="1、eMMC基本组成 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   1.1 NAND Flash NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：   BOOT Area Parti">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png">
+<meta property="article:published_time" content="2024-05-30T13:21:10.841Z">
+<meta property="article:modified_time" content="2024-05-30T13:40:18.604Z">
+<meta property="article:author" content="tanghui">
+<meta property="article:tag" content="eMMC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png">
+
+
+<link rel="canonical" href="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/05/30/eMMC基础知识/","title":"eMMC基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>eMMC基础知识 | thui blogs</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">thui blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页-|-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页 | home</a></li><li class="menu-item menu-item-标签-|-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签 | tags</a></li><li class="menu-item menu-item-分类-|-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类 | categories</a></li><li class="menu-item menu-item-归档-|-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档 | archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-emmc%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-text"> 1、eMMC基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-nand-flash"><span class="nav-text"> 1.1 NAND Flash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-device-controller"><span class="nav-text"> 1.2 Device Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-standard-inetrface"><span class="nav-text"> 1.3 Standard Inetrface</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-emmc%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text"> 2、eMMC工作流程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tanghui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="eMMC基础知识 | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          eMMC基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 21:21:10 / 修改时间：21:40:18" itemprop="dateCreated datePublished" datetime="2024-05-30T21:21:10+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/eMMC/" itemprop="url" rel="index"><span itemprop="name">eMMC</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-emmc基本组成"><a class="markdownIt-Anchor" href="#1-emmc基本组成"></a> 1、eMMC基本组成</h1>
+<p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1" /></p>
+<h2 id="11-nand-flash"><a class="markdownIt-Anchor" href="#11-nand-flash"></a> 1.1 NAND Flash</h2>
+<p>NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2" /></p>
+<ul>
+<li><strong>BOOT Area Partition 1 &amp; 2</strong>：这两个分区主要是为了支持eMMC 启动系统而设计。</li>
+<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：这个分区通过一些处理保证其内部的数据不被非法篡改，通常用于保存安全相关的数据，如指纹数据，安全支付相关的密钥。</li>
+<li><strong>General Purpose Partition 1 ~ 4 (GPP)</strong>：这个分区主要用于存储系统或者用户数据，一般需要在 eMMC 出厂后由用户主动配置后才会存在。</li>
+<li><strong>User Data Area (UDA)</strong>：这个分区主要用于存放系统和用户数据，通常 UDA 占据了 eMMC 总容量的 93% 左右，是用于读写的主要区域。</li>
+</ul>
+<h2 id="12-device-controller"><a class="markdownIt-Anchor" href="#12-device-controller"></a> 1.2 Device Controller</h2>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NAND Flash Translation Layer，即 NFTL 或 NAND Flash 文件系统来做坏块管理、磨损均衡等功能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3" /></p>
+<p>而 eMMC 在其内部集成了 Device Controller，用于完成 NFTL 的一系列功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash ，减少了主机软件的复杂度，省去了对 NAND Flash 的处理。同时 eMMC 还使用了其他的一些技术对 NAND Flash 进行优化，其读写性能也比直接使用 NAND Flash 好很多。</p>
+<h2 id="13-standard-inetrface"><a class="markdownIt-Anchor" href="#13-standard-inetrface"></a> 1.3 Standard Inetrface</h2>
+<p>eMMC 是基于 MMC 总线的一种存储技术，继承了 MMC 的接口规范，同时在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准有以下信号线：</p>
+<ul>
+<li><strong>CLK</strong>：用于接收主机输出的时钟信号。</li>
+<li><strong>Reset</strong>：用于接收主机输出的复位信号。</li>
+<li><strong>CMD</strong>：用于主机向 eMMC 发送命令信号和 eMMC 向主机发送应答信号。</li>
+<li><strong>Data</strong>：用于主机和 eMMC 间的数据通信，同时用户可以配置使用的 Date 线的数量，可以选择 4 根或者 8 根。</li>
+<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 时被提出。</li>
+</ul>
+<h1 id="2-emmc工作流程"><a class="markdownIt-Anchor" href="#2-emmc工作流程"></a> 2、eMMC工作流程</h1>
+<ul>
+<li><strong>初始化</strong>：包括引脚连接、电源供应、时钟设置、发送命令和应答等步骤。</li>
+<li><strong>读取数据</strong>：包括发送读取命令、应答、数据传输和校验等步骤。</li>
+<li><strong>发送数据</strong>：包括发送写入命令、应答、数据传输和校验等步骤。</li>
+<li><strong>结束</strong>：在完成读取或写入操作后，主机断开对eMMC的电源供应，以保护数据的安全性，并保存结果以满足系统或用户的需求。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/eMMC/" rel="tag"># eMMC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/17/%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/" rel="prev" title="三个数的最大乘积">
+                  <i class="fa fa-angle-left"></i> 三个数的最大乘积
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/05/30/NAND%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="NAND结构及特点">
+                  NAND结构及特点 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tanghui</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
