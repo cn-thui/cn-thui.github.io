@@ -896,10 +896,10 @@
 <li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，每个 Page 中包含了成千上万个 Cell。</li>
 <li><strong>Cell</strong>：Cell 主要是浮栅 MOS 管，用来存储信息。</li>
 </ul>
-<p>![Untitled Diagram (1)](D:\File\下载\Untitled Diagram (1).png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png" alt="Untitled Diagram (1)" /></p>
 <h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
 <p><strong>存储列阵</strong>：NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上。</p>
-<p>![Untitled Diagram (3)](D:\File\下载\Untitled Diagram (3).png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258547.png" alt="Untitled Diagram (3)" /></p>
 <p><strong>3D结构</strong>：在二维结构的基础上，将多个存储阵列在垂直方向上进行叠加处理，就形成了 NAND 的 3D 结构。</p>
 <h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
 <p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
@@ -909,7 +909,7 @@
 <li>TLC：一个存储单元存储 3 bit 数据。</li>
 <li>QLC：一个存储单元存储 4 bit 数据。</li>
 </ul>
-<p>通过更精准的判断晶体管浮栅中存储的电荷数量来存储信息，比如低于 10 个电荷为 00，10-20 个电荷为 01，20-30 个电荷为 10，40个电荷以上则为 11。</p>
+<p>通过更精准的判断晶体管浮栅中存储的电荷数量来存储信息，如低于 10 个电荷表示 00，10-20 个电荷之间表示 01，20-30 个电荷之间表示 10，40个电荷以上表示 11。</p>
 <h1 id="4-特点"><a class="markdownIt-Anchor" href="#4-特点"></a> 4、特点</h1>
 <ul>
 <li>顺序访问：因其串联的排列方式，使得寻址时只可以进行顺序访问。</li>
