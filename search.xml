@@ -928,4 +928,37 @@
         <tag>NAND</tag>
       </tags>
   </entry>
+  <entry>
+    <title>闪存基础知识</title>
+    <url>/2024/05/30/%E9%97%AA%E5%AD%98%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1、基本概念</h1>
+<p>闪存（Flash Memory）也叫闪存介质，是一种非易失性存储器，能够在没有电流供应的情况下长期保存数据，被广泛用于各种电子设备中，如计算机、手机、固态硬盘（SSD）和 U 盘等。</p>
+<h1 id="2-工作原理"><a class="markdownIt-Anchor" href="#2-工作原理"></a> 2、工作原理</h1>
+<p>闪存是基于 Flash Memory Cell 技术实现，这种技术使用了浮栅晶体管（Floating Gate Transistor）来存储数据，一个晶体管被称为一个 Cell（基本存储单元）。浮栅晶体管是一种类 NMOS 管，它由漏极、源极、控制栅极、衬底和浮栅构成，其中浮栅可以存储电荷，通过控制电荷进入浮栅的数量来存储二进制信息，通过读取浮栅中的电荷数量来读取二进制信息。</p>
+<h1 id="3-操作原理"><a class="markdownIt-Anchor" href="#3-操作原理"></a> 3、操作原理</h1>
+<ul>
+<li>读操作：通过给控制栅极施加高电压，使得衬底的电荷被吸引到沟道中发生隧穿效应，通过测量源极、漏极和沟道形成通路电流大小来读取存储在浮栅中的信息。电流越大进入浮栅中的电荷越多，浮栅中原本存在的电荷就越少，代表二进制信息 0，反之代表二进制信息 1。</li>
+<li>写操作：通过给控制栅极施加高电压，使得衬底的电荷被吸引到沟道中发送隧穿效应，通过控制源极、漏极和沟道形成的通路电流来控制电荷注入到栅极的数量。</li>
+<li>擦除操作：通过给衬底或源极施加高电压，使得栅极中的电荷发送隧穿效应被吸引到衬底或源极中，通过清除栅极中的电荷达到擦除的目的。</li>
+</ul>
+<h1 id="4-特性"><a class="markdownIt-Anchor" href="#4-特性"></a> 4、特性</h1>
+<ul>
+<li>非易失性：栅极中的电荷在掉电后基本不会流失，可以长时间的保存数据。</li>
+<li>写入次数限制：每个存储单元可以承受有限次数的擦写循环，当超过次数限制后，可能导致单元损坏。</li>
+<li>小型耐用：闪存为固态且其中不存在移动部件，可以紧凑的封装，抗震动和耐冲击性能更好。</li>
+</ul>
+<h1 id="5-分类"><a class="markdownIt-Anchor" href="#5-分类"></a> 5、分类</h1>
+<p>闪存根据其技术特点的不同，主要可以分为 NOR Flash 和 NAND Flash ，它们内部存储单元的排列结构不同，导致了它们在性能、容量等方面的差异。</p>
+<ul>
+<li><a href="https://cn-thui.github.io/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/">NAND结构及特点</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>存储开发</category>
+        <category>Flash</category>
+      </categories>
+      <tags>
+        <tag>Flash</tag>
+      </tags>
+  </entry>
 </search>
