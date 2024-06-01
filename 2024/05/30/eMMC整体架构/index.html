@@ -19,32 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1、eMMC基本组成 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   1.1 NAND Flash NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：   BOOT Area Parti">
+    <meta name="description" content="eMMC 整体架构 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   Standard Interface：用于通信的标准接口 Device Controller：用于管理的控制单元 NAND Flash：用于存储数据的存储单元  这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="eMMC基础知识">
-<meta property="og:url" content="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="eMMC整体架构">
+<meta property="og:url" content="http://example.com/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="thui blogs">
-<meta property="og:description" content="1、eMMC基本组成 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   1.1 NAND Flash NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：   BOOT Area Parti">
+<meta property="og:description" content="eMMC 整体架构 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   Standard Interface：用于通信的标准接口 Device Controller：用于管理的控制单元 NAND Flash：用于存储数据的存储单元  这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png">
 <meta property="article:published_time" content="2024-05-30T13:21:10.841Z">
-<meta property="article:modified_time" content="2024-05-30T13:40:18.604Z">
+<meta property="article:modified_time" content="2024-06-01T13:44:32.164Z">
 <meta property="article:author" content="tanghui">
 <meta property="article:tag" content="eMMC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png">
 
 
-<link rel="canonical" href="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+<link rel="canonical" href="http://example.com/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2024/05/30/eMMC基础知识/","title":"eMMC基础知识"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/","path":"2024/05/30/eMMC整体架构/","title":"eMMC整体架构"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>eMMC基础知识 | thui blogs</title>
+<title>eMMC整体架构 | thui blogs</title>
   
 
 
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-emmc%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-text"> 1、eMMC基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-nand-flash"><span class="nav-text"> 1.1 NAND Flash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-device-controller"><span class="nav-text"> 1.2 Device Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-standard-inetrface"><span class="nav-text"> 1.3 Standard Inetrface</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-emmc%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text"> 2、eMMC工作流程</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#emmc-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-text"> eMMC 整体架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-nand-flash"><span class="nav-text"> 1 NAND Flash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-device-controller"><span class="nav-text"> 2 Device Controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-standard-inetrface"><span class="nav-text"> 3 Standard Inetrface</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +194,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -207,12 +207,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="eMMC基础知识 | thui blogs">
+      <meta itemprop="name" content="eMMC整体架构 | thui blogs">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          eMMC基础知识
+          eMMC整体架构
         </h1>
 
         <div class="post-meta-container">
@@ -222,9 +222,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-30 21:21:10 / 修改时间：21:40:18" itemprop="dateCreated datePublished" datetime="2024-05-30T21:21:10+08:00">2024-05-30</time>
+      <time title="创建时间：2024-05-30 21:21:10" itemprop="dateCreated datePublished" datetime="2024-05-30T21:21:10+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-01 21:44:32" itemprop="dateModified" datetime="2024-06-01T21:44:32+08:00">2024-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,38 +255,39 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="1-emmc基本组成"><a class="markdownIt-Anchor" href="#1-emmc基本组成"></a> 1、eMMC基本组成</h1>
+    <div class="post-body" itemprop="articleBody"><h1 id="emmc-整体架构"><a class="markdownIt-Anchor" href="#emmc-整体架构"></a> eMMC 整体架构</h1>
 <p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1" /></p>
-<h2 id="11-nand-flash"><a class="markdownIt-Anchor" href="#11-nand-flash"></a> 1.1 NAND Flash</h2>
-<p>NAND Flash 作为一种非易失性存储器，在嵌入式系统中通常用于存放系统、应用和数据。eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
+<ul>
+<li>Standard Interface：用于通信的标准接口</li>
+<li>Device Controller：用于管理的控制单元</li>
+<li>NAND Flash：用于存储数据的存储单元</li>
+</ul>
+<p>这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，确保设备能够高效、可靠地进行数据存储和交换。</p>
+<h1 id="1-nand-flash"><a class="markdownIt-Anchor" href="#1-nand-flash"></a> 1 NAND Flash</h1>
+<p>eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2" /></p>
 <ul>
-<li><strong>BOOT Area Partition 1 &amp; 2</strong>：这两个分区主要是为了支持eMMC 启动系统而设计。</li>
-<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：这个分区通过一些处理保证其内部的数据不被非法篡改，通常用于保存安全相关的数据，如指纹数据，安全支付相关的密钥。</li>
-<li><strong>General Purpose Partition 1 ~ 4 (GPP)</strong>：这个分区主要用于存储系统或者用户数据，一般需要在 eMMC 出厂后由用户主动配置后才会存在。</li>
-<li><strong>User Data Area (UDA)</strong>：这个分区主要用于存放系统和用户数据，通常 UDA 占据了 eMMC 总容量的 93% 左右，是用于读写的主要区域。</li>
+<li><strong>BOOT Area Partition 1 &amp; 2</strong>：存储启动加载程序和引导相关数据，确保设备能够正确启动操作系统。</li>
+<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：提供安全存储区域，用于防止重放攻击，保护关键数据的完整性和安全性。</li>
+<li><strong>General Purpose Partition 1 ~ 4</strong>：用于特定应用或数据存储的自定义分区，灵活配置以满足不同应用需求。</li>
+<li><strong>User Data Area</strong>：存储用户数据、应用程序和操作系统文件，是eMMC中最大的分区，适应各种存储需求。</li>
 </ul>
-<h2 id="12-device-controller"><a class="markdownIt-Anchor" href="#12-device-controller"></a> 1.2 Device Controller</h2>
-<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NAND Flash Translation Layer，即 NFTL 或 NAND Flash 文件系统来做坏块管理、磨损均衡等功能。</p>
+<p>这些分区共同确保eMMC能够高效、安全地存储和管理各种类型的数据。</p>
+<h1 id="2-device-controller"><a class="markdownIt-Anchor" href="#2-device-controller"></a> 2 Device Controller</h1>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NFTL (NAND Flash Translation Layer) 对 NAND Flash 进行管理：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3" /></p>
-<p>而 eMMC 在其内部集成了 Device Controller，用于完成 NFTL 的一系列功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash ，减少了主机软件的复杂度，省去了对 NAND Flash 的处理。同时 eMMC 还使用了其他的一些技术对 NAND Flash 进行优化，其读写性能也比直接使用 NAND Flash 好很多。</p>
-<h2 id="13-standard-inetrface"><a class="markdownIt-Anchor" href="#13-standard-inetrface"></a> 1.3 Standard Inetrface</h2>
-<p>eMMC 是基于 MMC 总线的一种存储技术，继承了 MMC 的接口规范，同时在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准有以下信号线：</p>
+<p>而 eMMC 在其内部集成了 Device Controller 替代 NFTL，并通过一系列复杂的算法和机制，确保eMMC能够高效、可靠地工作，同时提供各种安全和性能优化功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash 的物理特性，节省了主机 CPU 资源的同时减少了主机系统软件的复杂度。</p>
+<h1 id="3-standard-inetrface"><a class="markdownIt-Anchor" href="#3-standard-inetrface"></a> 3 Standard Inetrface</h1>
+<p>eMMC 基于 MMC 总线，继承了 MMC 的接口规范，并在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准规定的信号线有：</p>
 <ul>
 <li><strong>CLK</strong>：用于接收主机输出的时钟信号。</li>
 <li><strong>Reset</strong>：用于接收主机输出的复位信号。</li>
 <li><strong>CMD</strong>：用于主机向 eMMC 发送命令信号和 eMMC 向主机发送应答信号。</li>
 <li><strong>Data</strong>：用于主机和 eMMC 间的数据通信，同时用户可以配置使用的 Date 线的数量，可以选择 4 根或者 8 根。</li>
-<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 时被提出。</li>
+<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 引入。</li>
 </ul>
-<h1 id="2-emmc工作流程"><a class="markdownIt-Anchor" href="#2-emmc工作流程"></a> 2、eMMC工作流程</h1>
-<ul>
-<li><strong>初始化</strong>：包括引脚连接、电源供应、时钟设置、发送命令和应答等步骤。</li>
-<li><strong>读取数据</strong>：包括发送读取命令、应答、数据传输和校验等步骤。</li>
-<li><strong>发送数据</strong>：包括发送写入命令、应答、数据传输和校验等步骤。</li>
-<li><strong>结束</strong>：在完成读取或写入操作后，主机断开对eMMC的电源供应，以保护数据的安全性，并保存结果以满足系统或用户的需求。</li>
-</ul>
+<p>eMMC 的标准接口在在数据传输、兼容性等方面进行了优化，确保主机和 eMMC 设备之间能够进行高效的通信。</p>
 
     </div>
 
@@ -302,8 +309,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/" rel="next" title="NAND结构及特点">
-                  NAND结构及特点 <i class="fa fa-angle-right"></i>
+                <a href="/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%B1%BB%E5%9E%8B/" rel="next" title="NAND结构及类型">
+                  NAND结构及类型 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

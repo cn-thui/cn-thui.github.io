@@ -19,31 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1、存储结构 NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。 DIE：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。 Plane：Plane 是一个存储矩阵，包含若干个 Block。 Block：Block 是 NAND 中擦除操作的最小单位，包含">
+    <meta name="description" content="1、物理结构 NAND Flash 的物理结构可以详细拆分为以下部分：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含若干个 DIE（也称为 LUN）。 DIE：DIE 是指芯片晶圆上的小方块，一个 DIE 种包含若干个 Plane。 Plane：Plane 是一个存储矩阵，一个 Plane 中包含若干个 Block。 Block：Block 是 NAND 中擦">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NAND结构及特点">
-<meta property="og:url" content="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/index.html">
+<meta property="og:title" content="NAND结构及类型">
+<meta property="og:url" content="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="thui blogs">
-<meta property="og:description" content="1、存储结构 NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。 DIE：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。 Plane：Plane 是一个存储矩阵，包含若干个 Block。 Block：Block 是 NAND 中擦除操作的最小单位，包含">
+<meta property="og:description" content="1、物理结构 NAND Flash 的物理结构可以详细拆分为以下部分：  CHIP：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含若干个 DIE（也称为 LUN）。 DIE：DIE 是指芯片晶圆上的小方块，一个 DIE 种包含若干个 Plane。 Plane：Plane 是一个存储矩阵，一个 Plane 中包含若干个 Block。 Block：Block 是 NAND 中擦">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258547.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406010045519.png">
 <meta property="article:published_time" content="2024-05-30T14:57:48.488Z">
-<meta property="article:modified_time" content="2024-05-30T15:06:38.116Z">
+<meta property="article:modified_time" content="2024-05-31T16:47:17.890Z">
 <meta property="article:author" content="tanghui">
 <meta property="article:tag" content="NAND">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png">
 
 
-<link rel="canonical" href="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/">
+<link rel="canonical" href="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%B1%BB%E5%9E%8B/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/","path":"2024/05/30/NAND结构及特点/","title":"NAND结构及特点"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%B1%BB%E5%9E%8B/","path":"2024/05/30/NAND结构及类型/","title":"NAND结构及类型"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>NAND结构及特点 | thui blogs</title>
+<title>NAND结构及类型 | thui blogs</title>
   
 
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-text"> 1、存储结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8E%92%E5%88%97%E7%BB%93%E6%9E%84"><span class="nav-text"> 2、排列结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-nand%E7%B1%BB%E5%9E%8B"><span class="nav-text"> 3、NAND类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%89%B9%E7%82%B9"><span class="nav-text"> 4、特点</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84"><span class="nav-text"> 1、物理结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8E%92%E5%88%97%E7%BB%93%E6%9E%84"><span class="nav-text"> 2、排列结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-nand%E7%B1%BB%E5%9E%8B"><span class="nav-text"> 3、NAND类型</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -193,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%89%B9%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/NAND%E7%BB%93%E6%9E%84%E5%8F%8A%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,12 +206,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="NAND结构及特点 | thui blogs">
+      <meta itemprop="name" content="NAND结构及类型 | thui blogs">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          NAND结构及特点
+          NAND结构及类型
         </h1>
 
         <div class="post-meta-container">
@@ -221,9 +221,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-30 22:57:48 / 修改时间：23:06:38" itemprop="dateCreated datePublished" datetime="2024-05-30T22:57:48+08:00">2024-05-30</time>
+      <time title="创建时间：2024-05-30 22:57:48" itemprop="dateCreated datePublished" datetime="2024-05-30T22:57:48+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-01 00:47:17" itemprop="dateModified" datetime="2024-06-01T00:47:17+08:00">2024-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,39 +254,86 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="1-存储结构"><a class="markdownIt-Anchor" href="#1-存储结构"></a> 1、存储结构</h1>
-<p>NAND Flash 从物理结构上进行划分，可以从芯片层拆分到晶体管：</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="1-物理结构"><a class="markdownIt-Anchor" href="#1-物理结构"></a> 1、物理结构</h1>
+<p>NAND Flash 的物理结构可以详细拆分为以下部分：</p>
 <ul>
-<li><strong>CHIP</strong>：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含了若干个 DIE。</li>
-<li><strong>DIE</strong>：DIE 是指芯片晶圆上的小方块，每个 DIE 包含了若干个 Plane。</li>
-<li><strong>Plane</strong>：Plane 是一个存储矩阵，包含若干个 Block。</li>
-<li><strong>Block</strong>：Block 是 NAND 中擦除操作的最小单位，包含若干个 Page。</li>
-<li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，每个 Page 中包含了成千上万个 Cell。</li>
-<li><strong>Cell</strong>：Cell 主要是浮栅 MOS 管，用来存储信息。</li>
+<li><strong>CHIP</strong>：一个闪存芯片就是一个 CHIP，也称为 DEVICE，一个芯片中包含若干个 DIE（也称为 LUN）。</li>
+<li><strong>DIE</strong>：DIE 是指芯片晶圆上的小方块，一个 DIE 种包含若干个 Plane。</li>
+<li><strong>Plane</strong>：Plane 是一个存储矩阵，一个 Plane 中包含若干个 Block。</li>
+<li><strong>Block</strong>：Block 是 NAND 中擦除操作的最小单位，一个 Block 中包含若干个 Page。</li>
+<li><strong>Page</strong>：Page 是NAND 中读、写操作的最小单位，一个 Page 中包含了成千上万个 Cell。</li>
+<li><strong>Cell</strong>：Cell 主要是浮栅晶体管，是组成 NAND Flash 的基本单元，不可再进行拆分。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png" alt="Untitled Diagram (1)" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258546.png" alt="1-1" /></p>
+<p>NAND Flash 的物理结构大致划分为以上部分，根据不同厂商和制造商的要求，可能还会包含一些其他的结构，如 Plane 中还会包含 cache register 和 page register 以优化读写性能。</p>
 <h1 id="2-排列结构"><a class="markdownIt-Anchor" href="#2-排列结构"></a> 2、排列结构</h1>
-<p>NAND 中的存储单元按照矩阵式排布，将每一行中所有存储单元的控制栅极串联起来形成一条链，这条链被连接到字线（Word Line）上；将每一列中存储单元的源极向下连接到相邻存储单元的漏极，第一个存储单元的漏极连接到位线（Bit Line）上，最后一个存储单元的源极连接到源线（Source Line）上；这种排列方式被称为 NAND 存储阵列，它是一种二维平面的排列方式（也存在三维结构的排列方式，通过将存储阵列在垂直方向上进行叠加处理来实现）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302258547.png" alt="Untitled Diagram (3)" /></p>
+<p>NAND 中的存储单元排列是一种串联方式，其中每一列浮栅晶体管的漏极和源极相连，这样的一长串被叫做 NAND 串；同一个串中的存储单元共享一根位线（Bit Line, BL），由串头的晶体管漏极接入；所有串中的存储单元共享一根源线（Source Line, SL），由串尾的晶体管源极接入；多个串中同一层的控制栅极串联起来连接到一根字线（Word Line, WL）上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406010045519.png" alt="1-2" /></p>
+<p>这种结构的好处在于提高了存储密度，降低了生产成本，且拥有更好的拓展性等等。</p>
 <h1 id="3-nand类型"><a class="markdownIt-Anchor" href="#3-nand类型"></a> 3、NAND类型</h1>
-<p>NAND 通过存储单元中存储的数据量的不同，可以划分为以下类型：</p>
-<ul>
-<li>SLC：一个存储单元存储 1 bit 数据。</li>
-<li>MLC：一个存储单元存储 2 bit 数据。</li>
-<li>TLC：一个存储单元存储 3 bit 数据。</li>
-<li>QLC：一个存储单元存储 4 bit 数据。</li>
-</ul>
-<p>通过更精准的判断晶体管浮栅中存储的电荷数量来存储信息，如低于 10 个电荷表示 00，10-20 个电荷之间表示 01，20-30 个电荷之间表示 10，40个电荷以上表示 11。</p>
-<h1 id="4-特点"><a class="markdownIt-Anchor" href="#4-特点"></a> 4、特点</h1>
-<ul>
-<li>顺序访问：因其串联的排列方式，使得寻址时只可以进行顺序访问。</li>
-<li>高密度存储：NAND 的串联排列相较于 NOR 的并行排列减少了金属导线的占用面积，使得相同面积下可以集成更多的存储单元，提高了存储密度。</li>
-<li>擦除速度快：NAND 采用块擦除的方式，相较于 NOR 的随机擦除方式，擦除速度更快。</li>
-<li>写入速度快：闪存写入前需要擦除，NAND 擦除速度相较于 NOR 更快，所以其写入速度也更快。</li>
-<li>使用寿命长：NAND 是基于块的存储，每个块的擦写寿命是有限的，为了避免在某一个块上反复擦写，引入了磨损均衡技术，延长了 NAND 的使用寿命。</li>
-<li>数据可靠：NAND 中即使某些块损坏了，NAND 也可以对坏块进行管理，使其不影响有效块的性能，确保了数据的完整性和可靠性。</li>
-<li>成本低：NAND 相较于 NOR 简化了结构，降低了制造难度和成本。</li>
-</ul>
+<p>NAND 中根据每个存储单元可以存储的位数可以分为以下类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>存储位数</th>
+<th>读写速度</th>
+<th>使用寿命</th>
+<th>成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLC (Single-Level Cell)</td>
+<td>1bit</td>
+<td>最快</td>
+<td>最长</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>MLC (Multi-Level Cell)</td>
+<td>2bit</td>
+<td>快</td>
+<td>长</td>
+<td>高</td>
+</tr>
+<tr>
+<td>TLC (Triple-Level Cell)</td>
+<td>3bit</td>
+<td>慢</td>
+<td>短</td>
+<td>低</td>
+</tr>
+<tr>
+<td>QLC (Quad-Level Cell)</td>
+<td>4bit</td>
+<td>最慢</td>
+<td>最短</td>
+<td>最低</td>
+</tr>
+</tbody>
+</table>
+<p>它的原理是通过精准的判断浮栅中存储的电荷数量来表示信息，如：</p>
+<table>
+<thead>
+<tr>
+<th>电荷数量</th>
+<th>0 - 10</th>
+<th>10 -20</th>
+<th>20 - 30</th>
+<th>30 - 40</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表示状态</td>
+<td>00</td>
+<td>01</td>
+<td>10</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
 
     </div>
 
@@ -297,8 +350,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/05/30/eMMC%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="eMMC基础知识">
-                  <i class="fa fa-angle-left"></i> eMMC基础知识
+                <a href="/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/" rel="prev" title="eMMC整体架构">
+                  <i class="fa fa-angle-left"></i> eMMC整体架构
                 </a>
             </div>
             <div class="post-nav-item">
