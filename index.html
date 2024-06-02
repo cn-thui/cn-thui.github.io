@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -174,6 +174,123 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">eMMC分区管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 22:00:25" itemprop="dateCreated datePublished" datetime="2024-06-01T22:00:25+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-02 16:18:23" itemprop="dateModified" datetime="2024-06-02T16:18:23+08:00">2024-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/eMMC/" itemprop="url" rel="index"><span itemprop="name">eMMC</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-分区概述"><a class="markdownIt-Anchor" href="#1-分区概述"></a> 1、分区概述</h1>
+<p>eMMC（嵌入式多媒体卡）内部将 NAND 划分为四个主要区域，最多可以分为 8 个分区。下图展示了 eMMC 内部的分区结构：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406021618306.png" style="zoom: 25%;">
+<ul>
+<li><strong>引导分区（Boot Area Partitions, BAP）</strong></li>
+<li><strong>RPMB分区（Replay Protected Memory Block, RPMB）</strong></li>
+<li><strong>通用分区（General Purpose Partitions, GPP）</strong></li>
+<li><strong>用户数据区（User Data Area, UDA）</strong></li>
+</ul>
+<h1 id="2-bap"><a class="markdownIt-Anchor" href="#2-bap"></a> 2、BAP</h1>
+<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 <code>EXT_CSD</code> 寄存器中的相关字段来完成：</p>
+<ul>
+<li><strong>BOOT_SIZE_MULT</strong>：定义每个启动分区的大小，单位为 128KB。</li>
+<li><strong>BOOT_CONFIG</strong>：配置启动模式和启动分区的选择。</li>
+</ul>
+<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 BAP 分区的使用，具体可以参考 <code>EXT_CSD</code> 寄存器相关文档。</p>
+<p>如果需要配置 BAP 分区，具体配置步骤如下：</p>
+<ol>
+<li><strong>读取当前配置</strong>：使用适当命令读取 <code>EXT_CSD</code> 寄存器的当前值。</li>
+<li><strong>设置 BOOT_SIZE_MULT</strong>：根据需求配置 BAP 分区的大小。</li>
+<li><strong>配置 BOOT_CONFIG</strong>：配置启动模式和启动分区。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -446,7 +563,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-01 21:44:32" itemprop="dateModified" datetime="2024-06-01T21:44:32+08:00">2024-06-01</time>
+      <time title="修改时间：2024-06-02 12:47:22" itemprop="dateModified" datetime="2024-06-02T12:47:22+08:00">2024-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -472,25 +589,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="emmc-整体架构"><a class="markdownIt-Anchor" href="#emmc-整体架构"></a> eMMC 整体架构</h1>
-<p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
+          <h1 id="1-架构概述"><a class="markdownIt-Anchor" href="#1-架构概述"></a> 1、架构概述</h1>
+<p>eMMC（嵌入式多媒体卡）整体架构可以分为三个部分。下图展示了 eMMC 整体架构：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1"></p>
 <ul>
-<li>Standard Interface：用于通信的标准接口</li>
-<li>Device Controller：用于管理的控制单元</li>
-<li>NAND Flash：用于存储数据的存储单元</li>
+<li><strong>Standard Interface</strong>：用于和主机通信的标准接口</li>
+<li><strong>Device Controller</strong>：用于管理通信和存储的控制单元</li>
+<li><strong>NAND Flash</strong>：用于存储数据的存储单元</li>
 </ul>
-<p>这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，确保设备能够高效、可靠地进行数据存储和交换。</p>
-<h1 id="1-nand-flash"><a class="markdownIt-Anchor" href="#1-nand-flash"></a> 1 NAND Flash</h1>
-<p>eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2"></p>
+<h1 id="2-standard-inetrface"><a class="markdownIt-Anchor" href="#2-standard-inetrface"></a> 2、Standard Inetrface</h1>
+<p>eMMC 基于 MMC 总线，继承了 MMC 的接口规范，并在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准规定的信号线有：</p>
 <ul>
-<li><strong>BOOT Area Partition 1 &amp; 2</strong>：存储启动加载程序和引导相关数据，确保设备能够正确启动操作系统。</li>
-<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：提供安全存储区域，用于防止重放攻击，保护关键数据的完整性和安全性。</li>
-<li><strong>General Purpose Partition 1 ~ 4</strong>：用于特定应用或数据存储的自定义分区，灵活配置以满足不同应用需求。</li>
-<li><strong>User Data Area</strong>：存储用户数据、应用程序和操作系统文件，是eMMC中最大的分区，适应各种存储需求。</li>
+<li><strong>CLK</strong>：用于接收主机输出的时钟信号。</li>
+<li><strong>Reset</strong>：用于接收主机输出的复位信号。</li>
+<li><strong>CMD</strong>：用于主机向 eMMC 发送命令信号和 eMMC 向主机发送应答信号。</li>
+<li><strong>Data</strong>：用于主机和 eMMC 间的数据通信，同时用户可以配置使用的 Date 线的数量，可以选择 4 根或者 8 根。</li>
+<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 引入。</li>
 </ul>
-<p>这些分区共同确保eMMC能够高效、安全地存储和管理各种类型的数据。</p>
+<p>eMMC 的标准接口在在数据传输、兼容性等方面进行了优化，确保主机和 eMMC 设备之间能够进行高效的通信。</p>
+<h1 id="3-device-controller"><a class="markdownIt-Anchor" href="#3-device-controller"></a> 3、Device Controller</h1>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NFTL (NAND Flash Translation Layer) 对 NAND Flash 进行管理：</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/#more" rel="contents">
@@ -1137,109 +1255,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/13/%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">重塑矩阵</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-13 20:00:41" itemprop="dateCreated datePublished" datetime="2024-05-13T20:00:41+08:00">2024-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-24 14:34:39" itemprop="dateModified" datetime="2024-05-24T14:34:39+08:00">2024-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reshape-the-matrix/description/">重塑矩阵</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1flatten映射"><a class="markdownIt-Anchor" href="#1flatten映射"></a> 1.flatten映射</h2>
-<p><strong>方法与思路</strong>：用两个下标进行标注，遍历原数组的元素插入重塑数组，当重塑数组的第一行插入满了以后切换进入下一行，直到插入完毕为止，先将原数组映射为一维数组，获得其下标，将下标再映射为目标数组，因为映射计算是可逆的，所以可以直接将原数组赋值给目标数组。</p>
-<p><strong>复杂度分析</strong>：</p>
-<ul>
-<li>时间复杂度：O(n)，n 为二维向量中的元素个数</li>
-<li>空间复杂度：O(1)</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">matrixReshape</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; mat, <span class="type">int</span> r, <span class="type">int</span> c) &#123;</span><br><span class="line">        <span class="type">int</span> rows = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> cols = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(rows * cols != r * c)&#123;</span><br><span class="line">            <span class="keyword">return</span> mat;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">againArr</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows * cols; i++) &#123;</span><br><span class="line">            <span class="comment">// 行 = 一维数组下标 / 最大列</span></span><br><span class="line">            <span class="comment">// 列 = 一维数组下标 % 最大列</span></span><br><span class="line">            againArr[i / c][i % c] = mat[i / cols][i % cols];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> againArr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

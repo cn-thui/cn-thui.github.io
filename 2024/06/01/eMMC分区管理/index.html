@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1、分区概述 eMMC（嵌入式多媒体卡）内部将 NAND 划分为四个主要区域，最多可以分为 8 个分区。下图展示了 eMMC 内部的分区结构：   引导分区（Boot Area Partitions, BAP） RPMB分区（Replay Protected Memory Block, RPMB） 通用分区（General Purpose Partitions, GPP） 用户数据区（User">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eMMC分区管理">
+<meta property="og:url" content="http://example.com/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="thui blogs">
+<meta property="og:description" content="1、分区概述 eMMC（嵌入式多媒体卡）内部将 NAND 划分为四个主要区域，最多可以分为 8 个分区。下图展示了 eMMC 内部的分区结构：   引导分区（Boot Area Partitions, BAP） RPMB分区（Replay Protected Memory Block, RPMB） 通用分区（General Purpose Partitions, GPP） 用户数据区（User">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406021618306.png">
+<meta property="article:published_time" content="2024-06-01T14:00:25.080Z">
+<meta property="article:modified_time" content="2024-06-02T08:18:23.085Z">
+<meta property="article:author" content="tanghui">
+<meta property="article:tag" content="eMMC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406021618306.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/","path":"2024/06/01/eMMC分区管理/","title":"eMMC分区管理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>eMMC分区管理 | thui blogs</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">thui blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页-|-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页 | home</a></li><li class="menu-item menu-item-标签-|-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签 | tags</a></li><li class="menu-item menu-item-分类-|-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类 | categories</a></li><li class="menu-item menu-item-归档-|-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档 | archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%88%86%E5%8C%BA%E6%A6%82%E8%BF%B0"><span class="nav-text"> 1、分区概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-bap"><span class="nav-text"> 2、BAP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-rpmb"><span class="nav-text"> 3、RPMB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-gpp"><span class="nav-text"> 4、GPP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-uda"><span class="nav-text"> 5、UDA</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tanghui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="eMMC分区管理 | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          eMMC分区管理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 22:00:25" itemprop="dateCreated datePublished" datetime="2024-06-01T22:00:25+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-02 16:18:23" itemprop="dateModified" datetime="2024-06-02T16:18:23+08:00">2024-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/eMMC/" itemprop="url" rel="index"><span itemprop="name">eMMC</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-分区概述"><a class="markdownIt-Anchor" href="#1-分区概述"></a> 1、分区概述</h1>
+<p>eMMC（嵌入式多媒体卡）内部将 NAND 划分为四个主要区域，最多可以分为 8 个分区。下图展示了 eMMC 内部的分区结构：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406021618306.png" style="zoom: 25%;" />
+<ul>
+<li><strong>引导分区（Boot Area Partitions, BAP）</strong></li>
+<li><strong>RPMB分区（Replay Protected Memory Block, RPMB）</strong></li>
+<li><strong>通用分区（General Purpose Partitions, GPP）</strong></li>
+<li><strong>用户数据区（User Data Area, UDA）</strong></li>
+</ul>
+<h1 id="2-bap"><a class="markdownIt-Anchor" href="#2-bap"></a> 2、BAP</h1>
+<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 <code>EXT_CSD</code> 寄存器中的相关字段来完成：</p>
+<ul>
+<li><strong>BOOT_SIZE_MULT</strong>：定义每个启动分区的大小，单位为 128KB。</li>
+<li><strong>BOOT_CONFIG</strong>：配置启动模式和启动分区的选择。</li>
+</ul>
+<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 BAP 分区的使用，具体可以参考 <code>EXT_CSD</code> 寄存器相关文档。</p>
+<p>如果需要配置 BAP 分区，具体配置步骤如下：</p>
+<ol>
+<li><strong>读取当前配置</strong>：使用适当命令读取 <code>EXT_CSD</code> 寄存器的当前值。</li>
+<li><strong>设置 BOOT_SIZE_MULT</strong>：根据需求配置 BAP 分区的大小。</li>
+<li><strong>配置 BOOT_CONFIG</strong>：配置启动模式和启动分区。</li>
+</ol>
+<p>一般出厂后 BAP 分区的大小是固定的，通常为 4M，但有的芯片厂家会提供功能，让用户自行配置 BAP 分区的大小。</p>
+<h1 id="3-rpmb"><a class="markdownIt-Anchor" href="#3-rpmb"></a> 3、RPMB</h1>
+<p>RPMB 是 eMMC 存储器中的一个特殊分区，设计用于存储敏感数据，并提供防重放攻击和数据篡改保护。RPMB 分区的配置和管理也是通过 <code>EXT_CSD</code> 寄存器中的相关字段来完成：</p>
+<ul>
+<li><strong>RPMB_SIZE_MULT</strong>：指定 RPMB 分区的大小，单位为 128KB。</li>
+<li><strong>RPMB_WRITE_COUNTER</strong>：用于跟踪 RPMB 分区的写操作计数器，每次写操作都会增加计数器值，防止重放攻击。这个字段不是直接通过 <code>EXT_CSD</code> 访问，而是在执行 RPMB 相关命令时，通过响应包获取。</li>
+</ul>
+<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 RPMB 分区的使用，具体可以参考 <code>EXT_CSD</code> 寄存器相关文档。</p>
+<p>在使用的 RPMB分区之前，需要进行配置和初始化，以确保其安全特性和功能能够正常工作。这包括设置认证密钥和初始化写计数器等步骤：</p>
+<ol>
+<li><strong>设置认证密钥</strong>：生成一个认证密钥（认证密钥是用于生成和验证 HMAC 的密钥，通常由设备的安全模块生成），使用特定的 eMMC 命令将认证密钥写入 RPMB 分区。</li>
+<li><strong>初始化写计数器</strong>：读取当前的写计数器值，确保其初始化为 0 或其他预定义值，并通过特定命令验证写计数器值。</li>
+<li><strong>数据写入和认证</strong>：计算待写入数据的 HMAC，将数据和 HMAC 一起写入 RPMB 分区，读取并验证 HMAC，以确认写操作的完整性。</li>
+</ol>
+<p>在使用 eMMC 的 RPMB 分区之前，进行适当的配置和初始化是确保其安全特性和功能正常工作的关键步骤。配置认证密钥、初始化写计数器以及确保数据写入和认证的过程，是保护敏感数据和防止重放攻击的必要措施。通过这些步骤，可以确保 RPMB 分区在数据存储和安全性方面的高效性和可靠性。</p>
+<h1 id="4-gpp"><a class="markdownIt-Anchor" href="#4-gpp"></a> 4、GPP</h1>
+<p>通用分区（General Purpose Partition，GPP）是 eMMC 中的一种分区类型，用于为特定的应用和功能提供灵活的存储空间，用以数据隔离，提高数据的安全性和稳定性。GPP 分区的配置和管理也是通过 <code>EXT_CSD</code> 寄存器中的相关字段来完成：</p>
+<ul>
+<li><strong>GP_SIZE_MULT_x</strong>：这里的 x 是指 GPP 的分区（1-4），这是一个 24 位值，占用三个字节，它指定 GPP_x 分区的大小，单位为 512KB。</li>
+</ul>
+<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 GPP 分区的使用，具体可以参考 <code>EXT_CSD</code> 寄存器相关文档。</p>
+<h1 id="5-uda"><a class="markdownIt-Anchor" href="#5-uda"></a> 5、UDA</h1>
+<p>用户数据区是 eMMC 中用于存储所有用户数据的主要区域。它负责存储操作系统、应用程序和用户文件，并通过各种技术手段来优化性能和保障数据安全。合理配置和管理 UDA 可以提高设备的存储效率和数据可靠性。它没有一些独立的控制字段，但是一些其他的字段也会间接的影响到 UDA 分区的使用，具体可以参考 <code>EXT_CSD</code> 寄存器相关文档。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/eMMC/" rel="tag"># eMMC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/30/%E9%97%AA%E5%AD%98%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="闪存基础知识">
+                  <i class="fa fa-angle-left"></i> 闪存基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">tanghui</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

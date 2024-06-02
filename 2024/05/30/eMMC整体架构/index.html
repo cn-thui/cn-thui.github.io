@@ -19,18 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":400},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="eMMC 整体架构 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   Standard Interface：用于通信的标准接口 Device Controller：用于管理的控制单元 NAND Flash：用于存储数据的存储单元  这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，">
+    <meta name="description" content="1、架构概述 eMMC（嵌入式多媒体卡）整体架构可以分为三个部分。下图展示了 eMMC 整体架构：   Standard Interface：用于和主机通信的标准接口 Device Controller：用于管理通信和存储的控制单元 NAND Flash：用于存储数据的存储单元   2、Standard Inetrface eMMC 基于 MMC 总线，继承了 MMC 的接口规范，并在其基础上进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eMMC整体架构">
 <meta property="og:url" content="http://example.com/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="thui blogs">
-<meta property="og:description" content="eMMC 整体架构 eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：   Standard Interface：用于通信的标准接口 Device Controller：用于管理的控制单元 NAND Flash：用于存储数据的存储单元  这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，">
+<meta property="og:description" content="1、架构概述 eMMC（嵌入式多媒体卡）整体架构可以分为三个部分。下图展示了 eMMC 整体架构：   Standard Interface：用于和主机通信的标准接口 Device Controller：用于管理通信和存储的控制单元 NAND Flash：用于存储数据的存储单元   2、Standard Inetrface eMMC 基于 MMC 总线，继承了 MMC 的接口规范，并在其基础上进">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png">
 <meta property="article:published_time" content="2024-05-30T13:21:10.841Z">
-<meta property="article:modified_time" content="2024-06-01T13:44:32.164Z">
+<meta property="article:modified_time" content="2024-06-02T04:47:22.553Z">
 <meta property="article:author" content="tanghui">
 <meta property="article:tag" content="eMMC">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#emmc-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-text"> eMMC 整体架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-nand-flash"><span class="nav-text"> 1 NAND Flash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-device-controller"><span class="nav-text"> 2 Device Controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-standard-inetrface"><span class="nav-text"> 3 Standard Inetrface</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="nav-text"> 1、架构概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-standard-inetrface"><span class="nav-text"> 2、Standard Inetrface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-device-controller"><span class="nav-text"> 3、Device Controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-nand-flash"><span class="nav-text"> 4、NAND Flash</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -230,7 +230,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-01 21:44:32" itemprop="dateModified" datetime="2024-06-01T21:44:32+08:00">2024-06-01</time>
+      <time title="修改时间：2024-06-02 12:47:22" itemprop="dateModified" datetime="2024-06-02T12:47:22+08:00">2024-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,30 +255,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="emmc-整体架构"><a class="markdownIt-Anchor" href="#emmc-整体架构"></a> eMMC 整体架构</h1>
-<p>eMMC（Embedded Multi Media Card）是一种内嵌式存储器标准规格，主要针对手机、平板电脑等移动设备设计。它主要由三部分构成：</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="1-架构概述"><a class="markdownIt-Anchor" href="#1-架构概述"></a> 1、架构概述</h1>
+<p>eMMC（嵌入式多媒体卡）整体架构可以分为三个部分。下图展示了 eMMC 整体架构：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122665.png" alt="1-1" /></p>
 <ul>
-<li>Standard Interface：用于通信的标准接口</li>
-<li>Device Controller：用于管理的控制单元</li>
-<li>NAND Flash：用于存储数据的存储单元</li>
+<li><strong>Standard Interface</strong>：用于和主机通信的标准接口</li>
+<li><strong>Device Controller</strong>：用于管理通信和存储的控制单元</li>
+<li><strong>NAND Flash</strong>：用于存储数据的存储单元</li>
 </ul>
-<p>这三个组件共同工作，构成了 eMMC 存储解决方案的关键部分，确保设备能够高效、可靠地进行数据存储和交换。</p>
-<h1 id="1-nand-flash"><a class="markdownIt-Anchor" href="#1-nand-flash"></a> 1 NAND Flash</h1>
-<p>eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2" /></p>
-<ul>
-<li><strong>BOOT Area Partition 1 &amp; 2</strong>：存储启动加载程序和引导相关数据，确保设备能够正确启动操作系统。</li>
-<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：提供安全存储区域，用于防止重放攻击，保护关键数据的完整性和安全性。</li>
-<li><strong>General Purpose Partition 1 ~ 4</strong>：用于特定应用或数据存储的自定义分区，灵活配置以满足不同应用需求。</li>
-<li><strong>User Data Area</strong>：存储用户数据、应用程序和操作系统文件，是eMMC中最大的分区，适应各种存储需求。</li>
-</ul>
-<p>这些分区共同确保eMMC能够高效、安全地存储和管理各种类型的数据。</p>
-<h1 id="2-device-controller"><a class="markdownIt-Anchor" href="#2-device-controller"></a> 2 Device Controller</h1>
-<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NFTL (NAND Flash Translation Layer) 对 NAND Flash 进行管理：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3" /></p>
-<p>而 eMMC 在其内部集成了 Device Controller 替代 NFTL，并通过一系列复杂的算法和机制，确保eMMC能够高效、可靠地工作，同时提供各种安全和性能优化功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash 的物理特性，节省了主机 CPU 资源的同时减少了主机系统软件的复杂度。</p>
-<h1 id="3-standard-inetrface"><a class="markdownIt-Anchor" href="#3-standard-inetrface"></a> 3 Standard Inetrface</h1>
+<h1 id="2-standard-inetrface"><a class="markdownIt-Anchor" href="#2-standard-inetrface"></a> 2、Standard Inetrface</h1>
 <p>eMMC 基于 MMC 总线，继承了 MMC 的接口规范，并在其基础上进行优化以适应嵌入式系统的要求，eMMC 的接口标准规定的信号线有：</p>
 <ul>
 <li><strong>CLK</strong>：用于接收主机输出的时钟信号。</li>
@@ -288,6 +273,20 @@
 <li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 引入。</li>
 </ul>
 <p>eMMC 的标准接口在在数据传输、兼容性等方面进行了优化，确保主机和 eMMC 设备之间能够进行高效的通信。</p>
+<h1 id="3-device-controller"><a class="markdownIt-Anchor" href="#3-device-controller"></a> 3、Device Controller</h1>
+<p>在单独使用 NAND Flash 接入到主机时，需要主机端有 NFTL (NAND Flash Translation Layer) 对 NAND Flash 进行管理：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122674.png" alt="1-3" /></p>
+<p>而 eMMC 在其内部集成了 Device Controller 替代 NFTL，并通过一系列复杂的算法和机制，确保eMMC能够高效、可靠地工作，同时提供各种安全和性能优化功能。相比于直接将 NAND Flash 接入到主机，eMMC 屏蔽了 NAND Flash 的物理特性，节省了主机 CPU 资源的同时减少了主机系统软件的复杂度。</p>
+<h1 id="4-nand-flash"><a class="markdownIt-Anchor" href="#4-nand-flash"></a> 4、NAND Flash</h1>
+<p>eMMC 在内部对 NAND Flash 划分为以下四个主要区域：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202405302122672.png" alt="1-2" /></p>
+<ul>
+<li><strong>BOOT Area Partition 1 &amp; 2</strong>：存储启动加载程序和引导相关数据，确保设备能够正确启动操作系统。</li>
+<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：提供安全存储区域，用于防止重放攻击，保护关键数据的完整性和安全性。</li>
+<li><strong>General Purpose Partition 1 ~ 4</strong>：用于特定应用或数据存储的自定义分区，灵活配置以满足不同应用需求。</li>
+<li><strong>User Data Area</strong>：存储用户数据、应用程序和操作系统文件，是eMMC中最大的分区，适应各种存储需求。</li>
+</ul>
+<p>这些分区共同确保 eMMC 能够高效、安全地存储和管理各种类型的数据。</p>
 
     </div>
 
