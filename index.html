@@ -146,18 +146,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -174,6 +174,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/07/NAND/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tanghui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | thui blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/07/NAND/" class="post-title-link" itemprop="url">NAND基本知识</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-07 19:06:02 / 修改时间：19:05:49" itemprop="dateCreated datePublished" datetime="2024-06-07T19:06:02+08:00">2024-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">存储开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E5%BC%80%E5%8F%91/NAND/" itemprop="url" rel="index"><span itemprop="name">NAND</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-nand概述"><a class="markdownIt-Anchor" href="#1-nand概述"></a> 1、NAND概述</h1>
+<h2 id="11-基本概念"><a class="markdownIt-Anchor" href="#11-基本概念"></a> 1.1 基本概念</h2>
+<p>NAND 又称 NAND 闪存，是闪存（一种非易失性存储技术，该技术可以在没有电流供应的情况下，长时间保存数据，被广泛用于各种电子设备中）的一种类型，因其具有较高的存储密度和较低的成本，在大规模存储中被广泛应用，如 SSD，存储卡等。</p>
+<h2 id="12-存储原理"><a class="markdownIt-Anchor" href="#12-存储原理"></a> 1.2 存储原理</h2>
+<p>NAND 基于 Flash Memory Cell 技术实现，这种技术使用了浮栅晶体管（Floating Gate Transistor）来存储数据，一个晶体管被称为一个 Cell（基本存储单元），其结构如图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345158.png" style="zoom:67%;">
+<ul>
+<li><strong>Control gate（控制栅极）</strong></li>
+<li><strong>Isolator（绝缘层）</strong></li>
+<li><strong>Floating gate（浮栅）</strong></li>
+<li><strong>Source（源极）</strong></li>
+<li><strong>Drain（漏极）</strong></li>
+<li><strong>n-channel（n沟道）</strong></li>
+<li><strong>Substrate（衬底）</strong></li>
+</ul>
+<p>浮栅中可以存储电荷，其上下两层绝缘层可以保证晶体管断电后浮栅内部的电荷几乎不流失，通过将电荷存储进浮栅中来存储二进制信息，这就是浮栅晶体管的存储原理。闪存则将多个浮栅晶体管组合排列，将复杂的信息转换为二进制信息后，存储到每个晶体管中，这就是 NAND 的工作原理。</p>
+<h2 id="13-读擦写原理"><a class="markdownIt-Anchor" href="#13-读擦写原理"></a> 1.3 读擦写原理</h2>
+<p><strong>读原理</strong>：通过在控制栅极施加读取电压，衬底接地，将浮栅中的电荷吸引到沟道中，但不足以发生隧穿效应，此时测量漏极和源极中是否存在大电流，即晶体管是否导通；若未导通，说明阈值电压较高，该状态读取为 0；若导通，说明阈值电压较低，该状态读取为 1。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/07/NAND/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -219,7 +326,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-06 21:11:32" itemprop="dateModified" datetime="2024-06-06T21:11:32+08:00">2024-06-06</time>
+      <time title="修改时间：2024-06-07 19:06:27" itemprop="dateModified" datetime="2024-06-07T19:06:27+08:00">2024-06-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,7 +362,7 @@
 <li><strong>用户数据区（User Data Area, UDA）</strong></li>
 </ul>
 <h1 id="2-bap"><a class="markdownIt-Anchor" href="#2-bap"></a> 2、BAP</h1>
-<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 EXT_CSD Register 寄存器中的相关字段来完成：</p>
+<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 EXT_CSD Register 中的相关字段来完成：</p>
 <ul>
 <li><strong>BOOT_SIZE_MULT</strong>：定义每个启动分区的大小，单位为 128KB。</li>
 <li><strong>BOOT_CONFIG</strong>：配置启动模式和启动分区的选择。</li>
@@ -1111,105 +1218,6 @@
 <li>空间复杂度：O(1)</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">matrixReshape</span>(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; mat, <span class="type">int</span> r, <span class="type">int</span> c) &#123;</span><br><span class="line">        <span class="type">int</span> rows = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> cols = mat[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span>(rows * cols != r * c)&#123;</span><br><span class="line">            <span class="keyword">return</span> mat;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">againArr</span>(r, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(c, <span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows * cols; i++) &#123;</span><br><span class="line">            <span class="comment">// 行 = 一维数组下标 / 最大列</span></span><br><span class="line">            <span class="comment">// 列 = 一维数组下标 % 最大列</span></span><br><span class="line">            againArr[i / c][i % c] = mat[i / cols][i % cols];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> againArr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/13/%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tanghui">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | thui blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/13/%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86/" class="post-title-link" itemprop="url">数组拆分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-13 18:16:00" itemprop="dateCreated datePublished" datetime="2024-05-13T18:16:00+08:00">2024-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-22 00:05:09" itemprop="dateModified" datetime="2024-05-22T00:05:09+08:00">2024-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原题"><a class="markdownIt-Anchor" href="#原题"></a> 原题</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/array-partition/description/">数组拆分</a></li>
-</ul>
-<h1 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h1>
-<h2 id="1排序贪心"><a class="markdownIt-Anchor" href="#1排序贪心"></a> 1.排序+贪心</h2>
-<ul>
-<li><strong>算法思路</strong>：如何获得总和最大？每一个数对中都会取较小的值，而另外一个值则一定排除再外，那么我只需要给这个数匹配一个大于它且最接近的数，那么这样的话，最小的值应该匹配第二小的值，剩下的数同理分析，所以将数组进行排序后可以发现，累加到和中的数字其实就是数组中偶数下标对应的元素。</li>
-<li><strong>算法分析</strong>：sort() 函数底层使用快速排序或者堆排序，时间复杂度：O（nlogn），循环遍历时间复杂度：O（n），综合来看时间复杂度：O（nlogn）；使用常数空间，空间复杂度：O（1）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">arrayPairSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> minSum = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> length = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; length; i+=<span class="number">2</span>)&#123;</span><br><span class="line">            minSum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>

@@ -908,7 +908,7 @@
 <li><strong>用户数据区（User Data Area, UDA）</strong></li>
 </ul>
 <h1 id="2-bap"><a class="markdownIt-Anchor" href="#2-bap"></a> 2、BAP</h1>
-<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 EXT_CSD Register 寄存器中的相关字段来完成：</p>
+<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 EXT_CSD Register 中的相关字段来完成：</p>
 <ul>
 <li><strong>BOOT_SIZE_MULT</strong>：定义每个启动分区的大小，单位为 128KB。</li>
 <li><strong>BOOT_CONFIG</strong>：配置启动模式和启动分区的选择。</li>
@@ -950,6 +950,213 @@
       </categories>
       <tags>
         <tag>eMMC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NAND基本知识</title>
+    <url>/2024/06/07/NAND/</url>
+    <content><![CDATA[<h1 id="1-nand概述"><a class="markdownIt-Anchor" href="#1-nand概述"></a> 1、NAND概述</h1>
+<h2 id="11-基本概念"><a class="markdownIt-Anchor" href="#11-基本概念"></a> 1.1 基本概念</h2>
+<p>NAND 又称 NAND 闪存，是闪存（一种非易失性存储技术，该技术可以在没有电流供应的情况下，长时间保存数据，被广泛用于各种电子设备中）的一种类型，因其具有较高的存储密度和较低的成本，在大规模存储中被广泛应用，如 SSD，存储卡等。</p>
+<h2 id="12-存储原理"><a class="markdownIt-Anchor" href="#12-存储原理"></a> 1.2 存储原理</h2>
+<p>NAND 基于 Flash Memory Cell 技术实现，这种技术使用了浮栅晶体管（Floating Gate Transistor）来存储数据，一个晶体管被称为一个 Cell（基本存储单元），其结构如图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345158.png" style="zoom:67%;" />
+<ul>
+<li><strong>Control gate（控制栅极）</strong></li>
+<li><strong>Isolator（绝缘层）</strong></li>
+<li><strong>Floating gate（浮栅）</strong></li>
+<li><strong>Source（源极）</strong></li>
+<li><strong>Drain（漏极）</strong></li>
+<li><strong>n-channel（n沟道）</strong></li>
+<li><strong>Substrate（衬底）</strong></li>
+</ul>
+<p>浮栅中可以存储电荷，其上下两层绝缘层可以保证晶体管断电后浮栅内部的电荷几乎不流失，通过将电荷存储进浮栅中来存储二进制信息，这就是浮栅晶体管的存储原理。闪存则将多个浮栅晶体管组合排列，将复杂的信息转换为二进制信息后，存储到每个晶体管中，这就是 NAND 的工作原理。</p>
+<h2 id="13-读擦写原理"><a class="markdownIt-Anchor" href="#13-读擦写原理"></a> 1.3 读擦写原理</h2>
+<p><strong>读原理</strong>：通过在控制栅极施加读取电压，衬底接地，将浮栅中的电荷吸引到沟道中，但不足以发生隧穿效应，此时测量漏极和源极中是否存在大电流，即晶体管是否导通；若未导通，说明阈值电压较高，该状态读取为 0；若导通，说明阈值电压较低，该状态读取为 1。</p>
+<p><strong>擦除原理</strong>：通过在控制栅极施加低电压，衬底加高电压，使浮栅中的电荷发生隧穿效应到达源极或衬底中，浮栅中没有了存储的电荷，也就没有了存储的信息，此时控制栅极的阈值电压较低，施加读取电压足以让晶体管导通，这个状态通常被读取为二进制 1，也是晶体管的默认状态。</p>
+<p><strong>写原理</strong>：通过在控制栅极施加高电压，衬底接地，使衬底中的电荷到达沟道中，并发生隧穿效应到达浮栅中，此时控制栅极的阈值电压较高，施加读取电压不足以使晶体管导通，这个状态通常被读取为二进制 0。</p>
+<h1 id="2-组织结构"><a class="markdownIt-Anchor" href="#2-组织结构"></a> 2、组织结构</h1>
+<h2 id="21-阵列组织"><a class="markdownIt-Anchor" href="#21-阵列组织"></a> 2.1 阵列组织</h2>
+<p>NAND 中的存储单元排列是一种串联方式，其串联结构如图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345159.png"  />
+<ul>
+<li><strong>WL (Word Line)</strong> ：每一行的浮栅晶体管的控制栅极通过串联的方式连接到字线上。</li>
+<li><strong>BL (Bit Line)</strong> ：每一列的第一个晶体管的漏极连接到位线上。</li>
+<li><strong>SL (Source Line)</strong> ：所有列的最后一个晶体管的源极连接到源线上。</li>
+</ul>
+<p>其中每一行就是一个 Page，整个存储阵列就是一个 Block，它的好处在于不需要给每一个晶体管接入字线、位线和源线，去除了大量的金属导线，使得相同面积下可以集成更多的存储单元，提高了存储密度，且一定程度上简化了生产工艺，降低了生产成本。</p>
+<h2 id="22-物理结构"><a class="markdownIt-Anchor" href="#22-物理结构"></a> 2.2 物理结构</h2>
+<p>NAND 的物理结构示意图如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345161.png"  />
+<ul>
+<li><strong>CHIP</strong>：通常指一个闪存芯片，也称为 DEVICE，一个 CHIP 中包含若干个 LUN（也称为 DIE）。</li>
+<li><strong>LUN</strong>：LUN 是芯片晶圆上的小方块，一个 LUN 中包含若干个 Plane。</li>
+<li><strong>Plane</strong>：Plane 是 LUN 中的一个存储单元阵列，一个 Plane 中包含若干个 Block。</li>
+<li><strong>Block</strong>：Block 是 Plane 的基本单位，同时也是擦除操作的最小单位，一个 Block 中包含若干个 Page。</li>
+<li><strong>Page</strong>：Page 是 Block的基本单位，同时也是读、写操作的最小单位，一个 Page 中包含了成千上万个 Cell。</li>
+</ul>
+<p>NAND Flash 的物理结构大致划分为以上部分，根据不同厂商和制造商的要求，可能还会包含一些其他的结构，如 Plane 可能还包含 cache register 和 page register 以优化读写性能。</p>
+<h2 id="23-寻址方式"><a class="markdownIt-Anchor" href="#23-寻址方式"></a> 2.3 寻址方式</h2>
+<p>NAND 中为每个 LUN 、Plane、Block 和 Page 都进行了编号，这些编号就是它们的地址，将它们的地址按照高位到地位组织成一个数据，这个数据在逻辑上被称为行地址（Row Address），其结构如图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345162.png" alt="" /></p>
+<p>而在 Page 中又由众多的 Cell 组成，每个 Cell 都有一个独特的地址，这个地址在逻辑上被称为列地址（Column Address）。通过行地址和列地址就可以将数据存储到指定位置或从指定位置读取数据。</p>
+<h1 id="3-存储模式"><a class="markdownIt-Anchor" href="#3-存储模式"></a> 3、存储模式</h1>
+<p>NAND 根据存储单元可以存储信息的位数可以分为以下模式：</p>
+<table>
+<thead>
+<tr>
+<th>存储模式</th>
+<th>比特数/单元</th>
+<th>擦写寿命</th>
+<th>读取速度</th>
+<th>写入速度</th>
+<th>容量密度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLC (Single-Level Cell)</td>
+<td>1</td>
+<td>高</td>
+<td>快</td>
+<td>快</td>
+<td>低</td>
+</tr>
+<tr>
+<td>MLC (Multi-Level Cell)</td>
+<td>2</td>
+<td>中</td>
+<td>较快</td>
+<td>较快</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>TLC (Triple-Level Cell)</td>
+<td>3</td>
+<td>较低</td>
+<td>较慢</td>
+<td>较慢</td>
+<td>高</td>
+</tr>
+<tr>
+<td>QLC (Quad-Level Cell)</td>
+<td>4</td>
+<td>低</td>
+<td>慢</td>
+<td>慢</td>
+<td>很高</td>
+</tr>
+</tbody>
+</table>
+<p>它们的原理是根据浮栅中存储电荷的数量来保存信息，其信息表示如下图：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345163.png" style="zoom:25%;" />
+<h1 id="4-接口模式"><a class="markdownIt-Anchor" href="#4-接口模式"></a> 4、接口模式</h1>
+<p>NAND 的接口主要可以分为两种，ONFI (Open NAND Flash Interface) 和 Toggle-Mode。Toggle-Mode 标准由三星和东芝开发。ONFI 标准则是由Intel、Micron、Hynix、Phison等厂商共同开发。以下是它们的主要区别：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ONFI</th>
+<th>Toggle-Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传输模式</td>
+<td>DDR（ONFI 2.x起）</td>
+<td>DDR</td>
+</tr>
+<tr>
+<td>同步信号</td>
+<td>CLK</td>
+<td>DQS</td>
+</tr>
+<tr>
+<td>信号线路</td>
+<td>单端信号</td>
+<td>单端信号</td>
+</tr>
+<tr>
+<td>协议复杂性</td>
+<td>相对复杂</td>
+<td>相对简单</td>
+</tr>
+<tr>
+<td>接口兼容性</td>
+<td>高，广泛适用</td>
+<td>相对较低，但适用特定高性能场景</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>支持较高的数据速率</td>
+<td>高速数据传输，特别适合高性能和移动设备应用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-命令操作"><a class="markdownIt-Anchor" href="#5-命令操作"></a> 5、命令操作</h1>
+<p>NAND 闪存操作通常需要通过发送不同的命令来执行，这些命令包括读取、写入、擦除、复位等操作。以下是 NAND 闪存中常见的一些命令及其功能：</p>
+<ol>
+<li><strong>读取命令（Read）</strong>：从指定地址读取数据。</li>
+<li><strong>编程命令（Program）</strong>：将数据编程到指定地址。</li>
+<li><strong>擦除命令（Erase）</strong>：擦除指定块中的数据。</li>
+<li><strong>复位命令（Reset）</strong>：复位 NAND 闪存芯片。</li>
+<li><strong>ID 查询命令（Read ID）</strong>：读取 NAND 闪存的制造商和设备 ID。</li>
+<li><strong>写保护命令（Write Protect）</strong>：设置或解除写保护状态。</li>
+<li><strong>锁存转储命令（Latch Dump）</strong>：将页面寄存器中的数据转储到数据寄存器。</li>
+<li><strong>随机缓存读取命令（Random Cache Read）</strong>：预加载下一页数据以提高读取速度。</li>
+<li><strong>快速读取命令（Fast Read）</strong>：以更快的速度读取数据。</li>
+<li><strong>自检命令（Read Status）</strong>：读取 NAND 闪存的状态寄存器，用于检测操作是否完成或错误状态。</li>
+</ol>
+<h2 id="51-基本时序"><a class="markdownIt-Anchor" href="#51-基本时序"></a> 5.1 基本时序</h2>
+<p><strong>读操作时序</strong>：</p>
+<ul>
+<li>发送读取命令：告知设备将要读取数据。</li>
+<li>发送地址信息：告知设备读取数据的位置。</li>
+<li>发送确认命令：告知设备可以开始准备数据。</li>
+<li>检查状态寄存器：当设备开始将传输数据时，设备会进入忙碌状态，当设备状态切换到空闲状态时，可以开始读取数据。</li>
+<li>读取数据：发送 RE 信号并到 DQ 总线上读取数据。</li>
+</ul>
+<p><strong>写操作时序</strong>：</p>
+<ul>
+<li>发送写入命令：告知设备将要写入数据。</li>
+<li>发送地址信息：告知设备数据写入的位置。</li>
+<li>发送数据：发送 WE 信号并将要写入的数据发送到 DQ 总线上。</li>
+<li>检查状态寄存器：当设备将数据传出到存储阵列时，设备会进入到忙碌状态，当设备切换到空闲状态时，说明数据写入完成。</li>
+</ul>
+<p><strong>擦除操作时序</strong>：</p>
+<ul>
+<li>发送擦除命令：告知设备将要擦除数据</li>
+<li>发送地址信息：告知设备将要擦除数据的位置。</li>
+<li>检查状态寄存器：当设备开始擦除时，设备会进入到忙碌状态，当设备切换到空闲状态时，说明擦除完成。</li>
+</ul>
+<p><strong>复位操作时序</strong>：</p>
+<ul>
+<li>发送复位命令：告知设备进行复位操作，并将设备状态置为空闲。</li>
+<li>检查设备状态：当设备进入空闲状态说明复位成功，</li>
+</ul>
+<p>以上命令操作都是最简单的操作，在 K9AFGD8J0C 中定义了命令集并实现了复杂的操作如：随机缓存读取操作、顺序缓存读取操作、缓存写入操作、回写操作等等，数据手册中说明了详细的操作步骤以及时序要求。</p>
+<h2 id="52-内部行为"><a class="markdownIt-Anchor" href="#52-内部行为"></a> 5.2 内部行为</h2>
+<p>NAND 在接收到主机发送的数据后，会根据数据的类型做出一系列的动作，主要有：</p>
+<ul>
+<li>命令锁存：将接收的命令存储到命令寄存器中。</li>
+<li>命令识别：对命令进行识别，并根据不同的命令触发不同的行为。</li>
+<li>地址锁存：将接收的地址信息存储到内部缓存中。</li>
+<li>内部寻址：根据接收到的地址信息进行寻址。</li>
+<li>数据锁存：将接收到的数据锁存到数据寄存器中。</li>
+<li>加载数据：将存储阵列中的数据加载到页寄存器中。</li>
+<li>缓存数据：将页寄存器中的数据加载到缓存寄存器中。</li>
+<li>预加载：将页寄存器的数据加载到缓存寄存器中后，将下一次要读取的数据提前加载到页寄存器中。</li>
+<li>切换状态：根据内部行为，将 R/B 置为忙碌或空闲。</li>
+<li>复位：清除命令寄存器和地址寄存器中的数据，将设备状态置为空闲，初始化计数器和内部逻辑等等。</li>
+</ul>
+<p>这些内部行为都由 NAND 内部的硬件电路控制，作为主机不需要关心其内部实现，控制好操作命令及时序即可对其进行读写。</p>
+]]></content>
+      <categories>
+        <category>存储开发</category>
+        <category>NAND</category>
+      </categories>
+      <tags>
+        <tag>NAND</tag>
       </tags>
   </entry>
 </search>
