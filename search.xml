@@ -840,127 +840,16 @@
       </tags>
   </entry>
   <entry>
-    <title>eMMC整体架构</title>
-    <url>/2024/05/30/eMMC%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="1-架构概述"><a class="markdownIt-Anchor" href="#1-架构概述"></a> 1、架构概述</h1>
-<p>eMMC（嵌入式多媒体卡）整体结构可以分为三个部分。下图展示了 eMMC 整体架构：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406052127486.png" style="zoom: 33%;" />
-<ul>
-<li><strong>Standard Interface</strong>：用于与外部主机通信的标准接口</li>
-<li><strong>Device Controller</strong>：用于管理通信和存储的控制单元</li>
-<li><strong>NAND Flash</strong>：用于存储数据的存储单元</li>
-</ul>
-<p>eMMC 由三部分构成，使得它具有高集成度、简化设计、易于集成和维护等多方面的优势，这使得eMMC成为嵌入式系统和移动设备中广泛应用的存储解决方案。</p>
-<h1 id="2-标准接口"><a class="markdownIt-Anchor" href="#2-标准接口"></a> 2、标准接口</h1>
-<p>eMMC 基于 MMC 标准，继承了 MMC 的接口规范，并在其基础上进行优化以适应嵌入式系统的要求，下图展示了 eMMC 的接口标准中规定的总线：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406052127492.png" style="zoom: 33%;" />
-<ul>
-<li><strong>CLK</strong>：用于接收 Host 输出的时钟信号。</li>
-<li><strong>Reset</strong>：用于接收 Host 输出的复位信号。</li>
-<li><strong>CMD</strong>：用于 Host 向 eMMC 发送命令信号和 eMMC 向 Host 发送应答信号。</li>
-<li><strong>Data</strong>：用于 Host 和 eMMC 间的数据通信，同时用户可以配置使用的 Date 线的数量。</li>
-<li><strong>DS (Data Strobe)</strong>：用于 HS400 模式下数据接收的同步，提高数据传输的稳定性，在 eMMC 5.0 规范引入。</li>
-</ul>
-<p>eMMC 接口相对于 MMC 来说，在数据传输、兼容性等方面进行优化，确保主机和 eMMC 设备之间能够进行高效的通信。</p>
-<h1 id="3-控制单元"><a class="markdownIt-Anchor" href="#3-控制单元"></a> 3、控制单元</h1>
-<p>控制单元是整个 eMMC 的核心，它向上负责给主机提高标准化的接口，向下负责管理 NAND 的各种操作。下图展示了控制单元实现的部分功能：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406052127494.png" style="zoom: 33%;" />
-<ul>
-<li>数据传输：提供数据缓冲区，用于临时存储正在传输的数据，以提高整体读写性能。</li>
-<li>错误检测：在其内部使用 ECC (Error Correction Code) 机制检测错误并纠正。</li>
-<li>地址转换：将主机提供的逻辑地址转换为 NAND 的物理地址。</li>
-<li>磨损均衡：磨损均衡算法确保所有存储单元均匀使用，防止某些单元过早磨损，以延长 NAND 的寿命。</li>
-<li>坏块管理：自动检测和管理坏块，确保数据的完整性和可靠性。</li>
-<li>安全功能：提供访问控制机制，防止未经授权的读写操作。</li>
-<li>电源管理：支持多种电源模式（如休眠模式、空闲模式）以降低功耗。</li>
-<li>………</li>
-</ul>
-<p>eMMC 的控制单元通过实现以上功能，为外部主机提供高效、可靠、安全的数据存储和访问。</p>
-<h1 id="4-存储介质"><a class="markdownIt-Anchor" href="#4-存储介质"></a> 4、存储介质</h1>
-<p>eMMC 内部将其存储介质 NAND 划分为四个主要区域，最多可分为 8 个分区。下图展示了 eMMC NAND 内部的具体分区：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406052127495.png" style="zoom: 25%;" />
-<ul>
-<li><strong>BOOT Area Partition 1 &amp; 2</strong>：存储启动加载程序和引导相关数据，确保设备能够正确启动操作系统。</li>
-<li><strong>RPMB Partition (Replay Protected Memory Block)</strong>：提供安全存储区域，用于防止重放攻击，保护关键数据的完整性和安全性。</li>
-<li><strong>General Purpose Partition 1 ~ 4</strong>：用于特定应用或数据存储的自定义分区，灵活配置以满足不同应用需求。</li>
-<li><strong>User Data Area</strong>：存储用户数据、应用程序和操作系统文件，是eMMC中最大的分区，适应各种存储需求。</li>
-</ul>
-<p>eMMC 通过这种分区方式，确保 eMMC 能够高效、安全地存储和管理各种类型的数据。</p>
-]]></content>
-      <categories>
-        <category>存储开发</category>
-        <category>eMMC</category>
-      </categories>
-      <tags>
-        <tag>eMMC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>eMMC分区管理</title>
-    <url>/2024/06/01/eMMC%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h1 id="1-分区概述"><a class="markdownIt-Anchor" href="#1-分区概述"></a> 1、分区概述</h1>
-<p>eMMC（嵌入式多媒体卡）内部将 NAND 划分为四个主要区域，最多可以分为 8 个分区。下图展示了 eMMC 内部的分区结构：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406052127495.png" style="zoom: 25%;" />
-<ul>
-<li><strong>引导分区（Boot Area Partitions, BAP）</strong></li>
-<li><strong>RPMB分区（Replay Protected Memory Block, RPMB）</strong></li>
-<li><strong>通用分区（General Purpose Partitions, GPP）</strong></li>
-<li><strong>用户数据区（User Data Area, UDA）</strong></li>
-</ul>
-<h1 id="2-bap"><a class="markdownIt-Anchor" href="#2-bap"></a> 2、BAP</h1>
-<p>BAP 分区主要用于存储启动代码和关键数据，以支持 SOC 启动系统。通常 eMMC 会包含两个分区（BAP1 &amp; BAP2），以提升设备的冗余性和可靠性。BAP 分区的配置和管理通过 EXT_CSD Register 中的相关字段来完成：</p>
-<ul>
-<li><strong>BOOT_SIZE_MULT</strong>：定义每个启动分区的大小，单位为 128KB。</li>
-<li><strong>BOOT_CONFIG</strong>：配置启动模式和启动分区的选择。</li>
-</ul>
-<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 BAP 分区的使用，具体可以参考 EXT_CSD Register 相关文档。</p>
-<p>如果需要配置 BAP 分区，具体配置步骤如下：</p>
-<ol>
-<li><strong>读取当前配置</strong>：使用适当命令读取 EXT_CSD Register 的当前值。</li>
-<li><strong>设置 BOOT_SIZE_MULT</strong>：根据需求配置 BAP 分区的大小。</li>
-<li><strong>配置 BOOT_CONFIG</strong>：配置启动模式和启动分区。</li>
-</ol>
-<p>一般出厂后 BAP 分区的大小是固定的，通常为 4M，但有的芯片厂家会提供功能，让用户自行配置 BAP 分区的大小。</p>
-<h1 id="3-rpmb"><a class="markdownIt-Anchor" href="#3-rpmb"></a> 3、RPMB</h1>
-<p>RPMB 是 eMMC 存储器中的一个特殊分区，设计用于存储敏感数据，并提供防重放攻击和数据篡改保护。RPMB 分区的配置和管理也是通过 EXT_CSD Register 中的相关字段来完成：</p>
-<ul>
-<li><strong>RPMB_SIZE_MULT</strong>：指定 RPMB 分区的大小，单位为 128KB。</li>
-<li><strong>RPMB_WRITE_COUNTER</strong>：用于跟踪 RPMB 分区的写操作计数器，每次写操作都会增加计数器值，防止重放攻击。这个字段不是直接通过 EXT_CSD Register 访问，而是在执行 RPMB 相关命令时，通过响应包获取。</li>
-</ul>
-<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 RPMB 分区的使用，具体可以参考 EXT_CSD Register 相关文档。</p>
-<p>在使用的 RPMB分区之前，需要进行配置和初始化，以确保其安全特性和功能能够正常工作。这包括设置认证密钥和初始化写计数器等步骤：</p>
-<ol>
-<li><strong>设置认证密钥</strong>：生成一个认证密钥（认证密钥是用于生成和验证 HMAC 的密钥，通常由设备的安全模块生成），使用特定的 eMMC 命令将认证密钥写入 RPMB 分区。</li>
-<li><strong>初始化写计数器</strong>：读取当前的写计数器值，确保其初始化为 0 或其他预定义值，并通过特定命令验证写计数器值。</li>
-<li><strong>数据写入和认证</strong>：计算待写入数据的 HMAC，将数据和 HMAC 一起写入 RPMB 分区，读取并验证 HMAC，以确认写操作的完整性。</li>
-</ol>
-<p>在使用 eMMC 的 RPMB 分区之前，进行适当的配置和初始化是确保其安全特性和功能正常工作的关键步骤。配置认证密钥、初始化写计数器以及确保数据写入和认证的过程，是保护敏感数据和防止重放攻击的必要措施。通过这些步骤，可以确保 RPMB 分区在数据存储和安全性方面的高效性和可靠性。</p>
-<h1 id="4-gpp"><a class="markdownIt-Anchor" href="#4-gpp"></a> 4、GPP</h1>
-<p>通用分区（General Purpose Partition，GPP）是 eMMC 中的一种分区类型，用于为特定的应用和功能提供灵活的存储空间，用以数据隔离，提高数据的安全性和稳定性。GPP 分区的配置和管理也是通过 EXT_CSD Register 中的相关字段来完成：</p>
-<ul>
-<li><strong>GP_SIZE_MULT_x</strong>：这里的 x 是指 GPP 的分区（1-4），这是一个 24 位值，占用三个字节，它指定 GPP_x 分区的大小，单位为 512KB。</li>
-</ul>
-<p>除了这些字段以外，还有一些其他的字段会直接或间接的影响到 GPP 分区的使用，具体可以参考 EXT_CSD Register 相关文档。</p>
-<h1 id="5-uda"><a class="markdownIt-Anchor" href="#5-uda"></a> 5、UDA</h1>
-<p>用户数据区是 eMMC 中用于存储所有用户数据的主要区域。它负责存储操作系统、应用程序和用户文件，并通过各种技术手段来优化性能和保障数据安全。合理配置和管理 UDA 可以提高设备的存储效率和数据可靠性。它没有一些独立的控制字段，但是一些其他的字段也会间接的影响到 UDA 分区的使用，具体可以参考 EXT_CSD Register 相关文档。</p>
-]]></content>
-      <categories>
-        <category>存储开发</category>
-        <category>eMMC</category>
-      </categories>
-      <tags>
-        <tag>eMMC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NAND基本知识</title>
-    <url>/2024/06/07/NAND/</url>
-    <content><![CDATA[<h1 id="1-nand概述"><a class="markdownIt-Anchor" href="#1-nand概述"></a> 1、NAND概述</h1>
-<h2 id="11-基本概念"><a class="markdownIt-Anchor" href="#11-基本概念"></a> 1.1 基本概念</h2>
-<p>NAND 又称 NAND 闪存，是闪存（一种非易失性存储技术，该技术可以在没有电流供应的情况下，长时间保存数据，被广泛用于各种电子设备中）的一种类型，因其具有较高的存储密度和较低的成本，在大规模存储中被广泛应用，如 SSD，存储卡等。</p>
-<h2 id="12-存储原理"><a class="markdownIt-Anchor" href="#12-存储原理"></a> 1.2 存储原理</h2>
-<p>NAND 基于 Flash Memory Cell 技术实现，这种技术使用了浮栅晶体管（Floating Gate Transistor）来存储数据，一个晶体管被称为一个 Cell（基本存储单元），其结构如图所示：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345158.png" style="zoom:67%;" />
+    <title>NAND闪存基础</title>
+    <url>/2024/06/16/NAND%E9%97%AA%E5%AD%98%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="1-闪存基础"><a class="markdownIt-Anchor" href="#1-闪存基础"></a> 1、闪存基础</h1>
+<h2 id="11-闪存是什么"><a class="markdownIt-Anchor" href="#11-闪存是什么"></a> 1.1 闪存是什么？</h2>
+<p>闪存称 Flash Memory，是一种非易失性存储器，非易失性存储器可以在没有电源供应的情况下长时间的保存数据。</p>
+<h2 id="12-闪存如何保存数据"><a class="markdownIt-Anchor" href="#12-闪存如何保存数据"></a> 1.2 闪存如何保存数据？</h2>
+<p>闪存基于 EEPROM 技术，通过浮栅晶体管来保存二进制信息，其信息写入和读取通过电压进行控制。</p>
+<h2 id="13-浮栅晶体管是什么"><a class="markdownIt-Anchor" href="#13-浮栅晶体管是什么"></a> 1.3 浮栅晶体管是什么？</h2>
+<p>浮栅晶体管是一种金属氧化物半导体场效应管（MOSFET），它的结构类似于传统的 MOSFET：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345158.png" style="zoom:50%;" />
 <ul>
 <li><strong>Control gate（控制栅极）</strong></li>
 <li><strong>Isolator（绝缘层）</strong></li>
@@ -970,193 +859,57 @@
 <li><strong>n-channel（n沟道）</strong></li>
 <li><strong>Substrate（衬底）</strong></li>
 </ul>
-<p>浮栅中可以存储电荷，其上下两层绝缘层可以保证晶体管断电后浮栅内部的电荷几乎不流失，通过将电荷存储进浮栅中来存储二进制信息，这就是浮栅晶体管的存储原理。闪存则将多个浮栅晶体管组合排列，将复杂的信息转换为二进制信息后，存储到每个晶体管中，这就是 NAND 的工作原理。</p>
-<h2 id="13-读擦写原理"><a class="markdownIt-Anchor" href="#13-读擦写原理"></a> 1.3 读擦写原理</h2>
-<p><strong>读原理</strong>：通过在控制栅极施加读取电压，衬底接地，将浮栅中的电荷吸引到沟道中，但不足以发生隧穿效应，此时测量漏极和源极中是否存在大电流，即晶体管是否导通；若未导通，说明阈值电压较高，该状态读取为 0；若导通，说明阈值电压较低，该状态读取为 1。</p>
-<p><strong>擦除原理</strong>：通过在控制栅极施加低电压，衬底加高电压，使浮栅中的电荷发生隧穿效应到达源极或衬底中，浮栅中没有了存储的电荷，也就没有了存储的信息，此时控制栅极的阈值电压较低，施加读取电压足以让晶体管导通，这个状态通常被读取为二进制 1，也是晶体管的默认状态。</p>
-<p><strong>写原理</strong>：通过在控制栅极施加高电压，衬底接地，使衬底中的电荷到达沟道中，并发生隧穿效应到达浮栅中，此时控制栅极的阈值电压较高，施加读取电压不足以使晶体管导通，这个状态通常被读取为二进制 0。</p>
-<h1 id="2-组织结构"><a class="markdownIt-Anchor" href="#2-组织结构"></a> 2、组织结构</h1>
-<h2 id="21-阵列组织"><a class="markdownIt-Anchor" href="#21-阵列组织"></a> 2.1 阵列组织</h2>
-<p>NAND 中的存储单元排列是一种串联方式，其串联结构如图所示：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345159.png"  />
-<ul>
-<li><strong>WL (Word Line)</strong> ：每一行的浮栅晶体管的控制栅极通过串联的方式连接到字线上。</li>
-<li><strong>BL (Bit Line)</strong> ：每一列的第一个晶体管的漏极连接到位线上。</li>
-<li><strong>SL (Source Line)</strong> ：所有列的最后一个晶体管的源极连接到源线上。</li>
-</ul>
-<p>其中每一行就是一个 Page，整个存储阵列就是一个 Block，它的好处在于不需要给每一个晶体管接入字线、位线和源线，去除了大量的金属导线，使得相同面积下可以集成更多的存储单元，提高了存储密度，且一定程度上简化了生产工艺，降低了生产成本。</p>
-<h2 id="22-物理结构"><a class="markdownIt-Anchor" href="#22-物理结构"></a> 2.2 物理结构</h2>
-<p>NAND 的物理结构示意图如下：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345161.png"  />
-<ul>
-<li><strong>CHIP</strong>：通常指一个闪存芯片，也称为 DEVICE，一个 CHIP 中包含若干个 LUN（也称为 DIE）。</li>
-<li><strong>LUN</strong>：LUN 是芯片晶圆上的小方块，一个 LUN 中包含若干个 Plane。</li>
-<li><strong>Plane</strong>：Plane 是 LUN 中的一个存储单元阵列，一个 Plane 中包含若干个 Block。</li>
-<li><strong>Block</strong>：Block 是 Plane 的基本单位，同时也是擦除操作的最小单位，一个 Block 中包含若干个 Page。</li>
-<li><strong>Page</strong>：Page 是 Block的基本单位，同时也是读、写操作的最小单位，一个 Page 中包含了成千上万个 Cell。</li>
-</ul>
-<p>NAND Flash 的物理结构大致划分为以上部分，根据不同厂商和制造商的要求，可能还会包含一些其他的结构，如 Plane 可能还包含 cache register 和 page register 以优化读写性能。</p>
-<h2 id="23-寻址方式"><a class="markdownIt-Anchor" href="#23-寻址方式"></a> 2.3 寻址方式</h2>
-<p>NAND 中为每个 LUN 、Plane、Block 和 Page 都进行了编号，这些编号就是它们的地址，将它们的地址按照高位到地位组织成一个数据，这个数据在逻辑上被称为行地址（Row Address），其结构如图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345162.png" alt="" /></p>
-<p>而在 Page 中又由众多的 Cell 组成，每个 Cell 都有一个独特的地址，这个地址在逻辑上被称为列地址（Column Address）。通过行地址和列地址就可以将数据存储到指定位置或从指定位置读取数据。</p>
-<h1 id="3-存储模式"><a class="markdownIt-Anchor" href="#3-存储模式"></a> 3、存储模式</h1>
-<p>NAND 根据存储单元可以存储信息的位数可以分为以下模式：</p>
+<h2 id="14-浮栅晶体管是如何保存数据的"><a class="markdownIt-Anchor" href="#14-浮栅晶体管是如何保存数据的"></a> 1.4 浮栅晶体管是如何保存数据的？</h2>
+<p>浮栅晶体管中的浮栅可以长时间的保存电子，而其上下两层绝缘层可以保证在掉电后浮栅中的电荷不会流失，可以通过将电子注入进浮栅来保存信息。</p>
+<h2 id="15-如何将电子注入浮栅中"><a class="markdownIt-Anchor" href="#15-如何将电子注入浮栅中"></a> 1.5 如何将电子注入浮栅中？</h2>
+<p>正常情况下电子是无法通过绝缘层的，但如果在绝缘层两端加上一个大电压（编程电压），电子就会发生量子隧道效应（也称隧穿效应）穿过绝缘层。在浮栅晶体管中，通过在控制栅极和衬底间加入一个大电压，电子会因为电场作用到达沟道中，并发生隧穿效应到达浮栅，这个过程就是写入的原理。反过来，当电子在浮栅中时，给其内部加入一个反向的大电压（擦除电压），电子就可以从浮栅达到沟道，这就是擦除的原理。</p>
+<h2 id="16-如何读取数据"><a class="markdownIt-Anchor" href="#16-如何读取数据"></a> 1.6 如何读取数据？</h2>
+<p>首先需要明确二进制信息与浮栅中电子数量的关系。假设给控制栅极和衬底中加入一个小电压（读取电压），电子会在弱电场的作用下达到沟道中，但不足以发生隧穿效应；然后在漏极和源极中也施加一个小电压（读取电压），测量这些电子是否足以让晶体管导通，衬底中的电子足够多时晶体管会导通，此时进入浮栅中的电子非常少，这个状态对应二进制状态 1；不导通则说明衬底中的电子很少，大部分电子进入到了浮栅中，这个状态对应二进制状态 0。其对应关系为：</p>
 <table>
 <thead>
 <tr>
-<th>存储模式</th>
-<th>比特数/单元</th>
-<th>擦写寿命</th>
-<th>读取速度</th>
-<th>写入速度</th>
-<th>容量密度</th>
+<th>二进制信息</th>
+<th>晶体管导通</th>
+<th>浮栅中电子数量</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SLC (Single-Level Cell)</td>
+<td>0</td>
+<td>不导通</td>
+<td>多</td>
+</tr>
+<tr>
 <td>1</td>
-<td>高</td>
-<td>快</td>
-<td>快</td>
-<td>低</td>
-</tr>
-<tr>
-<td>MLC (Multi-Level Cell)</td>
-<td>2</td>
-<td>中</td>
-<td>较快</td>
-<td>较快</td>
-<td>较高</td>
-</tr>
-<tr>
-<td>TLC (Triple-Level Cell)</td>
-<td>3</td>
-<td>较低</td>
-<td>较慢</td>
-<td>较慢</td>
-<td>高</td>
-</tr>
-<tr>
-<td>QLC (Quad-Level Cell)</td>
-<td>4</td>
-<td>低</td>
-<td>慢</td>
-<td>慢</td>
-<td>很高</td>
+<td>导通</td>
+<td>少</td>
 </tr>
 </tbody>
 </table>
-<p>它们的原理是根据浮栅中存储电荷的数量来保存信息，其信息表示如下图：</p>
-<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345163.png" style="zoom:25%;" />
-<h1 id="4-接口模式"><a class="markdownIt-Anchor" href="#4-接口模式"></a> 4、接口模式</h1>
-<p>NAND 的接口主要可以分为两种，ONFI (Open NAND Flash Interface) 和 Toggle-Mode。Toggle-Mode 标准由三星和东芝开发。ONFI 标准则是由Intel、Micron、Hynix、Phison等厂商共同开发。以下是它们的主要区别：</p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>ONFI</th>
-<th>Toggle-Mode</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>传输模式</td>
-<td>DDR（ONFI 2.x起）</td>
-<td>DDR</td>
-</tr>
-<tr>
-<td>同步信号</td>
-<td>CLK</td>
-<td>DQS</td>
-</tr>
-<tr>
-<td>信号线路</td>
-<td>单端信号</td>
-<td>单端信号</td>
-</tr>
-<tr>
-<td>协议复杂性</td>
-<td>相对复杂</td>
-<td>相对简单</td>
-</tr>
-<tr>
-<td>接口兼容性</td>
-<td>高，广泛适用</td>
-<td>相对较低，但适用特定高性能场景</td>
-</tr>
-<tr>
-<td>性能</td>
-<td>支持较高的数据速率</td>
-<td>高速数据传输，特别适合高性能和移动设备应用</td>
-</tr>
-</tbody>
-</table>
-<h1 id="5-命令操作"><a class="markdownIt-Anchor" href="#5-命令操作"></a> 5、命令操作</h1>
-<p>NAND 闪存操作通常需要通过发送不同的命令来执行，这些命令包括读取、写入、擦除、复位等操作。以下是 NAND 闪存中常见的一些命令及其功能：</p>
-<ol>
-<li><strong>读取命令（Read）</strong>：从指定地址读取数据。</li>
-<li><strong>编程命令（Program）</strong>：将数据编程到指定地址。</li>
-<li><strong>擦除命令（Erase）</strong>：擦除指定块中的数据。</li>
-<li><strong>复位命令（Reset）</strong>：复位 NAND 闪存芯片。</li>
-<li><strong>ID 查询命令（Read ID）</strong>：读取 NAND 闪存的制造商和设备 ID。</li>
-<li><strong>写保护命令（Write Protect）</strong>：设置或解除写保护状态。</li>
-<li><strong>锁存转储命令（Latch Dump）</strong>：将页面寄存器中的数据转储到数据寄存器。</li>
-<li><strong>随机缓存读取命令（Random Cache Read）</strong>：预加载下一页数据以提高读取速度。</li>
-<li><strong>快速读取命令（Fast Read）</strong>：以更快的速度读取数据。</li>
-<li><strong>自检命令（Read Status）</strong>：读取 NAND 闪存的状态寄存器，用于检测操作是否完成或错误状态。</li>
-</ol>
-<h2 id="51-基本时序"><a class="markdownIt-Anchor" href="#51-基本时序"></a> 5.1 基本时序</h2>
-<p><strong>读操作时序</strong>：</p>
-<ul>
-<li>发送读取命令：告知设备将要读取数据。</li>
-<li>发送地址信息：告知设备读取数据的位置。</li>
-<li>发送确认命令：告知设备可以开始准备数据。</li>
-<li>检查状态寄存器：当设备开始将传输数据时，设备会进入忙碌状态，当设备状态切换到空闲状态时，可以开始读取数据。</li>
-<li>读取数据：发送 RE 信号并到 DQ 总线上读取数据。</li>
-</ul>
-<p><strong>写操作时序</strong>：</p>
-<ul>
-<li>发送写入命令：告知设备将要写入数据。</li>
-<li>发送地址信息：告知设备数据写入的位置。</li>
-<li>发送数据：发送 WE 信号并将要写入的数据发送到 DQ 总线上。</li>
-<li>检查状态寄存器：当设备将数据传出到存储阵列时，设备会进入到忙碌状态，当设备切换到空闲状态时，说明数据写入完成。</li>
-</ul>
-<p><strong>擦除操作时序</strong>：</p>
-<ul>
-<li>发送擦除命令：告知设备将要擦除数据</li>
-<li>发送地址信息：告知设备将要擦除数据的位置。</li>
-<li>检查状态寄存器：当设备开始擦除时，设备会进入到忙碌状态，当设备切换到空闲状态时，说明擦除完成。</li>
-</ul>
-<p><strong>复位操作时序</strong>：</p>
-<ul>
-<li>发送复位命令：告知设备进行复位操作，并将设备状态置为空闲。</li>
-<li>检查设备状态：当设备进入空闲状态说明复位成功，</li>
-</ul>
-<p>以上命令操作都是最简单的操作，在 K9AFGD8J0C 中定义了命令集并实现了复杂的操作如：随机缓存读取操作、顺序缓存读取操作、缓存写入操作、回写操作等等，数据手册中说明了详细的操作步骤以及时序要求。</p>
-<h2 id="52-内部行为"><a class="markdownIt-Anchor" href="#52-内部行为"></a> 5.2 内部行为</h2>
-<p>NAND 在接收到主机发送的数据后，会根据数据的类型做出一系列的动作，主要有：</p>
-<ul>
-<li>命令锁存：将接收的命令存储到命令寄存器中。</li>
-<li>命令识别：对命令进行识别，并根据不同的命令触发不同的行为。</li>
-<li>地址锁存：将接收的地址信息存储到内部缓存中。</li>
-<li>内部寻址：根据接收到的地址信息进行寻址。</li>
-<li>数据锁存：将接收到的数据锁存到数据寄存器中。</li>
-<li>加载数据：将存储阵列中的数据加载到页寄存器中。</li>
-<li>缓存数据：将页寄存器中的数据加载到缓存寄存器中。</li>
-<li>预加载：将页寄存器的数据加载到缓存寄存器中后，将下一次要读取的数据提前加载到页寄存器中。</li>
-<li>切换状态：根据内部行为，将 R/B 置为忙碌或空闲。</li>
-<li>复位：清除命令寄存器和地址寄存器中的数据，将设备状态置为空闲，初始化计数器和内部逻辑等等。</li>
-</ul>
-<p>这些内部行为都由 NAND 内部的硬件电路控制，作为主机不需要关心其内部实现，控制好操作命令及时序即可对其进行读写。</p>
+<h2 id="17-如何保存生活中信息"><a class="markdownIt-Anchor" href="#17-如何保存生活中信息"></a> 1.7 如何保存生活中信息？</h2>
+<p>了解浮栅晶体管的原理后，浮栅晶体管通常只可以保存 1bit 的信息，显然这是不足以保存生活中的信息，但将成千上万个浮栅晶体管进行组织排列并通过特定的方式进行控制，将生活中的信息转换为二进制信息后，按照一定的顺序保存到不同的浮栅晶体管中即可；读取数据时再将这些浮栅晶体管中的数据按照相同的顺序组织起来转化为生活中的信息即可。</p>
+<h2 id="18-如何控制多个浮栅晶体管"><a class="markdownIt-Anchor" href="#18-如何控制多个浮栅晶体管"></a> 1.8 如何控制多个浮栅晶体管？</h2>
+<p>闪存由成千上万个浮栅晶体管组成，在写入数据或读取数据时，需要指定其中一个晶体管控制它的衬底、漏极、源极和控制栅极的电压，最简单的控制方法就是给每一个晶体管的衬底、漏极、源极和控制栅极分别接一根线，当需要控制这个晶体管时就操作这个浮栅晶体管相关的线。在闪存的设计中，衬底和漏极连接在一起，它们接入的线称为源线（Source Line, SL），漏极接入的线称为位线（Bit Line, BL），控制栅极接入的线称为字线（Word Line, WL）。在需要控制某个浮栅晶体管时就找到该晶体管对应的三根线，并控制其电压进行写入数据或读取数据。</p>
+<h1 id="2-nand基础"><a class="markdownIt-Anchor" href="#2-nand基础"></a> 2、NAND基础</h1>
+<h2 id="21-nand是什么"><a class="markdownIt-Anchor" href="#21-nand是什么"></a> 2.1 NAND是什么？</h2>
+<p>NAND 是闪存的一中类型，准确来说，NAND 是闪存组织和排列浮栅晶体管的一种方式，其独特的排列结构和组织结构使其具有独特的优点。</p>
+<h2 id="22-nand如何排列"><a class="markdownIt-Anchor" href="#22-nand如何排列"></a> 2.2 NAND如何排列？</h2>
+<p>NAND 以一种串联的形式组织浮栅晶体管，其结构示意图如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/202406161847572.png" style="zoom: 80%;" />
+<p>第一行和最后一行是传统的晶体管，而中间行则是由浮栅晶体管组成，这便是 NAND 晶体管的排列结构，也称为存储阵列。其中 BSL (Bit Select Line) 和 GSL (Ground Select Line) 的作用是用于选择不同的存储阵列。</p>
+<h2 id="23-nand如何组织"><a class="markdownIt-Anchor" href="#23-nand如何组织"></a> 2.3 NAND如何组织？</h2>
+<p>NAND 的组织结构结构示意图为：</p>
+<img src="https://cdn.jsdelivr.net/gh/cn-thui/image_source@master/hexo/blog202406062345161.png"  />
+<p>CHIP 就是一个闪存芯片，而中间的小方块则被称为一个 DIE 或 LUN，每个 DIE 中又划分为多个 Plane ，每个 Plane 又划分出多个 Block，而 Block 正是一个存储阵列，存储阵列中的由一根字线连接起来的所有浮栅晶体管被称为一个 Page。</p>
+<h2 id="24-nand结构有什么优缺点"><a class="markdownIt-Anchor" href="#24-nand结构有什么优缺点"></a> 2.4 NAND结构有什么优缺点？</h2>
+<p>这种闪存结构被称为 2D NAND，它结构的优点在于不需要在每一个浮栅晶体管上接三根线，其减少了金属导线的面积，在相同的存储面积下可以容纳更多的浮栅晶体管，提高闪存的存储密度，其结构的制作工艺也相对简单，其制造成本更低。其缺点在于由于复杂的结构，浮栅晶体管的地址编码解码变得更加困难，读写所需要的时间也更多，所以在读写性能上表现不突出，适用于存储数据场景而非频繁读写的场景。</p>
 ]]></content>
       <categories>
         <category>存储开发</category>
-        <category>NAND</category>
+        <category>NAND Flsh</category>
       </categories>
       <tags>
-        <tag>NAND</tag>
+        <tag>NAND Flash</tag>
       </tags>
   </entry>
 </search>
